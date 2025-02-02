@@ -3,6 +3,7 @@
 namespace App\Http\controllers\auth;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -77,5 +78,10 @@ class AuthController
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ];
+    }
+
+    public function userAddresses()
+    {
+        return $this->apiResponse(Auth::user()->userAddress, 'User addresses return successfully.');
     }
 }
