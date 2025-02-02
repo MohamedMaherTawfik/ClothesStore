@@ -23,7 +23,7 @@ Route::controller(brandController::class)->group(function () {
     Route::get('/brands', 'index');
     Route::get('/brand/{id}', 'show');
     Route::post('/brand', 'store');
-    Route::put('/brand/{id}', 'update');
+    Route::post('/brand/{id}', 'update');
     Route::delete('/brand/{id}', 'destroy');
     Route::get('/brand/{id}/products', 'products');
 });
@@ -32,7 +32,7 @@ Route::controller(categoreyController::class)->group(function () {
     Route::get('/categories', 'index');
     Route::get('/category/{id}', 'show');
     Route::post('/category', 'store');
-    Route::put('/category/{id}', 'update');
+    Route::post('/category/{id}', 'update');
     Route::delete('/category/{id}', 'destroy');
     Route::get('/category/{id}/products', 'products');
 });
@@ -40,9 +40,13 @@ Route::controller(categoreyController::class)->group(function () {
 Route::controller(productController::class)->group(function () {
     Route::get('/products', 'index');
     Route::get('/product/{id}', 'show');
+    Route::get('/product/{id}/colors', 'colors');
+    Route::get('/product/{id}/sizes', 'sizes');
+    Route::get('/product/{id}/colorsizes', 'ColorsSizes');
     Route::post('/product', 'store');
-    Route::put('/product/{id}', 'update');
+    Route::post('/product/{id}', 'update');
     Route::delete('/product/{id}','destroy');
+
 });
 
 

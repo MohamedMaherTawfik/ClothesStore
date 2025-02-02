@@ -2,6 +2,8 @@
 
 namespace App\Interfaces;
 
+use App\Models\brand;
+
 interface brandInterface
 {
     public function all();

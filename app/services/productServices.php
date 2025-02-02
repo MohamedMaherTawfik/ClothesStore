@@ -42,4 +42,21 @@ class productServices
         return $product;
     }
 
+    public function colors($id)
+    {
+        $colors=$this->productRepository->colors($id);
+        return $colors;
+    }
+
+    public function sizes($id)
+    {
+        $sizes=$this->productRepository->sizes($id);
+        return $sizes;
+    }
+
+    public function ColorsSizes($id){
+        $colorsSizes=$this->productRepository->ColorsSizes($id);
+        return $colorsSizes;
+    }
+
 }

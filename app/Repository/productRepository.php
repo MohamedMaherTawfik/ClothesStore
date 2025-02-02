@@ -37,4 +37,19 @@ class productRepository implements productInterface
         return $product;
     }
 
+    public function colors($id)
+    {
+        return products::with('colors')->find($id);
+    }
+
+    public function sizes($id)
+    {
+        return products::with('sizes')->find($id);
+    }
+
+    public function ColorsSizes($id)
+    {
+        return products::with('colors', 'sizes')->find($id);
+    }
+
 }
