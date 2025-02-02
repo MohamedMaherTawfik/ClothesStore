@@ -37,4 +37,9 @@ class brandServices
         $brand=$this->brandRepository->destroy($id);
         return $brand;
     }
+
+    public function products($id){
+        $brand=$this->brandRepository->products($id);
+        return $brand;
+    }
 }

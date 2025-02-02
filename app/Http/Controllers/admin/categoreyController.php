@@ -45,9 +45,16 @@ class categoreyController extends Controller
         }
         return $this->sendError('Categorey Not Updated');
     }
-
     public function destroy($id){
         $categorey=$this->categoreyServices->deleteCategorey($id);
         return $this->apiResponse($categorey,'Categorey Deleted Successfully');
+    }
+
+    public function products($id){
+        $categorey=$this->categoreyServices->products($id);
+        if(!$categorey){
+            return $this->sendError('Categorey Not Found');
+        }
+        return $this->apiResponse($categorey,'Categorey with products Fetched Successfully');
     }
 }

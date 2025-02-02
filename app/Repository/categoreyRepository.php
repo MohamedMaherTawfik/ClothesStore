@@ -35,4 +35,9 @@ class categoreyRepository implements CategoreyInteface
         $categorey->delete();
         return $categorey;
     }
+
+    public function products($id)
+    {
+        return categorey::with('products')->find($id);
+    }
 }

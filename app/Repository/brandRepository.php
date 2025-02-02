@@ -35,4 +35,9 @@ class brandRepository implements brandInterface
         $brand->delete();
         return $brand;
     }
+
+    public function products($id)
+    {
+        return brand::with('products')->find($id);
+    }
 }

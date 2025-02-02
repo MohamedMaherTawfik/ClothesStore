@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\brandController;
 use App\Http\Controllers\admin\categoreyController;
+use App\Http\Controllers\admin\productController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\auth\AuthController;
@@ -24,6 +25,7 @@ Route::controller(brandController::class)->group(function () {
     Route::post('/brand', 'store');
     Route::put('/brand/{id}', 'update');
     Route::delete('/brand/{id}', 'destroy');
+    Route::get('/brand/{id}/products', 'products');
 });
 
 Route::controller(categoreyController::class)->group(function () {
@@ -32,4 +34,15 @@ Route::controller(categoreyController::class)->group(function () {
     Route::post('/category', 'store');
     Route::put('/category/{id}', 'update');
     Route::delete('/category/{id}', 'destroy');
+    Route::get('/category/{id}/products', 'products');
 });
+
+Route::controller(productController::class)->group(function () {
+    Route::get('/products', 'index');
+    Route::get('/product/{id}', 'show');
+    Route::post('/product', 'store');
+    Route::put('/product/{id}', 'update');
+    Route::delete('/product/{id}','destroy');
+});
+
+

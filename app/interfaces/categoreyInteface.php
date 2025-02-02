@@ -9,4 +9,5 @@ interface CategoreyInteface{
     public function show($id);
     public function update($data, $id);
     public function destroy($id);
+    public function products($id);
 }

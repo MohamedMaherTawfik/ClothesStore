@@ -55,4 +55,12 @@ class brandController extends Controller
         return $this->apiResponse($brand,'Brand Deleted Successfully');
     }
 
+    public function products($id){
+        $brand=$this->brandServices->products($id);
+        if(!$brand){
+            return $this->sendError('Brand Not Found');
+        }
+        return $this->apiResponse($brand,'Brand Fetched Successfully');
+    }
+
 }

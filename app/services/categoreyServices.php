@@ -38,4 +38,9 @@ class categoreyServices{
         $categorey=$this->categoreyRepository->destroy($id);
         return $categorey;
     }
+
+    public function products($id){
+        $categorey=$this->categoreyRepository->products($id);
+        return $categorey;
+    }
 }
