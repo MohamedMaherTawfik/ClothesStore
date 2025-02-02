@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\brandController;
 use App\Http\Controllers\admin\categoreyController;
 use App\Http\Controllers\admin\productController;
+use App\Http\Controllers\orders\cartController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\auth\AuthController;
@@ -47,7 +48,13 @@ Route::controller(productController::class)->group(function () {
     Route::post('/product', 'store');
     Route::post('/product/{id}', 'update');
     Route::delete('/product/{id}','destroy');
+});
 
+Route::controller(cartController::class)->group(function () {
+    Route::post('/cart/{cart}', 'addToCart');
+    Route::get('/cart', 'getCartItems');
+    Route::delete('/cart', 'deleteFromCart');
+    Route::delete('/cart/clear', 'clearCart');
 });
 
 
