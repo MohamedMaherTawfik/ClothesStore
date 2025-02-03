@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\brandController;
 use App\Http\Controllers\admin\categoreyController;
 use App\Http\Controllers\admin\productController;
 use App\Http\Controllers\orders\cartController;
+use App\Http\Controllers\orders\orderController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\auth\AuthController;
@@ -57,4 +58,10 @@ Route::controller(cartController::class)->group(function () {
     Route::delete('/cart/clear', 'clearCart');
 });
 
-
+Route::controller(orderController::class)->group(function () {
+    Route::get('/orders', 'index');
+    Route::get('/order/{id}', 'show');
+    Route::post('/order', 'store');
+    Route::post('/user/orders', 'getUserOrders');
+    Route::delete('/order/{id}', 'destroy');
+});
