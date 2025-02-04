@@ -9,7 +9,7 @@ class productServices
     private $productRepository;
     public function __construct(productInterface $productInterface)
     {
-        $this->productInterface = $productInterface;
+        $this->productRepository = $productInterface;
     }
 
     public function allProducts()
@@ -38,7 +38,7 @@ class productServices
 
     public function deleteProduct($id)
     {
-        $product=$this->productRepository->delete($id);
+        $product=$this->productRepository->destroy($id);
         return $product;
     }
 

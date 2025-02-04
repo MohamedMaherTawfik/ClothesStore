@@ -22,7 +22,7 @@ class categoreyRepository implements CategoreyInteface
         return categorey::find($id);
     }
 
-    public function update($id, $data)
+    public function update($data, $id)
     {
         $categorey = categorey::find($id);
         $categorey->update($data);

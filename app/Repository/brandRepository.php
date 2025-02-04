@@ -22,7 +22,7 @@ class brandRepository implements brandInterface
         return brand::create($data);
     }
 
-    public function update($id, $data)
+    public function update($data, $id)
     {
         $brand = brand::find($id);
         $brand->update($data);

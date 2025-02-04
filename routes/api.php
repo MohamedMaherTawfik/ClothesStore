@@ -18,8 +18,7 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api');
     Route::post('/profile', [AuthController::class, 'profile'])->middleware('auth:api');
-    Route::post('/user/address', [AuthController::class, 'userAddress'])->middleware('auth:api');
-    Route::get('/user/addreses', [AuthController::class, 'userAddresses'])->middleware('auth:api');
+    Route::post('/user/address', [AuthController::class, 'addAddress'])->middleware('auth:api');
 });
 
 
@@ -51,11 +50,11 @@ Route::controller(productController::class)->group(function () {
     Route::get('/product/{id}/sizes', 'sizes');
     Route::get('/product/{id}/colorSizes', 'colorSizes');
     Route::post('/product/{id}/color', 'addColors');
-    Route::post('/product/{id}/color', 'addSizes');
+    Route::post('/product/{id}/size', 'addSizes');
 });
 
 Route::controller(cartController::class)->group(function () {
-    Route::post('/cart/{cart}', 'addToCart');
+    Route::post('/cart', 'addToCart');
     Route::get('/cart', 'getCartItems');
     Route::delete('/cart', 'deleteFromCart');
     Route::delete('/cart/clear', 'clearCart');

@@ -22,7 +22,6 @@ class colorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'products_id' => 'required|exists:products,id',
             'color' => 'required|max:25',
         ];
     }

@@ -22,7 +22,6 @@ class sizeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'products_id' => 'required|exists:products,id',
             'size' => 'required|max:25',
         ];
     }

@@ -5,23 +5,24 @@ namespace App\Repository;
 use App\Interfaces\colorSizesInterface;
 use App\Models\productColors;
 use App\Models\products;
+use App\Models\productSizes;
 
 class ColorsSizesRepository implements colorSizesInterface
 {
 
-    public function addColors($data)
+    public function addColors($data,$id)
     {
         $addColor=productColors::create([
-            'products_id'=>$data['products_id'],
+            'products_id'=>$id,
             'color'=>$data['color']
         ]);
         return $addColor;
     }
 
-    public function addSizes($data)
+    public function addSizes($data,$id)
     {
-        $addSize=productColors::create([
-            'products_id'=>$data['products_id'],
+        $addSize=productSizes::create([
+            'products_id'=>$id,
             'size'=>$data['size']
         ]);
         return $addSize;

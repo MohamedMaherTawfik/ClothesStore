@@ -38,9 +38,9 @@ class brandController extends Controller
         return $this->apiResponse($brand,'Brand Fetched Successfully');
     }
 
-    public function update(brandRequest $request,$id){
+    public function update(brandRequest $request){
         $data=$request->validated();
-        $brand=$this->brandServices->updateBrand($data,$id);
+        $brand=$this->brandServices->updateBrand($data,$request->id);
         if(!$brand){
             return $this->sendError('Brand Not Updated');
         }

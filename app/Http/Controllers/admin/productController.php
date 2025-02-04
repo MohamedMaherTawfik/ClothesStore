@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\colorRequest;
 use App\Http\Requests\productRequest;
+use App\Http\Requests\sizeRequest;
 use App\services\colorSizesServices;
 use App\Services\productServices;
 use Illuminate\Http\Request;
@@ -84,16 +85,16 @@ class productController extends Controller
 
     public function addColors(colorRequest $request){
         $fields=$request->validated();
-        $data=$this->colorSizes->addColors($fields);
+        $data=$this->colorSizes->addColors($fields,request('id'));
         if(!$data){
             return $this->sendError('Colors Not Added');
         }
         return $this->apiResponse($data,'Colors Added Successfully');
     }
 
-    public function addSizes(colorRequest $request){
+    public function addSizes(sizeRequest $request){
         $fields=$request->validated();
-        $data=$this->colorSizes->addSizes($fields);
+        $data=$this->colorSizes->addSizes($fields,request('id'));
         if(!$data){
             return $this->sendError('Sizes Not Added');
         }

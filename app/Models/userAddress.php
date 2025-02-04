@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class userAddress extends Model
 {
     protected $table='user_addresses';
-    protected $fillabl=['user_id','address','city','postal_code'];
+    protected $guarded=[];
 
     public function user()
     {

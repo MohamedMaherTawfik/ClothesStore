@@ -37,10 +37,10 @@ class categoreyController extends Controller
         return $this->apiResponse($categorey,'Categorey Fetched Successfully');
     }
 
-    public function update(categoreyRequest $request,$id){
+    public function update(categoreyRequest $request){
         $fields=$request->validated();
         if($fields){
-            $categorey=$this->categoreyServices->updateCategorey($fields,$id);
+            $categorey=$this->categoreyServices->updateCategorey($fields,$request->id);
             return $this->apiResponse($categorey,'Categorey Updated Successfully');
         }
         return $this->sendError('Categorey Not Updated');

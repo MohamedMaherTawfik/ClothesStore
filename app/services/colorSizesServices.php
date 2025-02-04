@@ -29,13 +29,13 @@ class colorSizesServices
         return $data;
     }
 
-    public function addColors($data){
-        $addColor= $this->colorSizesRepository->addColors($data);
+    public function addColors($data,$id){
+        $addColor= $this->colorSizesRepository->addColors($data,$id);
         return $addColor;
     }
 
-    public function addSizes($data){
-        $addSize= $this->colorSizesRepository->addSizes($data);
+    public function addSizes($data,$id){
+        $addSize= $this->colorSizesRepository->addSizes($data,$id);
         return $addSize;
     }
 

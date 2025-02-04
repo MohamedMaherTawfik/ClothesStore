@@ -52,7 +52,7 @@ class AuthController
 
     public function profile()
     {
-        $success = auth()->user();
+        $success = auth()->user()->load('userAddress');
 
         return $this->apiResponse($success, 'Refresh token return successfully.');
     }
@@ -99,8 +99,4 @@ class AuthController
         return $this->apiResponse($data, 'Address created successfully.');
     }
 
-    public function userAddresses()
-    {
-        return $this->apiResponse(Auth::user()->userAddress, 'User addresses return successfully.');
-    }
 }
