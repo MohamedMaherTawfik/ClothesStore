@@ -11,13 +11,14 @@ class cartRepository implements cartInterface
 {
     public function getCartItems()
     {
-        return Cart::with('products')->where('user_id', Auth::user()->id)->first();
+        $cart = Cart::where('user_id', Auth::user()->id)->first();
+        return CartItems::with('product')->where('cart_id', $cart->id)->get();
     }
 
-    public function deleteFromCart()
+    public function deleteFromCart($id)
     {
         $FindCart = Cart::where('user_id', Auth::user()->id)->first();
-        return CartItems::where('cart_id', $FindCart->id)->where('products_id', request('products_id'))->delete();
+        return CartItems::where('cart_id', $FindCart->id)->where('products_id', $id)->delete();
     }
 
     public function clearCart()

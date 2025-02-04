@@ -18,17 +18,7 @@ class cartController extends Controller
 
     public function addToCart(cartRequest $request)
     {
-        $addToNewCart=$this->cartServices->addToNewCart($request);
-        $addToExistingCart=$this->cartServices->addToExistingCart($request);
-        if($addToNewCart)
-        {
-            return $this->apiResponse($addToNewCart,'Cart Item Added Successfully');
-        }
-
-        if($addToExistingCart)
-        {
-            return $this->apiResponse($addToExistingCart,'Cart Item qunatity plused');
-        }
+        return $this->cartServices->add_to_cart($request);
     }
 
     public function getCartItems()
@@ -39,7 +29,10 @@ class cartController extends Controller
 
     public function deleteFromCart()
     {
-        $deleteFromCart=$this->cartServices->deleteFromCart();
+        $deleteFromCart=$this->cartServices->deleteFromCart(request('products_id'));
+        if(!$deleteFromCart){
+            return $this->sendError('Cart Items Not Deleted');
+        }
         return $this->apiResponse($deleteFromCart,'Cart Items Deleted Successfully');
     }
 

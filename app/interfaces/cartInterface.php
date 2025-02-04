@@ -6,6 +6,6 @@ use App\Models\Cart;
 
 interface cartInterface{
     public function getCartItems();
-    public function deleteFromCart();
+    public function deleteFromCart($id);
     public function clearCart();
 }

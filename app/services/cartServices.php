@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Controllers\admin\apiResponse;
 use App\Http\Requests\cartRequest;
 use App\Interfaces\cartInterface;
 use App\Models\Cart;
@@ -11,53 +12,47 @@ use Illuminate\Support\Facades\Auth;
 
 class cartServices {
     private $cartRepository;
+    use apiResponse;
 
     public function __construct(cartInterface $cartRepository)
     {
         $this->cartRepository = $cartRepository;
     }
 
-    public function     addToNewCart(cartRequest $request)
+    public function add_to_cart(cartRequest $request)
     {
-        $findProduct=products::findOrFail($request->products_id);
-        if(!$findProduct){
-            return false;
-        }
+        $fields=$request->validated();
         $cart=Cart::where('user_id', Auth::user()->id)->first();
-        if(!$cart)
-        {
-            $fields=$request->validated();
-            $data=$this->cartRepository->addToCart($fields);
-            return $data;
+        if(!$cart){
+            Cart::create([
+                'user_id'=>Auth::user()->id,
+            ]);
+            CartItems::create([
+                'cart_id'=>Cart::where('user_id', Auth::user()->id)->first()->id,
+                'products_id'=>$fields['products_id'],
+                'quantity'=>$request['quantity'],
+            ]);
+            return $this->apiResponse([],'Product Added To Cart Successfully');
         }
-    }
-
-    public function addToExistingCart(cartRequest $request)
-    {
-        $findProduct=products::findOrFail($request->products_id);
-        if(!$findProduct){
-            return false;
-        }
-        $cart=Cart::where('user_id', Auth::user()->id)->first();
-        if($cart)
-        {
-            if(isset(CartItems::where('cart_id', $cart->id)->where('products_id', $cart->products_id)->first()->id))
-            {
-                $cart->qunatity++;
-                $data=$cart->save();
-                return $data->products();
+        else{
+            if(isset(CartItems::where('cart_id', $cart->id)->where('products_id', $fields['products_id'])->first()->id)){
+                CartItems::where('cart_id', $cart->id)->where('products_id', $fields['products_id'])->increment('quantity', $fields['quantity']);
+                return $this->apiResponse([],'Product quantity plused');
             }
-            else
-            {
-                $data=$this->cartRepository->cartItems($cart);
-                return $data->products();
+            else{
+                CartItems::create([
+                    'cart_id'=>$cart->id,
+                    'products_id'=>$fields['products_id'],
+                    'quantity'=>$fields['quantity'],
+                ]);
+                return $this->apiResponse([],'Product Added To Cart Successfully');
             }
         }
     }
 
-    public function deleteFromCart()
+    public function deleteFromCart($id)
     {
-        $data=$this->cartRepository->deleteFromCart();
+        $data=$this->cartRepository->deleteFromCart($id);
         return $data;
     }
 

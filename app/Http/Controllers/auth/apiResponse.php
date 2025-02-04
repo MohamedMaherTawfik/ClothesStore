@@ -15,7 +15,7 @@ trait apiResponse
         return response($array);
     }
 
-    public function sendError($error, $errorMessages = [], $code = 401)
+    public function sendError($error, $errorMessages = [], $code = 404)
     {
     	$response = [
             'success' => false,
