@@ -18,7 +18,8 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api');
     Route::post('/profile', [AuthController::class, 'profile'])->middleware('auth:api');
-    Route::post('/user/addreses', [AuthController::class, 'userAddresses'])->middleware('auth:api');
+    Route::post('/user/address', [AuthController::class, 'userAddress'])->middleware('auth:api');
+    Route::get('/user/addreses', [AuthController::class, 'userAddresses'])->middleware('auth:api');
 });
 
 
@@ -43,12 +44,14 @@ Route::controller(categoreyController::class)->group(function () {
 Route::controller(productController::class)->group(function () {
     Route::get('/products', 'index');
     Route::get('/product/{id}', 'show');
-    Route::get('/product/{id}/colors', 'colors');
-    Route::get('/product/{id}/sizes', 'sizes');
-    Route::get('/product/{id}/colorsizes', 'ColorsSizes');
     Route::post('/product', 'store');
     Route::post('/product/{id}', 'update');
     Route::delete('/product/{id}','destroy');
+    Route::get('/product/{id}/colors', 'colors');
+    Route::get('/product/{id}/sizes', 'sizes');
+    Route::get('/product/{id}/colorSizes', 'colorSizes');
+    Route::post('/product/{id}/color', 'addColors');
+    Route::post('/product/{id}/color', 'addSizes');
 });
 
 Route::controller(cartController::class)->group(function () {

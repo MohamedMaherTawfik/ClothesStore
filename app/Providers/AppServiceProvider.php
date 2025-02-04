@@ -13,6 +13,8 @@ use App\Repository\productRepository;
 use App\Repository\brandRepository;
 use App\Repository\orderRepository;
 use App\Repository\cartRepository;
+use App\Interfaces\colorSizesInterface;
+use App\Repository\colorsSizesRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(brandInterface::class, brandRepository::class);
         $this->app->bind(OrderInterface::class, orderRepository::class);
         $this->app->bind(cartInterface::class, cartRepository::class);
+        $this->app->bind(colorSizesInterface::class, colorsSizesRepository::class);
     }
 
     /**
