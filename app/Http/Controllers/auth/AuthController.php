@@ -2,10 +2,13 @@
 
 namespace App\Http\controllers\auth;
 
+use App\Http\Requests\userAddresses;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
 use Validator;
 use Illuminate\Http\Request;
+use App\Models\userAddress;
 
 class AuthController
 {
@@ -14,10 +17,10 @@ class AuthController
     public function register(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'c_password' => 'required|same:password',
+            'name' => 'required|min:3|string|max:25',
+            'email' => 'required|email|unique:users,email',
+            'phone'=>'required|min:3|max:25|string',
+            'password' => ['required','confirmed',Password::min(8)->mixedCase()->numbers()],
         ]);
 
         if($validator->fails()){
@@ -78,6 +81,22 @@ class AuthController
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ];
+    }
+
+    public function addAddress(userAddresses $request)
+    {
+        $fields=$request->validated();
+        $data=userAddress::create([
+            'user_id'=>Auth::user()->id,
+            'address'=>$fields['address'],
+            'city'=>$fields['city'],
+            'postal_code'=>$fields['postal_code'],
+        ]);
+        if(!$data){
+            return $this->sendError('Address Not Created');
+        }
+
+        return $this->apiResponse($data, 'Address created successfully.');
     }
 
     public function userAddresses()
