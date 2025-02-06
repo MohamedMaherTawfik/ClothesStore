@@ -58,4 +58,12 @@ class orderController extends Controller
         }
         return $this->apiResponse($order,'Order Fetched Successfully');
     }
+
+    public function ChangeStatus($status){
+        $order=$this->orderServices->ChangeStatus(request('id'),$status);
+        if(!$order){
+            return $this->sendError('Order Not Found');
+        }
+        return $this->apiResponse($order,'Order Status Changed Successfully');
+    }
 }

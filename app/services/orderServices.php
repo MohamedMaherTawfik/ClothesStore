@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
+use App\Interfaces\cartInterface;
 use App\Interfaces\OrderInterface;
 use App\Models\Cart;
+use App\Models\CartItems;
 use App\Models\order;
+use App\Models\orderdetails;
 use App\Models\orders;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -12,10 +15,12 @@ use Illuminate\Support\Facades\Auth;
 class orderServices
 {
     private $orderRepository;
+    private $cartRepository;
 
-    public function __construct(OrderInterface $orderRepository)
+    public function __construct(OrderInterface $orderRepository,cartInterface $cartRepository)
     {
         $this->orderRepository = $orderRepository;
+        $this->cartRepository=$cartRepository;
     }
     public function allOrders()
     {
@@ -24,32 +29,30 @@ class orderServices
     }
 
     public function createOrder($data){
-
-        $order_items=Cart::with('products')->where('user_id', Auth::user()->id)->get();
-        foreach($order_items as $item){
-            foreach($item->products as $product){
-                $price=$product->price*$item->qunatity;
-                $total=$price+$total;
-                $total_quantity+=$item->qunatity;
-            }
+        $total=0;
+        $total_quantity=0;
+        $cartItem=$this->cartRepository->getCartItems();
+        // return $cartItem;
+        foreach($cartItem as $item){
+            $total+=$item->quantity * $item->product->price;
+            $total_quantity+=$item->quantity;
         }
+
         $order=orders::create([
             'user_id'=>Auth::user()->id,
             'total_price'=>$total,
             'total_quantity'=>$total_quantity,
-            'status'=>'pending',
-            'notes'=>$data['notes'],
         ]);
 
-        foreach($order_items as $item){
-            foreach($item->products as $product){
-                $order->orderDetails()->create([
+
+        foreach($cartItem as $item){
+                orderdetails::create([
                     'orders_id'=>$order->id,
-                    'products_id'=>$item->products_id,
-                    'qunatity'=>$item->qunatity,
+                    'products_id'=>$item->product->id,
+                    'quantity'=>$item->quantity,
+                    'price'=>$item->product->price
                 ]);
             }
-        }
         return $order->orderDetails()->get();
     }
 
@@ -65,6 +68,11 @@ class orderServices
 
     public function getUserOrders($id){
         $order=$this->orderRepository->getUserOrders($id);
+        return $order;
+    }
+
+    public function ChangeStatus($id,$status){
+        $order=$this->orderRepository->ChangeStatus($id,$status);
         return $order;
     }
 }

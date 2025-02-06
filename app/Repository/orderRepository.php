@@ -12,14 +12,20 @@ use Illuminate\Support\Facades\Auth;
 class orderRepository implements OrderInterface
 {
 
+    private $order;
+
+    public function __construct(orders $order)
+    {
+        $this->order = $order;
+    }
     public function allOrders()
     {
-        return orders::all();
+        return $this->order->all();
     }
 
     public function showOrder($id)
     {
-        return orders::find($id);
+        return orderdetails::with('order')->where('orders_id', $id)->get();
     }
 
     public function destroyOrder($id)
@@ -32,5 +38,13 @@ class orderRepository implements OrderInterface
     public function getUserOrders($id)
     {
         return User::with('orders')->find($id);
+
+    }
+
+    public function ChangeStatus($id,$status){
+        $order=orders::find($id);
+        $order->status=$status;
+        $order->save();
+        return $order;
     }
 }

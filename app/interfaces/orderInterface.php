@@ -9,4 +9,5 @@ interface OrderInterface{
     public function showOrder(int $id);
     public function destroyOrder(int $id);
     public function getUserOrders(int $id);
+    public function changeStatus(int $id,int $status);
 }

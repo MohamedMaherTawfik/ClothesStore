@@ -64,6 +64,7 @@ Route::controller(orderController::class)->group(function () {
     Route::get('/orders', 'index');
     Route::get('/order/{id}', 'show');
     Route::post('/order', 'store');
-    Route::post('/user/orders', 'getUserOrders');
+    Route::get('/user/orders', 'getUserOrders');
+    Route::post('/order/{id}/status', 'ChangeStatus');
     Route::delete('/order/{id}', 'destroy');
 });
