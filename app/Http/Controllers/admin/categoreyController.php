@@ -26,10 +26,17 @@ class categoreyController extends Controller
     public function store(categoreyRequest $request){
         $fields=$request->validated();
         if($fields){
+            if($request->hasFile('image')){
+                $file=$request->file('image');
+                $name=time().'.'.$file->getClientOriginalName();
+                $file->move(public_path('categorey'),$name);
+                $fields['image']=$name;
+            }
             $categorey=$this->categoreyServices->storeCategorey($fields);
             return $this->apiResponse($categorey,'Categorey Created Successfully');
         }
         return $this->sendError('Categorey Not Created');
+
     }
 
     public function show($id){
@@ -40,6 +47,12 @@ class categoreyController extends Controller
     public function update(categoreyRequest $request){
         $fields=$request->validated();
         if($fields){
+            if($request->hasFile('image')){
+                $file=$request->file('image');
+                $name=time().'.'.$file->getClientOriginalName();
+                $file->move(public_path('categorey'),$name);
+                $fields['image']=$name;
+            }
             $categorey=$this->categoreyServices->updateCategorey($fields,$request->id);
             return $this->apiResponse($categorey,'Categorey Updated Successfully');
         }

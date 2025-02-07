@@ -27,11 +27,18 @@ class productController extends Controller
 
     public function store(productRequest $request){
         $fields=$request->validated();
-        $data=$this->productServices->createProduct($fields);
-        if(!$data){
-            return $this->sendError('Product Not Created');
+        if($fields){
+            if($request->hasFile('image')){
+                $file=$request->file('image');
+                $name=time().'.'.$file->getClientOriginalName();
+                $file->move(public_path('products'),$name);
+                $fields['image']=$name;
+            }
+            $data=$this->productServices->createProduct($fields);
+            return $this->apiResponse($data,'Product Created Successfully');
         }
-        return $this->apiResponse($data,'Product Created Successfully');
+        return $this->sendError('Product Not Created');
+
     }
 
     public function show($id){
@@ -44,11 +51,19 @@ class productController extends Controller
 
     public function update(productRequest $request, $id){
         $fields=$request->validated();
-        $data=$this->productServices->updateProduct($id, $fields);
-        if(!$data){
-            return $this->sendError('Product Not Updated');
+        if($fields){
+            if($request->hasFile('image')){
+                $file=$request->file('image');
+                $name=time().'.'.$file->getClientOriginalName();
+                $file->move(public_path('products'),$name);
+                $fields['image']=$name;
+            }
+            $data=$this->productServices->updateProduct($id, $fields);
+            return $this->apiResponse($data,'Product Updated Successfully');
         }
-        return $this->apiResponse($data,'Product Updated Successfully');
+        return $this->sendError('Product Not Updated');
+
+
     }
 
     public function destroy($id){

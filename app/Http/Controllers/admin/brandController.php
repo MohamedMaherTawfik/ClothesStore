@@ -23,11 +23,17 @@ class brandController extends Controller
 
     public function store(brandRequest $request){
         $data=$request->validated();
-        $brand=$this->brandServices->storeBrand($data);
-        if(!$brand){
-            return $this->sendError('Brand Not Created');
+        if($data){
+            if($request->hasFile('image')){
+                $file=$request->file('image');
+                $name=time().'.'.$file->getClientOriginalName();
+                $file->move(public_path('brand'),$name);
+                $data['image']=$name;
+            }
+            $brand=$this->brandServices->storeBrand($data);
+            return $this->apiResponse($brand,'Brand Created Successfully');
         }
-        return $this->apiResponse($brand,'Brand Created Successfully');
+        return $this->sendError('Brand Not Created');
     }
 
     public function show($id){
@@ -40,11 +46,18 @@ class brandController extends Controller
 
     public function update(brandRequest $request){
         $data=$request->validated();
-        $brand=$this->brandServices->updateBrand($data,$request->id);
-        if(!$brand){
-            return $this->sendError('Brand Not Updated');
+        if($data){
+            if($request->hasFile('image')){
+                $file=$request->file('image');
+                $name=time().'.'.$file->getClientOriginalName();
+                $file->move(public_path('brand'),$name);
+                $data['image']=$name;
+            }
+            $brand=$this->brandServices->updateBrand($data,$request->id);
+            return $this->apiResponse($brand,'Brand Updated Successfully');
         }
-        return $this->apiResponse($brand,'Brand Updated Successfully');
+        return $this->sendError('Brand Not Updated');
+
     }
 
     public function destroy($id){
