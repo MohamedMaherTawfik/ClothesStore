@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\brandController;
 use App\Http\Controllers\admin\categoreyController;
 use App\Http\Controllers\admin\productController;
+use App\Http\Controllers\mail\MailController;
 use App\Http\Controllers\orders\cartController;
 use App\Http\Controllers\orders\orderController;
 use Illuminate\Support\Facades\Route;
@@ -67,4 +68,9 @@ Route::controller(orderController::class)->group(function () {
     Route::get('/user/orders', 'getUserOrders');
     Route::post('/order/{id}/status', 'ChangeStatus');
     Route::delete('/order/{id}', 'destroy');
+});
+
+Route::controller(MailController::class)->group(function () {
+    Route::post('/send-email', 'sendEmail');
+    Route::get('/send-email', 'sendEmail');
 });
