@@ -7,6 +7,7 @@ use App\Http\Controllers\mail\MailController;
 use App\Http\Controllers\orders\cartController;
 use App\Http\Controllers\orders\orderController;
 use App\Http\Controllers\reviews\blogConteroller;
+use App\Http\Middleware\checkAdmin;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\auth\AuthController;
@@ -23,37 +24,41 @@ Route::group([
     Route::post('/user/address', [AuthController::class, 'addAddress'])->middleware('auth:api');
 });
 
+Route::middleware(checkAdmin::class)->group(function () {
+    Route::controller(brandController::class)->group(function () {
+        Route::get('/brands', 'index');
+        Route::get('/brand/{id}', 'show');
+        Route::post('/brand', 'store');
+        Route::post('/brand/{id}', 'update');
+        Route::delete('/brand/{id}', 'destroy');
+        Route::get('/brand/{id}/products', 'products');
+    });
 
-Route::controller(brandController::class)->group(function () {
-    Route::get('/brands', 'index');
-    Route::get('/brand/{id}', 'show');
-    Route::post('/brand', 'store');
-    Route::post('/brand/{id}', 'update');
-    Route::delete('/brand/{id}', 'destroy');
-    Route::get('/brand/{id}/products', 'products');
+    Route::controller(categoreyController::class)->group(function () {
+        Route::get('/categories', 'index');
+        Route::get('/category/{id}', 'show');
+        Route::post('/category', 'store');
+        Route::post('/category/{id}', 'update');
+        Route::delete('/category/{id}', 'destroy');
+        Route::get('/category/{id}/products', 'products');
+    });
+
+    Route::controller(productController::class)->group(function () {
+        Route::get('/products', 'index');
+        Route::get('/product/{id}', 'show');
+        Route::post('/product', 'store');
+        Route::post('/product/{id}', 'update');
+        Route::delete('/product/{id}','destroy');
+        Route::get('/product/{id}/colors', 'colors');
+        Route::get('/product/{id}/sizes', 'sizes');
+        Route::get('/product/{id}/colorSizes', 'colorSizes');
+        Route::post('/product/{id}/color', 'addColors');
+        Route::post('/product/{id}/size', 'addSizes');
+    });
+
 });
 
-Route::controller(categoreyController::class)->group(function () {
-    Route::get('/categories', 'index');
-    Route::get('/category/{id}', 'show');
-    Route::post('/category', 'store');
-    Route::post('/category/{id}', 'update');
-    Route::delete('/category/{id}', 'destroy');
-    Route::get('/category/{id}/products', 'products');
-});
 
-Route::controller(productController::class)->group(function () {
-    Route::get('/products', 'index');
-    Route::get('/product/{id}', 'show');
-    Route::post('/product', 'store');
-    Route::post('/product/{id}', 'update');
-    Route::delete('/product/{id}','destroy');
-    Route::get('/product/{id}/colors', 'colors');
-    Route::get('/product/{id}/sizes', 'sizes');
-    Route::get('/product/{id}/colorSizes', 'colorSizes');
-    Route::post('/product/{id}/color', 'addColors');
-    Route::post('/product/{id}/size', 'addSizes');
-});
 
 Route::controller(cartController::class)->group(function () {
     Route::post('/cart', 'addToCart');
@@ -63,7 +68,7 @@ Route::controller(cartController::class)->group(function () {
 });
 
 Route::controller(orderController::class)->group(function () {
-    Route::get('/orders', 'index');
+    Route::get('/orders', 'index')->middleware(checkAdmin::class);
     Route::get('/order/{id}', 'show');
     Route::post('/order', 'store');
     Route::get('/user/orders', 'getUserOrders');
@@ -72,7 +77,7 @@ Route::controller(orderController::class)->group(function () {
 });
 
 Route::controller(MailController::class)->group(function () {
-    Route::post('/send-email', 'sendEmail');
+    Route::post('/send-email', 'sendEmail')->middleware(checkAdmin::class);
     Route::get('/send-email', 'sendEmail');
 });
 
