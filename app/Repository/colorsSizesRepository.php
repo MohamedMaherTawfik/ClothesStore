@@ -29,19 +29,19 @@ class ColorsSizesRepository implements colorSizesInterface
     }
     public function showProductColors(int $id)
     {
-        $colorSizes = products::with('colors')->get();
+        $colorSizes = products::with('colors')->find($id);
         return $colorSizes;
     }
 
     public function showProductSizes($id)
     {
-        $colorSizes = products::with('sizes')->get();
+        $colorSizes = products::with('sizes')->find($id);
         return $colorSizes;
     }
 
     public function ShowProductColorsSizes(int $id)
     {
-        $colorSizes = products::with('colors', 'sizes')->get();
+        $colorSizes = products::with('colors', 'sizes')->find($id);
         return $colorSizes;
     }
 

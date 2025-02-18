@@ -82,16 +82,16 @@ class productController extends Controller
         return $this->apiResponse($data,'Sizes Fetched Successfully');
     }
 
-    public function sizes($id){
-        $data=$this->colorSizes->getSizes($id);
+    public function sizes(){
+        $data=$this->colorSizes->getSizes(request('id'));
         if(!$data){
             return $this->sendError('Sizes Not Found');
         }
         return $this->apiResponse($data,'Sizes Fetched Successfully');
     }
 
-    public function colors($id){
-        $data=$this->colorSizes->getColors($id);
+    public function colors(){
+        $data=$this->colorSizes->getColors(request('id'));
         if(!$data){
             return $this->sendError('Colors Not Found');
         }

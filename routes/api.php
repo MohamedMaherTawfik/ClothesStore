@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\productController;
 use App\Http\Controllers\mail\MailController;
 use App\Http\Controllers\orders\cartController;
 use App\Http\Controllers\orders\orderController;
+use App\Http\Controllers\reviews\blogConteroller;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\auth\AuthController;
@@ -73,4 +74,13 @@ Route::controller(orderController::class)->group(function () {
 Route::controller(MailController::class)->group(function () {
     Route::post('/send-email', 'sendEmail');
     Route::get('/send-email', 'sendEmail');
+});
+
+
+Route::controller(blogConteroller::class)->group(function () {
+    Route::get('/blogs', 'index');
+    Route::get('/blog/{id}', 'show');
+    Route::post('/blog', 'store');
+    Route::post('/blog/{id}', 'update');
+    Route::delete('/blog/{id}', 'destroy');
 });

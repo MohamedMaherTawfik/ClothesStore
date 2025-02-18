@@ -29,20 +29,20 @@ class cartServices {
             ]);
             CartItems::create([
                 'cart_id'=>Cart::where('user_id', Auth::user()->id)->first()->id,
-                'products_id'=>$fields['products_id'],
+                'products_id'=>$request['products_id'],
                 'quantity'=>$request['quantity'],
             ]);
             return $this->apiResponse([],'Product Added To Cart Successfully');
         }
         else{
-            if(isset(CartItems::where('cart_id', $cart->id)->where('products_id', $fields['products_id'])->first()->id)){
-                CartItems::where('cart_id', $cart->id)->where('products_id', $fields['products_id'])->increment('quantity', $fields['quantity']);
+            if(isset(CartItems::where('cart_id', $cart->id)->where('products_id', $request['products_id'])->first()->id)){
+                CartItems::where('cart_id', $cart->id)->where('products_id', $request['products_id'])->increment('quantity', $fields['quantity']);
                 return $this->apiResponse([],'Product quantity plused');
             }
             else{
                 CartItems::create([
                     'cart_id'=>$cart->id,
-                    'products_id'=>$fields['products_id'],
+                    'products_id'=>$request['products_id'],
                     'quantity'=>$fields['quantity'],
                 ]);
                 return $this->apiResponse([],'Product Added To Cart Successfully');

@@ -39,7 +39,7 @@ class AuthController
     public function login()
     {
         $credentials = request(['email', 'password']);
-
+        // dd($token);
         if (! $token = auth()->attempt($credentials)) {
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         }
