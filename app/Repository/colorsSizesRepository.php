@@ -10,40 +10,23 @@ use App\Models\productSizes;
 class ColorsSizesRepository implements colorSizesInterface
 {
 
-    public function addColors($data,$id)
+    public function addColors($data)
     {
-        $addColor=productColors::create([
-            'products_id'=>$id,
-            'color'=>$data['color']
-        ]);
-        return $addColor;
+        return productColors::create($data);
     }
 
-    public function addSizes($data,$id)
+    public function addSizes($data)
     {
-        $addSize=productSizes::create([
-            'products_id'=>$id,
-            'size'=>$data['size']
-        ]);
-        return $addSize;
-    }
-    public function showProductColors(int $id)
-    {
-        $colorSizes = products::with('colors')->find($id);
-        return $colorSizes;
+        return productSizes::create($data);
     }
 
-    public function showProductSizes($id)
+    public function allColors($id)
     {
-        $colorSizes = products::with('sizes')->find($id);
-        return $colorSizes;
+        return productColors::all();
     }
 
-    public function ShowProductColorsSizes(int $id)
+    public function allSizes($id)
     {
-        $colorSizes = products::with('colors', 'sizes')->find($id);
-        return $colorSizes;
+        return productSizes::all();
     }
-
-
 }

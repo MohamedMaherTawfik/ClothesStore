@@ -21,11 +21,11 @@ class products extends Model
 
     public function colors()
     {
-        return $this->hasMany(productColors::class);
+        return $this->belongsToMany(productColors::class, 'product_color_sizes');
     }
 
     public function sizes()
     {
-        return $this->hasMany(productSizes::class);
+        return $this->belongsToMany(productSizes::class, 'product_color_sizes');
     }
 }

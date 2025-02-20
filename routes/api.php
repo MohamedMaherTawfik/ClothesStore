@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\brandController;
 use App\Http\Controllers\admin\categoreyController;
+use App\Http\Controllers\admin\colorSizesController;
 use App\Http\Controllers\admin\productController;
 use App\Http\Controllers\mail\MailController;
 use App\Http\Controllers\orders\cartController;
@@ -52,8 +53,13 @@ Route::middleware(checkAdmin::class)->group(function () {
         Route::get('/product/{id}/colors', 'colors');
         Route::get('/product/{id}/sizes', 'sizes');
         Route::get('/product/{id}/colorSizes', 'colorSizes');
-        Route::post('/product/{id}/color', 'addColors');
-        Route::post('/product/{id}/size', 'addSizes');
+    });
+
+    Route::controller(colorSizesController::class)->group(function () {
+        Route::post('/addColor', 'addColor');
+        Route::post('/addSize', 'addSize');
+        Route::get('/colors', 'getAllColors');
+        Route::get('/sizes', 'getAllSizes');
     });
 
 });

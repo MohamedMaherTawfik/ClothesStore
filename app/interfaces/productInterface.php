@@ -8,4 +8,7 @@ interface productInterface {
     public function store($data);
     public function update($data, $id);
     public function destroy($id);
+    public function showProductColors(int $id);
+    public function showProductSizes(int $id);
+    public function ShowProductColorsSizes(int $id);
 }

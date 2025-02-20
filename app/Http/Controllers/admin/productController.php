@@ -75,7 +75,7 @@ class productController extends Controller
     }
 
     public function colorSizes($id){
-        $data=$this->colorSizes->getColorSizes($id);
+        $data=$this->productServices->getColorSizes($id);
         if(!$data){
             return $this->sendError('Sizes Not Found');
         }
@@ -83,7 +83,7 @@ class productController extends Controller
     }
 
     public function sizes(){
-        $data=$this->colorSizes->getSizes(request('id'));
+        $data=$this->productServices->getSizes(request('id'));
         if(!$data){
             return $this->sendError('Sizes Not Found');
         }
@@ -91,28 +91,12 @@ class productController extends Controller
     }
 
     public function colors(){
-        $data=$this->colorSizes->getColors(request('id'));
+        $data=$this->productServices->getColors(request('id'));
         if(!$data){
             return $this->sendError('Colors Not Found');
         }
         return $this->apiResponse($data,'Colors Fetched Successfully');
     }
 
-    public function addColors(colorRequest $request){
-        $fields=$request->validated();
-        $data=$this->colorSizes->addColors($fields,request('id'));
-        if(!$data){
-            return $this->sendError('Colors Not Added');
-        }
-        return $this->apiResponse($data,'Colors Added Successfully');
-    }
 
-    public function addSizes(sizeRequest $request){
-        $fields=$request->validated();
-        $data=$this->colorSizes->addSizes($fields,request('id'));
-        if(!$data){
-            return $this->sendError('Sizes Not Added');
-        }
-        return $this->apiResponse($data,'Sizes Added Successfully');
-    }
 }

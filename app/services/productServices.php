@@ -7,7 +7,7 @@ use App\Interfaces\productInterface;
 class productServices
 {
     private $productRepository;
-    public function __construct(productInterface $productRepository)
+    public function __construct(productInterface $productRepository,)
     {
         $this->productRepository = $productRepository;
     }
@@ -40,6 +40,21 @@ class productServices
     {
         $product=$this->productRepository->destroy($id);
         return $product;
+    }
+
+    public function getSizes($id){
+        $data= $this->productRepository->showProductSizes($id);
+        return $data;
+    }
+
+    public function getColors($id){
+        $data= $this->productRepository->showProductColors($id);
+        return $data;
+    }
+
+    public function getColorSizes($id){
+        $data= $this->productRepository->ShowProductColorsSizes($id);
+        return $data;
     }
 
 }
