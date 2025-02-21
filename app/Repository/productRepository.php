@@ -4,6 +4,7 @@ namespace App\Repository;
 
 
 use App\Interfaces\productInterface;
+use App\Models\ProductColorSizes;
 use App\Models\products;
 
 class productRepository implements productInterface
@@ -20,7 +21,7 @@ class productRepository implements productInterface
 
     public function show($id)
     {
-        return products::find($id);
+        return products::with( 'colors', 'sizes')->find($id);
     }
 
     public function update($id, $data)
@@ -70,4 +71,12 @@ class productRepository implements productInterface
         return $colorSizes;
     }
 
+    public function storeProductColorsSizes($data,$color_id,$size_id)
+    {
+        return ProductColorSizes::create([
+            'products_id' => $data,
+            'product_colors_id' => $color_id,
+            'product_sizes_id' => $size_id,
+        ]);
+    }
 }

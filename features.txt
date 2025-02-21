@@ -12,5 +12,5 @@ Features To Add in Ecommerce Project:
     11-Status code == Done
     12-Ensure All controllers check form request
     13-Arabic & English languages
-    14-Size and Colors are static for all Products
+    14-Size and Colors are static for all Products == Done
     15-login function Token

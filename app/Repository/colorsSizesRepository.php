@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Interfaces\colorSizesInterface;
 use App\Models\productColors;
+use App\Models\ProductColorSizes;
 use App\Models\products;
 use App\Models\productSizes;
 
@@ -29,4 +30,5 @@ class ColorsSizesRepository implements colorSizesInterface
     {
         return productSizes::all();
     }
+
 }

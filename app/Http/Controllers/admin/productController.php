@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\colorRequest;
 use App\Http\Requests\productRequest;
 use App\Http\Requests\sizeRequest;
+use App\Models\productColors;
+use App\Models\productSizes;
 use App\services\colorSizesServices;
 use App\Services\productServices;
 use Illuminate\Http\Request;
@@ -34,15 +36,17 @@ class productController extends Controller
                 $file->move(public_path('products'),$name);
                 $fields['image']=$name;
             }
-            $data=$this->productServices->createProduct($fields);
-            return $this->apiResponse($data,'Product Created Successfully');
+            $colors=productColors::all();
+            $sizes=productSizes::all();
+            $data=$this->productServices->createProduct($fields, $colors, $sizes);
+            return $this->apiResponse($data->load('colors','sizes'),'Product Created Successfully');
         }
         return $this->sendError('Product Not Created');
 
     }
 
-    public function show($id){
-        $data=$this->productServices->showProduct($id);
+    public function show(){
+        $data=$this->productServices->showProduct(request('id'));
         if(!$data){
             return $this->sendError('Product Not Found');
         }
