@@ -21,12 +21,12 @@ class ColorsSizesRepository implements colorSizesInterface
         return productSizes::create($data);
     }
 
-    public function allColors($id)
+    public function allColors()
     {
         return productColors::all();
     }
 
-    public function allSizes($id)
+    public function allSizes()
     {
         return productSizes::all();
     }

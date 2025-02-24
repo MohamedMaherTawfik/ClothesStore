@@ -24,13 +24,13 @@ class colorSizesServices
         return $addSize;
     }
 
-    public function allColors($id){
-        $allColors= $this->colorSizesRepository->allColors($id);
+    public function allColors(){
+        $allColors= $this->colorSizesRepository->allColors();
         return $allColors;
     }
 
-    public function allSizes($id){
-        $allSizes= $this->colorSizesRepository->allSizes($id);
+    public function allSizes(){
+        $allSizes= $this->colorSizesRepository->allSizes();
         return $allSizes;
     }
 

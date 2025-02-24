@@ -20,6 +20,6 @@ class checkAdmin
        if(auth()->check() && auth()->user()->role == 'admin'){
            return $next($request);
        }
-       return $this->apiResponse(null,'Unauthorised Acess',401);
+       return $this->apiResponse(null,'Un authorized Acess',401);
     }
 }
