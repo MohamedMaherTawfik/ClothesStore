@@ -32,6 +32,7 @@ class brandRepository implements brandInterface
     public function destroy($id)
     {
         $brand = brand::find($id);
+        if(!$brand) return false;
         $brand->delete();
         return $brand;
     }

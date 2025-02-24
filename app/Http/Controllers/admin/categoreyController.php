@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\categoreyRequest;
 use App\Services\categoreyServices;
+use Illuminate\Support\Facades\App;
 
 
 class categoreyController extends Controller
@@ -19,11 +20,16 @@ class categoreyController extends Controller
     }
 
     public function index(){
+        App::setLocale(request('lang'));
         $allCategories=$this->categoreyServices->getAllCategorey();
-        return $this->apiResponse($allCategories,'All Categorey Fethched Successfully');
+        if(count($allCategories ) == 0){
+            return $this->sendError(__('messages.Error_index_Message'));
+        }
+        return $this->apiResponse($allCategories,__('messages.index_Message'));
     }
 
     public function store(categoreyRequest $request){
+        App::setLocale(request('lang'));
         $fields=$request->validated();
         if($fields){
             if($request->hasFile('image')){
@@ -33,18 +39,23 @@ class categoreyController extends Controller
                 $fields['image']=$name;
             }
             $categorey=$this->categoreyServices->storeCategorey($fields);
-            return $this->apiResponse($categorey,'Categorey Created Successfully');
+            return $this->apiResponse($categorey,__('messages.store_Message'));
         }
-        return $this->sendError('Categorey Not Created');
+        return $this->sendError(__('messages.Error_store_Message'));
 
     }
 
-    public function show($id){
-        $categorey=$this->categoreyServices->showCategorey($id);
-        return $this->apiResponse($categorey,'Categorey Fetched Successfully');
+    public function show(){
+        App::setLocale(request('lang'));
+        $categorey=$this->categoreyServices->showCategorey(request('id'));
+        if(!$categorey){
+            return $this->sendError(__('messages.Error_show_Message'));
+        }
+        return $this->apiResponse($categorey,__('messages.show_Message'));
     }
 
     public function update(categoreyRequest $request){
+        App::setLocale(request('lang'));
         $fields=$request->validated();
         if($fields){
             if($request->hasFile('image')){
@@ -53,21 +64,26 @@ class categoreyController extends Controller
                 $file->move(public_path('categorey'),$name);
                 $fields['image']=$name;
             }
-            $categorey=$this->categoreyServices->updateCategorey($fields,$request->id);
-            return $this->apiResponse($categorey,'Categorey Updated Successfully');
+            $categorey=$this->categoreyServices->updateCategorey($fields,request('id'));
+            return $this->apiResponse($categorey,__("messages.update_Message"));
         }
-        return $this->sendError('Categorey Not Updated');
+        return $this->sendError(__("messages.Error_update_Message"));
     }
-    public function destroy($id){
-        $categorey=$this->categoreyServices->deleteCategorey($id);
-        return $this->apiResponse($categorey,'Categorey Deleted Successfully');
+    public function destroy(){
+        App::setLocale(request('lang'));
+        $categorey=$this->categoreyServices->deleteCategorey(request('id'));
+        if(!$categorey){
+            return $this->sendError(__("messages.Error_destroy_Message"));
+        }
+        return $this->apiResponse($categorey,__("messages.destroy_Message"));
     }
 
-    public function products($id){
-        $categorey=$this->categoreyServices->products($id);
+    public function products(){
+        App::setLocale(request('lang'));
+        $categorey=$this->categoreyServices->products(request('id'));
         if(!$categorey){
-            return $this->sendError('Categorey Not Found');
+            return $this->sendError(__("messages.Error_with_products_Message"));
         }
-        return $this->apiResponse($categorey,'Categorey with products Fetched Successfully');
+        return $this->apiResponse($categorey,__("messages.with_products_Message"));
     }
 }

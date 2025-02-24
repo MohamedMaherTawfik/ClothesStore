@@ -1,16 +1,15 @@
 Features To Add in Ecommerce Project:
     1-Send mails using Api == Done
-    2-Live Chat pusher using Api
-    3-How to make filters in functions
-    4-Most recents Products
-    5-Reviews For Projects
-    6-Stocks Table and relations
-    7-blogs for The Full App == Done
-    8-Payment Methods using Paymob(Api)
-    9-Create api_key
-    10-Admin Middleware == Done
-    11-Status code == Done
-    12-Ensure All controllers check form request
-    13-Arabic & English languages
-    14-Size and Colors are static for all Products == Done
-    15-login function Token
+    2-Most recents Products == Done
+    3-blogs for The Full App == Done
+    4-Admin Middleware == Done
+    5-Status code == Done
+    6-Ensure All controllers check form request == Done
+    7-Size and Colors are static for all Products == Done
+    7-login function Token
+    9-Live Chat pusher using Api
+    10-How to make filters in functions
+    11-Stocks Table and relations
+    12-Payment Methods using Paymob(Api)
+    13-Create api_key
+    14-Multiplie languages EN , AR , FR , SP

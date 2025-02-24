@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\brandRequest;
 use App\Services\brandServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class brandController extends Controller
 {
@@ -17,11 +18,16 @@ class brandController extends Controller
     }
 
     public function index(){
+        App::setLocale(request('lang'));
         $allBrands=$this->brandServices->getBrands();
-        return $this->apiResponse($allBrands,'All Brands Fethched Successfully');
+        if(count($allBrands ) == 0){
+            return $this->sendError(__('messages.Error_index_Message'));
+        }
+        return $this->apiResponse($allBrands,__('messages.index_Message'));
     }
 
     public function store(brandRequest $request){
+        App::setLocale(request('lang'));
         $data=$request->validated();
         if($data){
             if($request->hasFile('image')){
@@ -31,20 +37,22 @@ class brandController extends Controller
                 $data['image']=$name;
             }
             $brand=$this->brandServices->storeBrand($data);
-            return $this->apiResponse($brand,'Brand Created Successfully');
+            return $this->apiResponse($brand,__("messages.store_Message"));
         }
-        return $this->sendError('Brand Not Created');
+        return $this->sendError(__("messages.Error_store_Message"));
     }
 
-    public function show($id){
-        $brand=$this->brandServices->showBrand($id);
+    public function show(){
+        App::setLocale(request('lang'));
+        $brand=$this->brandServices->showBrand(request('id'));
         if(!$brand){
-            return $this->sendError('Brand Not Found');
+            return $this->sendError(__("messages.Error_show_Message"));
         }
-        return $this->apiResponse($brand,'Brand Fetched Successfully');
+        return $this->apiResponse($brand,__("messages.show_Message"));
     }
 
     public function update(brandRequest $request){
+        App::setLocale(request('lang'));
         $data=$request->validated();
         if($data){
             if($request->hasFile('image')){
@@ -54,26 +62,28 @@ class brandController extends Controller
                 $data['image']=$name;
             }
             $brand=$this->brandServices->updateBrand($data,$request->id);
-            return $this->apiResponse($brand,'Brand Updated Successfully');
+            return $this->apiResponse($brand,__("messages.update_Message"));
         }
-        return $this->sendError('Brand Not Updated');
+        return $this->sendError(__("messages.Error_update_Message"));
 
     }
 
-    public function destroy($id){
-        $brand=$this->brandServices->deleteBrand($id);
+    public function destroy(){
+        App::setLocale(request('lang'));
+        $brand=$this->brandServices->deleteBrand(request('id'));
         if(!$brand){
-            return $this->sendError('Brand Not Deleted');
+            return $this->sendError(__("messages.Error_destroy_Message"));
         }
-        return $this->apiResponse($brand,'Brand Deleted Successfully');
+        return $this->apiResponse($brand,__("messages.destroy_Message"));
     }
 
-    public function products($id){
-        $brand=$this->brandServices->products($id);
+    public function products(){
+        App::setLocale(request('lang'));
+        $brand=$this->brandServices->products(request('id'));
         if(!$brand){
-            return $this->sendError('Brand Not Found');
+            return $this->sendError(__("messages.Error_with_products_Message"));
         }
-        return $this->apiResponse($brand,'Brand Fetched Successfully');
+        return $this->apiResponse($brand,__("messages.with_products_Message"));
     }
 
 }

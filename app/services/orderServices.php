@@ -42,6 +42,11 @@ class orderServices
             'user_id'=>Auth::user()->id,
             'total_price'=>$total,
             'total_quantity'=>$total_quantity,
+            'carrier'=>$data['carrier'],
+            'notes'=>$data['notes'],
+            'coupon_code'=>$data['coupon_code'],
+            'discount'=>$data['discount'],
+            'taxes'=>$data['taxes']
         ]);
 
 

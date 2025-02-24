@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->double('total_price');
             $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
-            $table->double('disocunt')->nullable();
+            $table->double('discount')->nullable();
             $table->double('total_quantity');
             $table->double('taxes')->nullable();
             $table->string('coupon_code')->nullable();

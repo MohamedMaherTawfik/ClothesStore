@@ -22,7 +22,11 @@ class orderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'discount' => 'numeric',
+            'taxes' => 'numeric',
+            'coupon_code'=>'string',
+            'notes'=>'string|min:3|max:100',
+            'carrier'=>'string|min:3|max:40',
         ];
     }
 }

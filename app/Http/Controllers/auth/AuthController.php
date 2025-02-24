@@ -3,6 +3,7 @@
 namespace App\Http\controllers\auth;
 
 use App\Http\Requests\userAddresses;
+use App\Http\Requests\userRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
@@ -14,19 +15,8 @@ class AuthController
 {
     use apiResponse;
 
-    public function register(Request $request) {
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|string|max:25',
-            'email' => 'required|email|unique:users,email',
-            'phone'=>'required|min:3|max:25|string',
-            'password' => ['required','confirmed',Password::min(8)->mixedCase()->numbers()],
-        ]);
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
+    public function register(userRequest $request) {
+        $fields = $request->validated();
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);

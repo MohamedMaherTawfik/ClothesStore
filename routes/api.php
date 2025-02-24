@@ -27,21 +27,21 @@ Route::group([
 
 Route::middleware(checkAdmin::class)->group(function () {
     Route::controller(brandController::class)->group(function () {
-        Route::get('/brands', 'index');
-        Route::get('/brand/{id}', 'show');
-        Route::post('/brand', 'store');
-        Route::post('/brand/{id}', 'update');
-        Route::delete('/brand/{id}', 'destroy');
-        Route::get('/brand/{id}/products', 'products');
+        Route::get('/brands/{lang}', 'index');
+        Route::get('/brand/{lang}/{id}', 'show');
+        Route::post('/brand/{lang}', 'store');
+        Route::post('/brand/{lang}/{id}', 'update');
+        Route::delete('/brand/{lang}/{id}', 'destroy');
+        Route::get('/brand/{lang}/{id}/products', 'products');
     });
 
     Route::controller(categoreyController::class)->group(function () {
-        Route::get('/categories', 'index');
-        Route::get('/category/{id}', 'show');
-        Route::post('/category', 'store');
-        Route::post('/category/{id}', 'update');
-        Route::delete('/category/{id}', 'destroy');
-        Route::get('/category/{id}/products', 'products');
+        Route::get('/categories/{lang}', 'index');
+        Route::get('/category/{lang}/{id}', 'show');
+        Route::post('/category/{lang}', 'store');
+        Route::post('/category/{lang}/{id}', 'update');
+        Route::delete('/category/{lang}/{id}', 'destroy');
+        Route::get('/category/{lang}/{id}/products', 'products');
     });
 
     Route::controller(productController::class)->group(function () {
