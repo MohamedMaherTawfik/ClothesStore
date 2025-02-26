@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Models\blogs;
 use App\Interfaces\blogInterface;
+use App\Models\products;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class blogRepository implements blogInterface{
@@ -15,22 +17,35 @@ class blogRepository implements blogInterface{
         return blogs::find($id);
     }
 
-    public function createBlog($data){
-        return blogs::create([
+    public function createBlog($id,$data){
+        $data= blogs::create([
             'user_id' => Auth::user()->id,
             'blog'=>$data['blog'],
+            'products_id'=>$id
         ]);
+        if(!$data) return false;
+        return $data;
     }
 
     public function updateBlog($id, $data){
-        return blogs::where('id', $id)->update($data);
+        $updated = blogs::find($id);
+        $updated->update($data);
+        if(!$updated) return false;
+        return $updated;
     }
 
     public function deleteBlog($id){
-        return blogs::where('id', $id)->delete();
+        $delete = blogs::find($id);
+        $delete->delete();
+        if(!$delete) return false;
+        return $delete;
     }
 
     public function userBlogs($id){
-        return blogs::with('user')->where('user_id', $id)->get();
+        return blogs::where('user_id', $id)->get();
+    }
+
+    public function productBlogs($id){
+        return User::with('blogs')->find($id);
     }
 }

@@ -33,4 +33,9 @@ class products extends Model
     {
         return $this->hasMany(ProductColorSizes::class, 'products_id');
     }
+
+    public function blog()
+    {
+        return $this->hasMany(blogs::class);
+    }
 }

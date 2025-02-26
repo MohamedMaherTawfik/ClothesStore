@@ -6,7 +6,8 @@ use App\Http\Controllers\admin\apiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\blogRequest;
 use App\Services\blogServices;
-use Illuminate\Http\Request;
+use App\Http\Resources\ReviewResource;
+use Illuminate\Support\Facades\Auth;
 
 class blogConteroller extends Controller
 {
@@ -43,7 +44,7 @@ class blogConteroller extends Controller
         if(!$data){
             return $this->sendError('Blog Not Created');
         }
-        $created= $this->blogServices->store($data);
+        $created= $this->blogServices->store(request('id'),$data);
         return $this->apiResponse($created,'Blog Created Successfully');
     }
 
@@ -53,18 +54,35 @@ class blogConteroller extends Controller
         if(!$data){
             return $this->sendError('Blog Not Updated');
         }
-        $created= $this->blogServices->update($request->id,$data);
-        return $this->apiResponse($created,'Blog Updated Successfully');
+        $updated= $this->blogServices->update(request('id'),$data);
+        return $this->apiResponse($updated,'Blog Updated Successfully');
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        $data= $this->blogServices->destroy($id);
+        $data= $this->blogServices->destroy(request('id'));
         if($data){
             return $this->apiResponse($data,'Blog Deleted Successfully');
         }
         return $this->sendError('Blog Not Deleted');
     }
 
+    public function userBlogs()
+    {
+        $data= $this->blogServices->userBlogs(Auth::user()->id);
+        if($data){
+            return $this->apiResponse($data,'Blogs Fetched Successfully');
+        }
+        return $this->sendError('Blogs Not Found');
+    }
+
+    public function productBlogs()
+    {
+        $data= $this->blogServices->productBlogs(request('id'));
+        if($data){
+            return $this->apiResponse($data,'Blogs Fetched Successfully');
+        }
+        return $this->sendError('Blogs Not Found');
+    }
 
 }

@@ -20,12 +20,13 @@ class  blogServices {
         return $this->blogRepository->getBlog($id);
     }
 
-    public function store($data) {
-        return $this->blogRepository->createBlog($data);
+    public function store($id,$data) {
+        return $this->blogRepository->createBlog($id,$data);
     }
 
     public function update($id, $data) {
-        return $this->blogRepository->updateBlog($id, $data);
+        $data= $this->blogRepository->updateBlog($id, $data);
+        return $data;
     }
 
     public function destroy($id) {
@@ -34,5 +35,9 @@ class  blogServices {
 
     public function userBlogs($id) {
         return $this->blogRepository->userBlogs($id);
+    }
+
+    public function productBlogs($id) {
+        return $this->blogRepository->productBlogs($id);
     }
 }
