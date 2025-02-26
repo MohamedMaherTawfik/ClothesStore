@@ -33,7 +33,7 @@ class blogConteroller extends Controller
     {
         $data= $this->blogServices->show($id);
         if($data){
-            return $this->apiResponse($data,'Blog Fetched Successfully');
+            return $this->apiResponse(new ReviewResource($data),'Blog Fetched Successfully');
         }
         return $this->sendError('Blog Not Found');
     }
@@ -55,7 +55,7 @@ class blogConteroller extends Controller
             return $this->sendError('Blog Not Updated');
         }
         $updated= $this->blogServices->update(request('id'),$data);
-        return $this->apiResponse($updated,'Blog Updated Successfully');
+        return $this->apiResponse(new ReviewResource($updated),'Blog Updated Successfully');
     }
 
     public function destroy()

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\categoreyRequest;
+use App\Http\Resources\CategoreyResoucres;
+use App\Models\categorey;
 use App\Services\categoreyServices;
 use Illuminate\Support\Facades\App;
 
@@ -65,7 +67,7 @@ class categoreyController extends Controller
                 $fields['image']=$name;
             }
             $categorey=$this->categoreyServices->updateCategorey($fields,request('id'));
-            return $this->apiResponse($categorey,__("messages.update_Message"));
+            return $this->apiResponse(new CategoreyResoucres($categorey),__("messages.update_Message"));
         }
         return $this->sendError(__("messages.Error_update_Message"));
     }
@@ -75,7 +77,7 @@ class categoreyController extends Controller
         if(!$categorey){
             return $this->sendError(__("messages.Error_destroy_Message"));
         }
-        return $this->apiResponse($categorey,__("messages.destroy_Message"));
+        return $this->apiResponse(new CategoreyResoucres($categorey),__("messages.destroy_Message"));
     }
 
     public function products(){

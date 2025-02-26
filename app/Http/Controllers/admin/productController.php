@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\colorRequest;
 use App\Http\Requests\productRequest;
 use App\Http\Requests\sizeRequest;
+use App\Http\Resources\ProductsResoucres;
 use App\Models\productColors;
 use App\Models\productSizes;
 use App\services\colorSizesServices;
@@ -50,7 +51,7 @@ class productController extends Controller
         if(!$data){
             return $this->sendError('Product Not Found');
         }
-        return $this->apiResponse($data,'Product Found Successfully');
+        return $this->apiResponse(new ProductsResoucres($data),'Product Found Successfully');
     }
 
     public function update(productRequest $request, $id){
@@ -63,7 +64,7 @@ class productController extends Controller
                 $fields['image']=$name;
             }
             $data=$this->productServices->updateProduct($id, $fields);
-            return $this->apiResponse($data,'Product Updated Successfully');
+            return $this->apiResponse(new ProductsResoucres($data),'Product Updated Successfully');
         }
         return $this->sendError('Product Not Updated');
 

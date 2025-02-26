@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\brandRequest;
+use App\Http\Resources\BrandsResoucres;
 use App\Services\brandServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -48,7 +49,7 @@ class brandController extends Controller
         if(!$brand){
             return $this->sendError(__("messages.Error_show_Message"));
         }
-        return $this->apiResponse($brand,__("messages.show_Message"));
+        return $this->apiResponse(new BrandsResoucres($brand),__("messages.show_Message"));
     }
 
     public function update(brandRequest $request){
@@ -62,7 +63,7 @@ class brandController extends Controller
                 $data['image']=$name;
             }
             $brand=$this->brandServices->updateBrand($data,$request->id);
-            return $this->apiResponse($brand,__("messages.update_Message"));
+            return $this->apiResponse(new BrandsResoucres($brand),__("messages.update_Message"));
         }
         return $this->sendError(__("messages.Error_update_Message"));
 
