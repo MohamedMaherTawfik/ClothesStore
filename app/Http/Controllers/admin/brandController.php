@@ -18,8 +18,7 @@ class brandController extends Controller
         $this->brandServices = $brandServices;
     }
 
-    public function index(){
-        App::setLocale(request('lang'));
+    public function index(Request $request){
         $allBrands=$this->brandServices->getBrands();
         if(count($allBrands ) == 0){
             return $this->sendError(__('messages.Error_index_Message'));
@@ -28,7 +27,6 @@ class brandController extends Controller
     }
 
     public function store(brandRequest $request){
-        App::setLocale(request('lang'));
         $data=$request->validated();
         if($data){
             if($request->hasFile('image')){
@@ -44,7 +42,6 @@ class brandController extends Controller
     }
 
     public function show(){
-        App::setLocale(request('lang'));
         $brand=$this->brandServices->showBrand(request('id'));
         if(!$brand){
             return $this->sendError(__("messages.Error_show_Message"));
@@ -53,7 +50,6 @@ class brandController extends Controller
     }
 
     public function update(brandRequest $request){
-        App::setLocale(request('lang'));
         $data=$request->validated();
         if($data){
             if($request->hasFile('image')){
@@ -70,7 +66,6 @@ class brandController extends Controller
     }
 
     public function destroy(){
-        App::setLocale(request('lang'));
         $brand=$this->brandServices->deleteBrand(request('id'));
         if(!$brand){
             return $this->sendError(__("messages.Error_destroy_Message"));
@@ -79,7 +74,6 @@ class brandController extends Controller
     }
 
     public function products(){
-        App::setLocale(request('lang'));
         $brand=$this->brandServices->products(request('id'));
         if(!$brand){
             return $this->sendError(__("messages.Error_with_products_Message"));

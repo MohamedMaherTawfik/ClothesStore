@@ -40,21 +40,21 @@ Route::middleware(checkAdmin::class)->group(function () {
 });
 
 Route::controller(brandController::class)->group(function () {
-    Route::get('/brands/{lang}', 'index');
-    Route::get('/brand/{lang}/{id}', 'show');
-    Route::post('/brand/{lang}', 'store')->middleware(checkAdmin::class);
-    Route::post('/brand/{lang}/{id}', 'update')->middleware(checkAdmin::class);
-    Route::delete('/brand/{lang}/{id}', 'destroy')->middleware(checkAdmin::class);
-    Route::get('/brand/{lang}/{id}/products', 'products');
+    Route::get('/brands', 'index');
+    Route::get('/brand/{id}', 'show');
+    Route::post('/brand', 'store')->middleware(checkAdmin::class);
+    Route::post('/brand/{id}', 'update')->middleware(checkAdmin::class);
+    Route::delete('/brand/{id}', 'destroy')->middleware(checkAdmin::class);
+    Route::get('/brand/{id}/products', 'products');
 });
 
 Route::controller(categoreyController::class)->group(function () {
-    Route::get('/categories/{lang}', 'index');
-    Route::get('/category/{lang}/{id}', 'show');
-    Route::post('/category/{lang}', 'store')->middleware(checkAdmin::class);
-    Route::post('/category/{lang}/{id}', 'update')->middleware(checkAdmin::class);
-    Route::delete('/category/{lang}/{id}', 'destroy')->middleware(checkAdmin::class);
-    Route::get('/category/{lang}/{id}/products', 'products');
+    Route::get('/categories', 'index');
+    Route::get('/category/{id}', 'show');
+    Route::post('/category', 'store')->middleware(checkAdmin::class);
+    Route::post('/category/{id}', 'update')->middleware(checkAdmin::class);
+    Route::delete('/category/{id}', 'destroy')->middleware(checkAdmin::class);
+    Route::get('/category/{id}/products', 'products');
 });
 
 

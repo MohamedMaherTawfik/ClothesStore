@@ -7,6 +7,7 @@ use App\Http\Requests\categoreyRequest;
 use App\Http\Resources\CategoreyResoucres;
 use App\Models\categorey;
 use App\Services\categoreyServices;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
 
@@ -22,7 +23,6 @@ class categoreyController extends Controller
     }
 
     public function index(){
-        App::setLocale(request('lang'));
         $allCategories=$this->categoreyServices->getAllCategorey();
         if(count($allCategories ) == 0){
             return $this->sendError(__('messages.Error_index_Message'));
@@ -31,7 +31,6 @@ class categoreyController extends Controller
     }
 
     public function store(categoreyRequest $request){
-        App::setLocale(request('lang'));
         $fields=$request->validated();
         if($fields){
             if($request->hasFile('image')){
@@ -48,7 +47,6 @@ class categoreyController extends Controller
     }
 
     public function show(){
-        App::setLocale(request('lang'));
         $categorey=$this->categoreyServices->showCategorey(request('id'));
         if(!$categorey){
             return $this->sendError(__('messages.Error_show_Message'));
@@ -57,7 +55,6 @@ class categoreyController extends Controller
     }
 
     public function update(categoreyRequest $request){
-        App::setLocale(request('lang'));
         $fields=$request->validated();
         if($fields){
             if($request->hasFile('image')){
@@ -72,7 +69,6 @@ class categoreyController extends Controller
         return $this->sendError(__("messages.Error_update_Message"));
     }
     public function destroy(){
-        App::setLocale(request('lang'));
         $categorey=$this->categoreyServices->deleteCategorey(request('id'));
         if(!$categorey){
             return $this->sendError(__("messages.Error_destroy_Message"));
@@ -81,7 +77,6 @@ class categoreyController extends Controller
     }
 
     public function products(){
-        App::setLocale(request('lang'));
         $categorey=$this->categoreyServices->products(request('id'));
         if(!$categorey){
             return $this->sendError(__("messages.Error_with_products_Message"));
