@@ -12,5 +12,5 @@ Features To Add in Ecommerce Project:
     11-Stocks Table and relations
     12-Payment Methods using Paymob(Api)
     13-Create api_key
-    14-Multiplie languages EN , AR , FR , SP
+    14-Multiplie languages EN , AR == Done
     15-Load UserAddress When make order

@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    // My Api key Restored in .env File
+    'api_key' => env('API_KEY'),
 ];

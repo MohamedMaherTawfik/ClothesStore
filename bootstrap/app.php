@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ApiKey;
 use App\Http\Middleware\localization;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -15,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // define localization middleware
         $middleware->append(localization::class);
+        $middleware->append(ApiKey::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
