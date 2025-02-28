@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class blogRequest extends FormRequest
+class stockRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class blogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'blog' => 'required|min:3|max:150',
+            'quantity' => 'required|numeric',
         ];
     }
 }

@@ -31,7 +31,7 @@ class AuthController
         $credentials = request(['email', 'password']);
         // dd($token);
         if (! $token = auth()->attempt($credentials)) {
-            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+            return $this->sendError('These credentials do not match our records.', ['error'=>'These credentials do not match our records']);
         }
 
         $success = $this->respondWithToken($token);

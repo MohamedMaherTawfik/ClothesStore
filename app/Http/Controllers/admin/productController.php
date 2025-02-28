@@ -6,26 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\colorRequest;
 use App\Http\Requests\productRequest;
 use App\Http\Requests\sizeRequest;
+use App\Http\Requests\stockRequest;
 use App\Http\Resources\ProductsResoucres;
 use App\Models\productColors;
 use App\Models\productSizes;
 use App\services\colorSizesServices;
 use App\Services\productServices;
+use App\services\StockServices;
 use Illuminate\Http\Request;
 
 class productController extends Controller
 {
     use apiResponse;
     private $productServices;
-    private $colorSizes;
 
-    public function __construct(productServices $productServices, colorSizesServices $colorSizes){
+    public function __construct(productServices $productServices){
         $this->productServices = $productServices;
-        $this->colorSizes = $colorSizes;
     }
 
     public function index(){
-        return $this->productServices->allProducts();
+        $data= $this->productServices->allProducts();
+        if(count($data) == 0){
+            return $this->sendError(__('messages.Error_index_Message'));
+        }
+        return $this->apiResponse($data,__('messages.index_Message'));
     }
 
     public function store(productRequest $request){
@@ -40,18 +44,18 @@ class productController extends Controller
             $colors=productColors::all();
             $sizes=productSizes::all();
             $data=$this->productServices->createProduct($fields, $colors, $sizes);
-            return $this->apiResponse($data->load('colors','sizes'),'Product Created Successfully');
+            return $this->apiResponse($data,__("messages.store_Message"));
         }
-        return $this->sendError('Product Not Created');
+        return $this->sendError(__("messages.Error_store_Message"));
 
     }
 
     public function show(){
         $data=$this->productServices->showProduct(request('id'));
         if(!$data){
-            return $this->sendError('Product Not Found');
+            return $this->sendError(__("messages.Error_show_Message"));
         }
-        return $this->apiResponse(new ProductsResoucres($data),'Product Found Successfully');
+        return $this->apiResponse($data,__("messages.show_Message"));
     }
 
     public function update(productRequest $request, $id){
@@ -64,44 +68,51 @@ class productController extends Controller
                 $fields['image']=$name;
             }
             $data=$this->productServices->updateProduct($id, $fields);
-            return $this->apiResponse(new ProductsResoucres($data),'Product Updated Successfully');
+            return $this->apiResponse(new ProductsResoucres($data),__("messages.update_Message"));
         }
-        return $this->sendError('Product Not Updated');
+        return $this->sendError(__("messages.Error_update_Message"));
+    }
 
-
+    public function updateStock(stockRequest $request){
+        $fields=$request->validated();
+        $updated=$this->productServices->updateProductStock(request('id'), $fields);
+        if(!$updated){
+            return $this->sendError(__("messages.Error_stock_Message"));
+        }
+        return $this->apiResponse($updated,__("messages.stock_Message"));
     }
 
     public function destroy($id){
         $data=$this->productServices->deleteProduct($id);
         if(!$data){
-            return $this->sendError('Product Not Deleted');
+            return $this->sendError(__("messages.Error_destroy_Message"));
         }
-        return $this->apiResponse($data,'Product Deleted Successfully');
+        return $this->apiResponse($data,__("messages.destroy_Message"));
     }
 
-    public function colorSizes($id){
-        $data=$this->productServices->getColorSizes($id);
-        if(!$data){
-            return $this->sendError('Sizes Not Found');
-        }
-        return $this->apiResponse($data,'Sizes Fetched Successfully');
-    }
+    // public function colorSizes($id){
+    //     $data=$this->productServices->getColorSizes($id);
+    //     if(!$data){
+    //         return $this->sendError('Sizes Not Found');
+    //     }
+    //     return $this->apiResponse($data,'Sizes Fetched Successfully');
+    // }
 
-    public function sizes(){
-        $data=$this->productServices->getSizes(request('id'));
-        if(!$data){
-            return $this->sendError('Sizes Not Found');
-        }
-        return $this->apiResponse($data,'Sizes Fetched Successfully');
-    }
+    // public function sizes(){
+    //     $data=$this->productServices->getSizes(request('id'));
+    //     if(!$data){
+    //         return $this->sendError('Sizes Not Found');
+    //     }
+    //     return $this->apiResponse($data,'Sizes Fetched Successfully');
+    // }
 
-    public function colors(){
-        $data=$this->productServices->getColors(request('id'));
-        if(!$data){
-            return $this->sendError('Colors Not Found');
-        }
-        return $this->apiResponse($data,'Colors Fetched Successfully');
-    }
+    // public function colors(){
+    //     $data=$this->productServices->getColors(request('id'));
+    //     if(!$data){
+    //         return $this->sendError('Colors Not Found');
+    //     }
+    //     return $this->apiResponse($data,'Colors Fetched Successfully');
+    // }
 
 
 }

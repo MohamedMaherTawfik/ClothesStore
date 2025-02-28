@@ -19,7 +19,7 @@ class ApiKey
     {
         $apikey= config('app.api_key');
         if($request->header('api-key') != $apikey){
-            return $this->apiResponse(null,'UnAuthorized Acess',401);
+            return $this->apiResponse(null,'Invalid Api Key',401);
         }
         return $next($request);
     }

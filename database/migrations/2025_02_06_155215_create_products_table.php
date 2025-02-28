@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('image');
             $table->string('description')->nullable();
             $table->double('price');
-            $table->integer('quantity');
             $table->integer('discount')->nullable();
             $table->enum('status', ['available', 'unavailable'])->default('available');
             $table->foreignIdFor(categorey::class)->constrained()->cascadeOnDelete();

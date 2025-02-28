@@ -14,14 +14,35 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'email' => 'm7mdellham77@gmail.com',
-            'name' => 'Mohamed Maher',
-            'password' => Hash::make('M7mdmaher11'),
-            'role' => 'admin',
-            'address' => 'Elteera Street Mansourah Egypt',
-            'phone' => '+201024328382',
+        $users =[
+            [
+                'email' => 'm7mdellham77@gmail.com',
+                'name' => 'Mohamed Maher',
+                'password' => Hash::make('M7mdmaher11'),
+                'role' => 'admin',
+                'address' => 'Elteera Street Mansourah Egypt',
+                'phone' => '+201024328382',
+            ],
+            [
+                'email' => 'AhmedMaher@gmail.com',
+                'name' => 'Ahmed Maher',
+                'password' => Hash::make('Ahmedmaher11'),
+                'role' => 'user',
+                'address' => 'Elteera Street Mansourah Egypt',
+                'phone' => '+201007352061',
+            ]
+            ];
 
-        ]);
+        foreach ($users as $user) {
+            User::create($user);
+        }
+        // User::create([
+        //     'email' => 'm7mdellham77@gmail.com',
+        //     'name' => 'Mohamed Maher',
+        //     'password' => Hash::make('M7mdmaher11'),
+        //     'role' => 'admin',
+        //     'address' => 'Elteera Street Mansourah Egypt',
+        //     'phone' => '+201024328382',
+        // ]);
     }
 }

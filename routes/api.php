@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\brandController;
 use App\Http\Controllers\admin\categoreyController;
 use App\Http\Controllers\admin\colorSizesController;
 use App\Http\Controllers\admin\productController;
+use App\Http\Controllers\admin\stockController;
 use App\Http\Controllers\mail\MailController;
 use App\Http\Controllers\orders\cartController;
 use App\Http\Controllers\orders\orderController;
@@ -31,10 +32,10 @@ Route::group([
 Route::middleware(checkAdmin::class)->group(function () {
 
     Route::controller(colorSizesController::class)->group(function () {
-        Route::post('/addColor/{lang}', 'addColor');
-        Route::post('/addSize/{lang}', 'addSize');
-        Route::get('/colors/{lang}', 'getAllColors');
-        Route::get('/sizes/{lang}', 'getAllSizes');
+        Route::post('/addColor', 'addColor');
+        Route::post('/addSize', 'addSize');
+        Route::get('/colors', 'getAllColors');
+        Route::get('/sizes', 'getAllSizes');
     });
 
 });
@@ -64,11 +65,11 @@ Route::controller(productController::class)->group(function () {
     Route::post('/product', 'store')->middleware(checkAdmin::class);
     Route::post('/product/{id}', 'update')->middleware(checkAdmin::class);
     Route::delete('/product/{id}','destroy')->middleware(checkAdmin::class);
-    Route::get('/product/{id}/colors', 'colors');
-    Route::get('/product/{id}/sizes', 'sizes');
-    Route::get('/product/{id}/colorSizes', 'colorSizes');
+    Route::post('product/{id}/stock', 'updateStock')->middleware(checkAdmin::class);
+    // Route::get('/product/{id}/colors', 'colors');
+    // Route::get('/product/{id}/sizes', 'sizes');
+    // Route::get('/product/{id}/colorSizes', 'colorSizes');
 });
-
 
 Route::controller(cartController::class)->group(function () {
     Route::post('/cart', 'addToCart');

@@ -3,14 +3,11 @@
 namespace App\Services;
 
 use App\Interfaces\productInterface;
-use App\Models\productColors;
-use App\Models\productSizes;
-use Nette\Utils\Random;
-
 class productServices
 {
     private $productRepository;
-    public function __construct(productInterface $productRepository,)
+    private $stockRepository;
+    public function __construct(productInterface $productRepository)
     {
         $this->productRepository = $productRepository;
     }
@@ -25,14 +22,18 @@ class productServices
     {
         $product=$this->productRepository->store($data);
         foreach($colors as $key => $color ){
-                
-                if(!isset($sizes[$key]) || $sizes[$key]==null){ 
+
+                if(!isset($sizes[$key]) || $sizes[$key]==null){
                     $this->productRepository->storeProductColorsSizes($product->id, $color->id, rand(1,count($sizes)));
                 }
                 else if($size=$sizes[$key]){
-                $this->productRepository->storeProductColorsSizes($product->id, $color->id, $size->id);       
+                $this->productRepository->storeProductColorsSizes($product->id, $color->id, $size->id);
         }
     }
+        $this->productRepository->storeStock([
+            'products_id'=>$product->id,
+            'quantity'=>$data['quantity']
+        ]);
         return $product;
     }
 
@@ -48,25 +49,30 @@ class productServices
         return $product;
     }
 
+    public function updateProductStock($id, $data)
+    {
+        $product=$this->productRepository->updateStock($id, $data);
+        return $product;
+    }
     public function deleteProduct($id)
     {
         $product=$this->productRepository->destroy($id);
         return $product;
     }
 
-    public function getSizes($id){
-        $data= $this->productRepository->showProductSizes($id);
-        return $data;
-    }
+    // public function getSizes($id){
+    //     $data= $this->productRepository->showProductSizes($id);
+    //     return $data;
+    // }
 
-    public function getColors($id){
-        $data= $this->productRepository->showProductColors($id);
-        return $data;
-    }
+    // public function getColors($id){
+    //     $data= $this->productRepository->showProductColors($id);
+    //     return $data;
+    // }
 
-    public function getColorSizes($id){
-        $data= $this->productRepository->ShowProductColorsSizes($id);
-        return $data;
-    }
+    // public function getColorSizes($id){
+    //     $data= $this->productRepository->ShowProductColorsSizes($id);
+    //     return $data;
+    // }
 
 }
