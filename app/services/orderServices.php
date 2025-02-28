@@ -10,6 +10,7 @@ use App\Models\order;
 use App\Models\orderdetails;
 use App\Models\orders;
 use App\Models\User;
+use App\Models\userAddress;
 use Illuminate\Support\Facades\Auth;
 
 class orderServices
@@ -37,11 +38,13 @@ class orderServices
             $total+=$item->quantity * $item->product->price;
             $total_quantity+=$item->quantity;
         }
-
+        $user_address=userAddress::where('user_id',Auth::user()->id)->first();
+        // dd($user_address);
         $order=orders::create([
             'user_id'=>Auth::user()->id,
             'total_price'=>$total,
             'total_quantity'=>$total_quantity,
+            'user_address'=>$user_address->address,
             'carrier'=>$data['carrier'],
             'notes'=>$data['notes'],
             'coupon_code'=>$data['coupon_code'],

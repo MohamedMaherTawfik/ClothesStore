@@ -8,9 +8,8 @@ Features To Add in Ecommerce Project:
     7-Size and Colors are static for all Products == Done
     8-login function Token
     9-Live Chat pusher using Api
-    10-How to make filters in functions
     11-Stocks Table and relations == Done
     12-Payment Methods using Paymob(Api)
     13-Create api_key ==Done
     14-Multiplie languages English,Arabic == Done
-    15-Load UserAddress When make order
+    15-Load UserAddress When make order == Done

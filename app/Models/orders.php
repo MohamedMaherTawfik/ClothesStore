@@ -13,6 +13,7 @@ class orders extends Model
         'status',
         'discount',
         'total_quantity',
+        'user_address',
         'taxes',
         'coupon_code',
         'notes',

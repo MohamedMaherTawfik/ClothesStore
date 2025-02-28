@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
             $table->double('discount')->nullable();
             $table->double('total_quantity');
+            $table->double('user_address');
             $table->double('taxes')->nullable();
             $table->string('coupon_code')->nullable();
             $table->string('notes')->nullable();
