@@ -63,7 +63,7 @@ class categoreyController extends Controller
                 $file->move(public_path('categorey'),$name);
                 $fields['image']=$name;
             }
-            $categorey=$this->categoreyServices->updateCategorey($fields,request('id'));
+            $categorey=$this->categoreyServices->updateCategorey($fields,$request->id);
             return $this->apiResponse(new CategoreyResoucres($categorey),__("messages.update_Message"));
         }
         return $this->sendError(__("messages.Error_update_Message"));

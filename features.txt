@@ -6,7 +6,7 @@ Features To Add in Ecommerce Project:
     5-Status code == Done
     6-Ensure All controllers check form request == Done
     7-Size and Colors are static for all Products == Done
-    8-login function Token
+    8-login function Token == Done
     9-Live Chat pusher using Api
     11-Stocks Table and relations == Done
     12-Payment Methods using Paymob(Api)

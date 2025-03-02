@@ -19,7 +19,6 @@ class colorSizesController extends Controller
     }
 
     public function addColor(colorRequest $request){
-        App::setLocale(request('lang'));
         $fields=$request->validated();
         if($fields){
             $addColor= $this->colorSizeServices->addColors($fields);
@@ -29,7 +28,6 @@ class colorSizesController extends Controller
     }
 
     public function addSize(sizeRequest $request){
-        App::setLocale(request('lang'));
         $fields=$request->validated();
         if($fields){
             $addSize= $this->colorSizeServices->addSizes($fields);
@@ -39,7 +37,6 @@ class colorSizesController extends Controller
     }
 
     public function getAllColors(){
-        App::setLocale(request('lang'));
         $data=$this->colorSizeServices->allColors();
         if(!$data){
             return $this->sendError(__('messages.Error_index_Message'));
@@ -48,7 +45,6 @@ class colorSizesController extends Controller
     }
 
     public function getAllSizes(){
-        App::setLocale(request('lang'));
         $data=$this->colorSizeServices->allSizes();
         if(!$data){
             return $this->sendError(__('messages.Error_index_Message'));

@@ -39,7 +39,6 @@ class orderServices
             $total_quantity+=$item->quantity;
         }
         $user_address=userAddress::where('user_id',Auth::user()->id)->first();
-        // dd($user_address);
         $order=orders::create([
             'user_id'=>Auth::user()->id,
             'total_price'=>$total,
@@ -52,16 +51,15 @@ class orderServices
             'taxes'=>$data['taxes']
         ]);
 
-
         foreach($cartItem as $item){
                 orderdetails::create([
                     'orders_id'=>$order->id,
                     'products_id'=>$item->product->id,
                     'quantity'=>$item->quantity,
-                    'price'=>$item->product->price
+                    'total_price'=>$item->product->price
                 ]);
             }
-        return $order->orderDetails()->get();
+        return $order;
     }
 
     Public function showOrder($id){

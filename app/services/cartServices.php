@@ -32,12 +32,12 @@ class cartServices {
                 'products_id'=>$request['products_id'],
                 'quantity'=>$request['quantity'],
             ]);
-            return $this->apiResponse([],'Product Added To Cart Successfully');
+            return $this->apiResponse([],__('messages.AddToCart'));
         }
         else{
             if(isset(CartItems::where('cart_id', $cart->id)->where('products_id', $request['products_id'])->first()->id)){
                 CartItems::where('cart_id', $cart->id)->where('products_id', $request['products_id'])->increment('quantity', $fields['quantity']);
-                return $this->apiResponse([],'Product quantity plused');
+                return $this->apiResponse([],__('messages.Quantityplused'));
             }
             else{
                 CartItems::create([
@@ -45,7 +45,7 @@ class cartServices {
                     'products_id'=>$request['products_id'],
                     'quantity'=>$fields['quantity'],
                 ]);
-                return $this->apiResponse([],'Product Added To Cart Successfully');
+                return $this->apiResponse([],__('messages.Quantityplused'));
             }
         }
     }

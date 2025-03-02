@@ -36,13 +36,5 @@ class UserSeeder extends Seeder
         foreach ($users as $user) {
             User::create($user);
         }
-        // User::create([
-        //     'email' => 'm7mdellham77@gmail.com',
-        //     'name' => 'Mohamed Maher',
-        //     'password' => Hash::make('M7mdmaher11'),
-        //     'role' => 'admin',
-        //     'address' => 'Elteera Street Mansourah Egypt',
-        //     'phone' => '+201024328382',
-        // ]);
     }
 }

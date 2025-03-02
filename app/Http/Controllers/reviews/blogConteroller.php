@@ -23,9 +23,9 @@ class blogConteroller extends Controller
     {
         $data= $this->blogServices->index();
         if($data){
-            return $this->apiResponse($data,'Blogs Fetched Successfully');
+            return $this->apiResponse($data,__('messages.index_Message'));
         }
-        return $this->sendError('Blogs Not Found');
+        return $this->sendError(__('messages.Error_index_Message'));
     }
 
 
@@ -33,56 +33,56 @@ class blogConteroller extends Controller
     {
         $data= $this->blogServices->show($id);
         if($data){
-            return $this->apiResponse(new ReviewResource($data),'Blog Fetched Successfully');
+            return $this->apiResponse(new ReviewResource($data),__('messages.show_Message'));
         }
-        return $this->sendError('Blog Not Found');
+        return $this->sendError(__('messages.Error_show_Message'));
     }
 
     public function store(blogRequest $request)
     {
         $data=$request->validated();
         if(!$data){
-            return $this->sendError('Blog Not Created');
+            return $this->sendError(__("messages.Error_store_Message"));
         }
         $created= $this->blogServices->store(request('id'),$data);
-        return $this->apiResponse($created,'Blog Created Successfully');
+        return $this->apiResponse($created,__("messages.store_Message"));
     }
 
     public function update(blogRequest $request)
     {
         $data=$request->validated();
         if(!$data){
-            return $this->sendError('Blog Not Updated');
+            return $this->sendError(__("messages.Error_update_Message"));
         }
         $updated= $this->blogServices->update(request('id'),$data);
-        return $this->apiResponse(new ReviewResource($updated),'Blog Updated Successfully');
+        return $this->apiResponse(new ReviewResource($updated),__("messages.update_Message"));
     }
 
     public function destroy()
     {
         $data= $this->blogServices->destroy(request('id'));
         if($data){
-            return $this->apiResponse($data,'Blog Deleted Successfully');
+            return $this->apiResponse($data,__("messages.destroy_Message"));
         }
-        return $this->sendError('Blog Not Deleted');
+        return $this->sendError(__("messages.Error_destroy_Message"));
     }
 
     public function userBlogs()
     {
         $data= $this->blogServices->userBlogs(Auth::user()->id);
         if($data){
-            return $this->apiResponse($data,'Blogs Fetched Successfully');
+            return $this->apiResponse($data,__('messages.userBlogs'));
         }
-        return $this->sendError('Blogs Not Found');
+        return $this->sendError(__('messages.Error_userBlogs'));
     }
 
     public function productBlogs()
     {
         $data= $this->blogServices->productBlogs(request('id'));
         if($data){
-            return $this->apiResponse($data,'Blogs Fetched Successfully');
+            return $this->apiResponse($data,__('messages.userBlogs'));
         }
-        return $this->sendError('Blogs Not Found');
+        return $this->sendError(__('messages.Error_userBlogs'));
     }
 
 }

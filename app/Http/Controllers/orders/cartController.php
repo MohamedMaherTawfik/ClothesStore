@@ -20,32 +20,32 @@ class cartController extends Controller
     {
         $data= $this->cartServices->add_to_cart($request);
         if(!$data){
-            return $this->sendError('Cart Items Not Added');
+            return $this->sendError(__('messages.Error_AddToCart'));
         }
-        return $this->apiResponse($data,'Cart Items Added Successfully');
+        return $this->apiResponse($data,__('messages.AddToCart'));
     }
 
     public function getCartItems()
     {
         $getCartItems=$this->cartServices->getCartItems();
         if(!$getCartItems){
-            return $this->sendError('Cart Items Not Found');
+            return $this->sendError(__('messages.Error_GetCartItems'));
         }
-        return $this->apiResponse($getCartItems,'Cart Items Fetched Successfully');
+        return $this->apiResponse($getCartItems,__('messages.GetCartItems'));
     }
 
     public function deleteFromCart()
     {
         $deleteFromCart=$this->cartServices->deleteFromCart(request('products_id'));
         if(!$deleteFromCart){
-            return $this->sendError('Cart Items Not Deleted');
+            return $this->sendError(__('messages.Error_DeleteFromCart'));
         }
-        return $this->apiResponse($deleteFromCart,'Cart Items Deleted Successfully');
+        return $this->apiResponse($deleteFromCart,__('messages.DeleteFromCart'));
     }
 
     public function clearCart()
     {
         $clearCart=$this->cartServices->clearCart();
-        return $this->apiResponse($clearCart,'Cart Items Cleared Successfully');
+        return $this->apiResponse($clearCart,__('messages.DeleteAllFromCart'));
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->double('total_price');
-            $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'delivered', 'cancelled'])->default('pending');
             $table->double('discount')->nullable();
             $table->double('total_quantity');
             $table->double('user_address');

@@ -6,9 +6,6 @@ use App\Http\Requests\userAddresses;
 use App\Http\Requests\userRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\Password;
-use Validator;
-use Illuminate\Http\Request;
 use App\Models\userAddress;
 
 class AuthController
@@ -22,47 +19,22 @@ class AuthController
         $user = User::create($input);
         $success['user'] =  $user;
 
-        return $this->apiResponse($success, 'User register successfully.');
+        return $this->apiResponse($success, __('messages.register'));
     }
 
 
     public function login()
     {
         $credentials = request(['email', 'password']);
-        // dd($token);
-        if (! $token = auth()->attempt($credentials)) {
-            return $this->sendError('These credentials do not match our records.', ['error'=>'These credentials do not match our records']);
+        // dd(auth()->attempt($credentials)); Token السطر دا عباره اصلا عن
+        if (! $token = auth()->attempt($credentials)) { // Variable scope هنا انا بعرف المتغير جوا الشرط عادي لان بي اتش بي بتدعم النوع دا من
+            return $this->sendError(__('messages.Error_login'), ['error'=>__('messages.Error_login')]);
         }
 
-        $success = $this->respondWithToken($token);
+        $success = $this->respondWithToken($token); // لو نجحت الايميل و الباسورد بعمل التوكن الجديده عن طريق الفانكشن دي
 
-        return $this->apiResponse($success, 'User login successfully.');
+        return $this->apiResponse($success, __('messages.login'));
     }
-
-
-    public function profile()
-    {
-        $success = auth()->user()->load('userAddress');
-
-        return $this->apiResponse($success, 'Refresh token return successfully.');
-    }
-
-
-    public function logout()
-    {
-        auth()->logout();
-
-        return $this->apiResponse([], 'Successfully logged out.');
-    }
-
-
-    public function refresh()
-    {
-        $success = $this->respondWithToken(auth()->refresh());
-
-        return $this->apiResponse($success, 'Refresh token return successfully.');
-    }
-
 
     protected function respondWithToken($token)
     {
@@ -71,6 +43,29 @@ class AuthController
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ];
+    }
+
+    public function profile()
+    {
+        $success = auth()->user()->load('userAddress');
+
+        return $this->apiResponse($success, __('messages.profile'));
+    }
+
+
+    public function logout()
+    {
+        auth()->logout();
+
+        return $this->apiResponse([], __('messages.logout'));
+    }
+
+
+    public function refresh()
+    {
+        $success = $this->respondWithToken(auth()->refresh());
+
+        return $this->apiResponse($success, __('messages.refresh'));
     }
 
     public function addAddress(userAddresses $request)
@@ -83,10 +78,10 @@ class AuthController
             'postal_code'=>$fields['postal_code'],
         ]);
         if(!$data){
-            return $this->sendError('Address Not Created');
+            return $this->sendError(__('messages.Error_addAddress'));
         }
 
-        return $this->apiResponse($data, 'Address created successfully.');
+        return $this->apiResponse($data, __('messages.addAddress'));
     }
 
 }

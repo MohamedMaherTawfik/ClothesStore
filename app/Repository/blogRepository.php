@@ -42,10 +42,11 @@ class blogRepository implements blogInterface{
     }
 
     public function userBlogs($id){
-        return blogs::where('user_id', $id)->get();
+        return User::with('blogs')->find($id);
     }
 
     public function productBlogs($id){
-        return User::with('blogs')->find($id);
+        return products::with('blog')->find($id);
+
     }
 }
