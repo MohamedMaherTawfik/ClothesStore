@@ -26,8 +26,7 @@ class AuthController
     public function login()
     {
         $token=auth()->attempt(request(['email', 'password']));
-        $credentials = request(['email', 'password']);
-        if (!auth()->attempt($credentials)) {
+        if (!$token) {
             return $this->sendError(__('messages.Error_login'), ['error'=>__('messages.Error_login')]);
         }
         $success = $this->respondWithToken($token);
