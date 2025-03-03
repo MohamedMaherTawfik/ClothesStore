@@ -14,7 +14,7 @@ class AuthController
 
     public function register(userRequest $request) {
         $fields = $request->validated();
-        $input = $request->all();
+        $input = $fields;
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['user'] =  $user;
@@ -25,13 +25,12 @@ class AuthController
 
     public function login()
     {
+        $token=auth()->attempt(request(['email', 'password']));
         $credentials = request(['email', 'password']);
-        // dd(auth()->attempt($credentials)); Token السطر دا عباره اصلا عن
-        if (! $token = auth()->attempt($credentials)) { // Variable scope هنا انا بعرف المتغير جوا الشرط عادي لان بي اتش بي بتدعم النوع دا من
+        if (!auth()->attempt($credentials)) {
             return $this->sendError(__('messages.Error_login'), ['error'=>__('messages.Error_login')]);
         }
-
-        $success = $this->respondWithToken($token); // لو نجحت الايميل و الباسورد بعمل التوكن الجديده عن طريق الفانكشن دي
+        $success = $this->respondWithToken($token);
 
         return $this->apiResponse($success, __('messages.login'));
     }
