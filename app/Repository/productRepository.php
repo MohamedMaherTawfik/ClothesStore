@@ -3,10 +3,12 @@
 namespace App\Repository;
 
 
+use App\Events\NewDataEvent;
 use App\Interfaces\productInterface;
 use App\Models\ProductColorSizes;
 use App\Models\products;
 use App\Models\stocks;
+use Illuminate\Support\Facades\Event;
 
 class productRepository implements productInterface
 {
@@ -17,7 +19,9 @@ class productRepository implements productInterface
 
     public function store($data)
     {
-        return products::create($data);
+        $product = products::create($data);
+        Event::dispatch(new NewDataEvent($product));
+        return $product;
     }
 
     public function storeStock($data)

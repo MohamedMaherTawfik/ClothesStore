@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Events\NewDataEvent;
 use App\Interfaces\brandInterface;
 use App\Models\brand;
+use Illuminate\Support\Facades\Event;
 
 class brandRepository implements brandInterface
 {
@@ -19,7 +21,9 @@ class brandRepository implements brandInterface
 
     public function store($data)
     {
-        return brand::create($data);
+        $categorey = brand::create($data);
+        Event::dispatch(new NewDataEvent($categorey));
+        return $categorey;
     }
 
     public function update($data, $id)

@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Events\NewDataEvent;
 use App\Interfaces\CategoreyInteface;
 use App\Models\categorey;
+use Illuminate\Support\Facades\Event;
 
 class categoreyRepository implements CategoreyInteface
 {
@@ -14,7 +16,9 @@ class categoreyRepository implements CategoreyInteface
 
     public function store($data)
     {
-        return categorey::create($data);
+        $brand = categorey::create($data);
+        Event::dispatch(new NewDataEvent($brand));
+        return $brand;
     }
 
     public function show($id)
