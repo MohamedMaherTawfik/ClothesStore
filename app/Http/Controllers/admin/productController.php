@@ -10,10 +10,8 @@ use App\Http\Requests\stockRequest;
 use App\Http\Resources\ProductsResoucres;
 use App\Models\productColors;
 use App\Models\productSizes;
-use App\services\colorSizesServices;
 use App\Services\productServices;
-use App\services\StockServices;
-use Illuminate\Http\Request;
+
 
 class productController extends Controller
 {

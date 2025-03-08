@@ -5,8 +5,10 @@ namespace App\Http\controllers\auth;
 use App\Http\Requests\userAddresses;
 use App\Http\Requests\userRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\userAddress;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthController
 {
@@ -45,15 +47,21 @@ class AuthController
 
     public function profile()
     {
-        $success = auth()->user()->load('userAddress');
-
+        $success = auth()->user();
+        if(!$success){
+            return $this->sendError(__('messages.Error_profile'), ['error'=>__('messages.Error_profile')]);
+        }
         return $this->apiResponse($success, __('messages.profile'));
     }
 
 
     public function logout()
     {
-        auth()->logout();
+        try {
+            auth()->logout();
+        } catch (\Throwable $th) {
+            return $this->sendError(__('messages.Error_logout'), ['error'=>__('messages.Error_logout')]);
+        }
 
         return $this->apiResponse([], __('messages.logout'));
     }

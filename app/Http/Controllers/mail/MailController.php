@@ -2,28 +2,21 @@
 
 namespace App\Http\Controllers\mail;
 
+use App\Http\Controllers\admin\apiResponse;
 use App\Http\Controllers\Controller;
 use App\Mail\sendMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Mail;
 
 class MailController extends Controller
 {
+    use apiResponse;
     public function sendEmail(Request $request)
     {
-        $request->validate([
-            'to' => 'required|email',
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string',
-        ]);
+        $send=Mail::to(Auth::user()->email)->send(new sendMail());
 
-        $details = [
-            'subject' => $request->subject,
-            'message' => $request->message,
-        ];
-
-        Mail::to($request->to)->send(new sendMail($details));
-
-        return response()->json(['message' => 'Email sent successfully']);
+        return $this->apiResponse($send,__('messages.emailsent'));
     }
 }
+

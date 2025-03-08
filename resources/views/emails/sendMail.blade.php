@@ -4,6 +4,7 @@
     <title>Email from Laravel API</title>
 </head>
 <body>
-    <p>{{ $details['message'] }}</p>
+    <h1>Welcome:{{$user->name}}</h1>
+    <p>This Email is from Laravel API</p>
 </body>
 </html>

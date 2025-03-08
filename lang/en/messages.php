@@ -39,4 +39,6 @@ return [
     'Quantityminused'=>'Quantity Minused Successfully',
     'ChangeOrderStatus'=>'Order Status Changed Successfully',
     'Error_ChangeOrderStatus'=>'Order Not Changed',
+    'emailsent'=>'Email Sent Successfully',
+    'Error_emailsent'=>'Email Not Sent',
 ];

@@ -39,4 +39,6 @@ return [
     'Quantityminused'=>'تم خصم الكمية بنجاح',
     'ChangeOrderStatus'=>'تم تغيير حالة الطلب بنجاح',
     'Error_ChangeOrderStatus'=>'لم يتم تغيير حالة الطلب',
+    'emailsent'=>'تم ارسال البريد بنجاح',
+    'Error_emailsent'=>'لم يتم ارسال البريد',
 ];

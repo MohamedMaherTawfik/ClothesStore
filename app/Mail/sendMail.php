@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class sendMail extends Mailable
 {
@@ -17,10 +18,10 @@ class sendMail extends Mailable
      * Create a new message instance.
      */
 
-    public $details;
-    public function __construct($details)
+    public $user;
+    public function __construct()
     {
-        $this->details = $details;
+        $this->user = Auth::user();
     }
 
     /**

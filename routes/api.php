@@ -4,7 +4,6 @@ use App\Http\Controllers\admin\brandController;
 use App\Http\Controllers\admin\categoreyController;
 use App\Http\Controllers\admin\colorSizesController;
 use App\Http\Controllers\admin\productController;
-use App\Http\Controllers\admin\stockController;
 use App\Http\Controllers\mail\MailController;
 use App\Http\Controllers\orders\cartController;
 use App\Http\Controllers\orders\orderController;
@@ -14,7 +13,6 @@ use App\Http\Middleware\CheckBelongsTo;
 use App\Http\Middleware\ownCart;
 use App\Http\Middleware\ownOrder;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\auth\AuthController;
 
 Route::group([
@@ -22,11 +20,11 @@ Route::group([
     'prefix' => 'auth'
 ], function () {
     Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
-    Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api');
-    Route::post('/profile', [AuthController::class, 'profile'])->middleware('auth:api');
-    Route::post('/user/address', [AuthController::class, 'addAddress'])->middleware('auth:api');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('jwt.auth');
+    Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('jwt.auth');
+    Route::post('/profile', [AuthController::class, 'profile'])->middleware('jwt.auth');
+    Route::post('/user/address', [AuthController::class, 'addAddress'])->middleware('jwt.auth');
 });
 
 Route::middleware(checkAdmin::class)->group(function () {
@@ -88,8 +86,7 @@ Route::controller(orderController::class)->group(function () {
 });
 
 Route::controller(MailController::class)->group(function () {
-    Route::post('/send-email', 'sendEmail')->middleware(checkAdmin::class);
-    Route::get('/send-email', 'sendEmail');
+    Route::post('/send-email', 'sendEmail')->middleware('jwt.auth');
 });
 
 
