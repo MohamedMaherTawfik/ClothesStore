@@ -8,6 +8,7 @@ use App\Http\Requests\colorRequest;
 use App\Http\Requests\sizeRequest;
 use App\Interfaces\colorSizesInterface;
 use App\services\colorSizesServices;
+use Illuminate\Support\Facades\Auth;
 class colorSizesController extends Controller
 {
     use apiResponse;
@@ -22,7 +23,8 @@ class colorSizesController extends Controller
         $fields=$request->validated();
         if($fields){
             $addColor= $this->colorSizeServices->addColors($fields);
-            return $this->apiResponse($addColor,__('messages.store_Message'));
+            $emailsent="Email Has been sent To " .Auth::user()->email;
+            return $this->apiResponse($addColor,__('messages.store_Message'),$emailsent);
         }
         return $this->sendError(__('messages.Error_store_Message'));
     }
@@ -31,7 +33,8 @@ class colorSizesController extends Controller
         $fields=$request->validated();
         if($fields){
             $addSize= $this->colorSizeServices->addSizes($fields);
-            return $this->apiResponse($addSize,__('messages.store_Message'));
+            $emailsent="Email Has been sent To " .Auth::user()->email;
+            return $this->apiResponse($addSize,__('messages.store_Message'),$emailsent);
         }
         return $this->sendError(__('messages.Error_store_Message'));
     }

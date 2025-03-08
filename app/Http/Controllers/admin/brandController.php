@@ -8,6 +8,7 @@ use App\Http\Resources\BrandsResoucres;
 use App\Services\brandServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class brandController extends Controller
 {
@@ -36,7 +37,8 @@ class brandController extends Controller
                 $data['image']=$name;
             }
             $brand=$this->brandServices->storeBrand($data);
-            return $this->apiResponse($brand,__("messages.store_Message"));
+            $emailsent="Email Has been sent To " .Auth::user()->email;
+            return $this->apiResponse($brand,__("messages.store_Message"),$emailsent);
         }
         return $this->sendError(__("messages.Error_store_Message"));
     }

@@ -9,6 +9,7 @@ use App\Models\categorey;
 use App\Services\categoreyServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 
 class categoreyController extends Controller
@@ -40,7 +41,8 @@ class categoreyController extends Controller
                 $fields['image']=$name;
             }
             $categorey=$this->categoreyServices->storeCategorey($fields);
-            return $this->apiResponse($categorey,__('messages.store_Message'));
+            $emailsent="Email Has been sent To " .Auth::user()->email;
+            return $this->apiResponse($categorey,__('messages.store_Message'),$emailsent);
         }
         return $this->sendError(__('messages.Error_store_Message'));
 

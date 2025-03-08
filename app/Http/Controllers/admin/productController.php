@@ -11,6 +11,7 @@ use App\Http\Resources\ProductsResoucres;
 use App\Models\productColors;
 use App\Models\productSizes;
 use App\Services\productServices;
+use Illuminate\Support\Facades\Auth;
 
 
 class productController extends Controller
@@ -42,7 +43,8 @@ class productController extends Controller
             $colors=productColors::all();
             $sizes=productSizes::all();
             $data=$this->productServices->createProduct($fields, $colors, $sizes);
-            return $this->apiResponse($data,__("messages.store_Message"));
+            $emailsent="Email Has been sent To " .Auth::user()->email;
+            return $this->apiResponse($data,__("messages.store_Message"),$emailsent);
         }
         return $this->sendError(__("messages.Error_store_Message"));
 

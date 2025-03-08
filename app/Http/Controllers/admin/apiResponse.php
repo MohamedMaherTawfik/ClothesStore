@@ -4,12 +4,13 @@ namespace App\Http\Controllers\admin;
 
 trait apiResponse
 {
-    public function apiResponse($data=null,$message='',$status=200)
+    public function apiResponse($data=null,$message='',$emailMessage='',$status=200)
     {
         $array=[
             'success'=>true,
             'status'=>$status,
             'message'=>$message,
+            'emailMessage'=>$emailMessage,
             'result'=>$data,
         ];
         return response($array);
