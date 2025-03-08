@@ -85,38 +85,5 @@ class productRepository implements productInterface
         ]);
     }
 
-    // public function colors($id)
-    // {
-    //     return products::with('colors')->find($id);
-    // }
-
-    // public function sizes($id)
-    // {
-    //     return products::with('sizes')->find($id);
-    // }
-
-    // public function ColorsSizes($id)
-    // {
-    //     return products::with('colors', 'sizes')->find($id);
-    // }
-
-    // public function showProductColors(int $id)
-    // {
-    //     $colorSizes = products::with('colors')->find($id);
-    //     return $colorSizes;
-    // }
-
-    // public function showProductSizes($id)
-    // {
-    //     $colorSizes = products::with('sizes')->find($id);
-    //     return $colorSizes;
-    // }
-
-    // public function ShowProductColorsSizes(int $id)
-    // {
-    //     $colorSizes = products::with('colors', 'sizes')->find($id);
-    //     return $colorSizes;
-    // }
-
-
 }
+

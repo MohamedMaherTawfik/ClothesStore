@@ -90,29 +90,4 @@ class productController extends Controller
         return $this->apiResponse($data,__("messages.destroy_Message"));
     }
 
-    // public function colorSizes($id){
-    //     $data=$this->productServices->getColorSizes($id);
-    //     if(!$data){
-    //         return $this->sendError('Sizes Not Found');
-    //     }
-    //     return $this->apiResponse($data,'Sizes Fetched Successfully');
-    // }
-
-    // public function sizes(){
-    //     $data=$this->productServices->getSizes(request('id'));
-    //     if(!$data){
-    //         return $this->sendError('Sizes Not Found');
-    //     }
-    //     return $this->apiResponse($data,'Sizes Fetched Successfully');
-    // }
-
-    // public function colors(){
-    //     $data=$this->productServices->getColors(request('id'));
-    //     if(!$data){
-    //         return $this->sendError('Colors Not Found');
-    //     }
-    //     return $this->apiResponse($data,'Colors Fetched Successfully');
-    // }
-
-
 }

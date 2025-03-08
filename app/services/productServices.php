@@ -60,19 +60,5 @@ class productServices
         return $product;
     }
 
-    // public function getSizes($id){
-    //     $data= $this->productRepository->showProductSizes($id);
-    //     return $data;
-    // }
-
-    // public function getColors($id){
-    //     $data= $this->productRepository->showProductColors($id);
-    //     return $data;
-    // }
-
-    // public function getColorSizes($id){
-    //     $data= $this->productRepository->ShowProductColorsSizes($id);
-    //     return $data;
-    // }
 
 }

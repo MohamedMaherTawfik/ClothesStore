@@ -11,7 +11,4 @@ interface productInterface {
     public function updateStock($id, $data);
     public function destroy($id);
     public function storeProductColorsSizes($data,$color_id,$size_id);
-    // public function showProductColors(int $id);
-    // public function showProductSizes(int $id);
-    // public function ShowProductColorsSizes(int $id);
 }
