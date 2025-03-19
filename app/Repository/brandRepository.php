@@ -22,7 +22,7 @@ class brandRepository implements brandInterface
     public function store($data)
     {
         $categorey = brand::create($data);
-        Event::dispatch(new NewDataEvent($categorey));
+        // Event::dispatch(new NewDataEvent($categorey));
         return $categorey;
     }
 

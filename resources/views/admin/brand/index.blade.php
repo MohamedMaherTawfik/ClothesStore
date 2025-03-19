@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Crud_System</title>
+    <title>All Brands</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-header">
                 <h4>All Brands</h4>
-                <a href="{{route('create')}}" class="btn btn-success btn-sm float-end">Create Brand</a>
+                <a href="{{route('createBrand')}}" class="btn btn-success btn-sm float-end">Create Brand</a>
             </div>
             @if (Session::has('success'))
                 <span class="alert alert-success p-2">{{ Session::get('success') }}</span>
@@ -35,8 +35,8 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->image}}</td>
-                                <td><a href="{{route('edit', $item->id)}}" class="btn btn-primary btn-md">Edit Brand</a></td>
-                                <td><a href="{{route('delete', $item->id)}}" class="btn btn-danger btn-md">Delete Brand</a></td>
+                                <td><a href="{{route('editBrand', $item->id)}}" class="btn btn-primary btn-md">Edit Brand</a></td>
+                                <td><a href="{{route('deleteBrand', $item->id)}}" class="btn btn-danger btn-md">Delete Brand</a></td>
                             </tr>
                             @endforeach
                         @else

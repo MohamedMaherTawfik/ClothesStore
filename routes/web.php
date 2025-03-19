@@ -9,8 +9,14 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/admin/brands',[brandController::class ,'index']);
-Route::get('/admin/brands/create',[brandController::class ,'create'])->name('create');
-Route::get('/admin/brands/edit',[brandController::class ,'edit'])->name('edit');
-Route::get('/admin/brands/delete',[brandController::class ,'delete'])->name('delete');
+Route::group([
+    'prefix' => 'admin/brand',
+],function(){
+    Route::get('/',[brandController::class,'index'])->name('brand');
+    Route::get('/create',[brandController::class,'create'])->name('createBrand');
+    Route::post('/create/store',[brandController::class,'store'])->name('storeBrand');
+    Route::get('/edit/{id}',[brandController::class,'edit'])->name('editBrand');
+    Route::post('/edit/{id}/update',[brandController::class,'update'])->name('updateBrand');
+    Route::get('/delete/{id}',[brandController::class,'delete'])->name('deleteBrand');
+});
 
