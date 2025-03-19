@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\controllers\auth;
+namespace App\Http\controllers\api\auth;
 
 use App\Http\Requests\userAddresses;
 use App\Http\Requests\userRequest;

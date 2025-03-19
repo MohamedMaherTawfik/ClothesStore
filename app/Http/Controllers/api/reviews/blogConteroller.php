@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\reviews;
+namespace App\Http\Controllers\api\reviews;
 
-use App\Http\Controllers\admin\apiResponse;
+use App\Http\Controllers\api\admin\apiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\blogRequest;
 use App\Services\blogServices;

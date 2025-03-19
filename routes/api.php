@@ -1,19 +1,18 @@
 <?php
-
-use App\Http\Controllers\admin\brandController;
-use App\Http\Controllers\admin\categoreyController;
-use App\Http\Controllers\admin\colorSizesController;
-use App\Http\Controllers\admin\productController;
+use App\Http\Controllers\api\admin\brandController;
+use App\Http\Controllers\api\admin\categoreyController;
+use App\Http\Controllers\api\admin\colorSizesController;
+use App\Http\Controllers\api\admin\productController;
+use App\Http\Controllers\api\auth\AuthController;
+use App\Http\Controllers\api\orders\cartController;
+use App\Http\Controllers\api\orders\orderController;
+use App\Http\Controllers\api\reviews\blogConteroller;
 use App\Http\Controllers\mail\MailController;
-use App\Http\Controllers\orders\cartController;
-use App\Http\Controllers\orders\orderController;
-use App\Http\Controllers\reviews\blogConteroller;
 use App\Http\Middleware\checkAdmin;
 use App\Http\Middleware\CheckBelongsTo;
 use App\Http\Middleware\ownCart;
 use App\Http\Middleware\ownOrder;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\auth\AuthController;
 
 Route::group([
     'middleware' => 'api',
@@ -64,14 +63,11 @@ Route::controller(productController::class)->group(function () {
     Route::post('/product/{id}', 'update')->middleware(checkAdmin::class);
     Route::delete('/product/{id}','destroy')->middleware(checkAdmin::class);
     Route::post('product/{id}/stock', 'updateStock')->middleware(checkAdmin::class);
-    // Route::get('/product/{id}/colors', 'colors');
-    // Route::get('/product/{id}/sizes', 'sizes');
-    // Route::get('/product/{id}/colorSizes', 'colorSizes');
 });
 
 Route::controller(cartController::class)->group(function () {
     Route::post('/cart', 'addToCart');
-    Route::get('/cart', 'getCartItems')->middleware(ownCart::class);
+    Route::get('/cart', 'getCartItems');
     Route::delete('/cart', 'deleteFromCart')->middleware(ownCart::class);
     Route::delete('/cart/clear', 'clearCart')->middleware(ownCart::class);
 });
@@ -80,7 +76,7 @@ Route::controller(orderController::class)->group(function () {
     Route::get('/orders', 'index')->middleware(checkAdmin::class);
     Route::get('/order/{id}', 'show');
     Route::post('/order', 'store');
-    Route::get('/user/orders', 'getUserOrders')->middleware(ownOrder::class);
+    Route::get('/user/orders', 'getUserOrders');
     Route::post('/order/{id}/status', 'ChangeStatus')->middleware(ownOrder::class);
     Route::delete('/order/{id}', 'destroy')->middleware(ownOrder::class);
 });

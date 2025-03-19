@@ -1,6 +1,6 @@
 <?php
 
-namespace App\http\controllers\auth;
+namespace App\http\controllers\api\auth;
 
 trait apiResponse
 {

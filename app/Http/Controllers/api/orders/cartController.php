@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\orders;
+namespace App\Http\Controllers\api\orders;
 
-use App\http\controllers\auth\apiResponse;
+use App\http\controllers\api\auth\apiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\cartRequest;
 use App\Services\cartServices;
