@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\web\admin\brandController;
 use App\Http\Controllers\web\admin\categoreyController;
+use App\Http\Controllers\web\admin\productController;
 use App\Http\Controllers\web\home\indexController;
+use App\Http\Middleware\checkAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -32,3 +34,19 @@ Route::group([
     Route::post('/edit/{id}/update',[categoreyController::class,'update'])->name('updateCategorey');
     Route::get('/delete/{id}',[categoreyController::class,'delete'])->name('deleteCategorey');
 });
+
+
+Route::group([
+    'prefix' => 'dashboard/product',
+],function(){
+    Route::get('/',[productController::class,'index'])->name('product');
+    Route::get('/create',[productController::class,'create'])->name('createProduct');
+    Route::post('/create/store',[productController::class,'store'])->name('storeProduct');
+    Route::get('/edit/{id}',[productController::class,'edit'])->name('editProduct');
+    Route::post('/edit/{id}/update',[productController::class,'update'])->name('updateProduct');
+    Route::get('/delete/{id}',[productController::class,'delete'])->name('deleteProduct');
+});
+
+
+
+
