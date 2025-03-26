@@ -30,7 +30,7 @@ class categoreyController extends Controller
         if($request->hasFile('image')){
             $file=$request->file('image');
             $name=time().'.'.$file->getClientOriginalName();
-            $file->move(public_path('brand'),$name);
+            $file->move(public_path('categorey'),$name);
             $fields['image']=$name;
         }
         $categorey=$this->categoreyServices->storeCategorey($fields);

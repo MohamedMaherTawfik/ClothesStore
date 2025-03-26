@@ -8,10 +8,10 @@ use App\Http\Controllers\api\orders\cartController;
 use App\Http\Controllers\api\orders\orderController;
 use App\Http\Controllers\api\reviews\blogConteroller;
 use App\Http\Controllers\mail\MailController;
-use App\Http\Middleware\checkAdmin;
-use App\Http\Middleware\CheckBelongsTo;
-use App\Http\Middleware\ownCart;
-use App\Http\Middleware\ownOrder;
+use App\Http\Middleware\api\checkAdmin;
+use App\Http\Middleware\api\CheckBelongsTo;
+use App\Http\Middleware\api\ownCart;
+use App\Http\Middleware\api\ownOrder;
 use Illuminate\Support\Facades\Route;
 
 Route::group([

@@ -29,7 +29,7 @@ class productRequest extends FormRequest
             'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'categorey_id' => 'required',
             'brand_id' => 'required',
-            'discount' => 'nullable|',
+            'discount' => 'nullable',
         ];
     }
 }

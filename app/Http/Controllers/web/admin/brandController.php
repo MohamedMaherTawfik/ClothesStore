@@ -5,7 +5,6 @@ namespace App\Http\Controllers\web\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\brandRequest;
 use App\Services\brandServices;
-use Illuminate\Http\Request;
 
 class brandController extends Controller
 {

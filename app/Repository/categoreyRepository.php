@@ -35,7 +35,7 @@ class categoreyRepository implements CategoreyInteface
 
     public function destroy($id)
     {
-        $categorey = categorey::find($id);
+        $categorey = categorey::findOrFail($id);
         $categorey->delete();
         return $categorey;
     }

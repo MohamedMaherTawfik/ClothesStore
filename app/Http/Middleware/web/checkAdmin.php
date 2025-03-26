@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\web;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Symfony\Component\HttpFoundation\Response;
 
-class localization
+class checkAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,10 +15,9 @@ class localization
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->hasHeader('Accept-Language')) {
-            $locale = explode(',', $request->header('Accept-Language'))[0];
-            App::setLocale($locale);
+        if(auth()->check() && auth()->user()->role == 'admin'){
+            return $next($request);
         }
-        return $next($request);
+        return redirect()->route('login');
     }
 }

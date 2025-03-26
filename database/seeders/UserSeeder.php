@@ -20,7 +20,6 @@ class UserSeeder extends Seeder
                 'name' => 'Mohamed Maher',
                 'password' => Hash::make('M7mdmaher11'),
                 'role' => 'admin',
-                'address' => 'Elteera Street Mansourah Egypt',
                 'phone' => '+201024328382',
             ],
             [
@@ -28,7 +27,6 @@ class UserSeeder extends Seeder
                 'name' => 'Ahmed Maher',
                 'password' => Hash::make('Ahmedmaher11'),
                 'role' => 'user',
-                'address' => 'Elteera Street Mansourah Egypt',
                 'phone' => '+201007352061',
             ]
             ];

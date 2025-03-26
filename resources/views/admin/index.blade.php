@@ -5,6 +5,7 @@
     <!-- partial:partials/_navbar.html -->
 @include('admin.dashboard.navbar')
     <!-- partial -->
+
     <!-- main-panel ends -->
   </div>
   <!-- page-body-wrapper ends -->

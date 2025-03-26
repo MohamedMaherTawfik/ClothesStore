@@ -4,14 +4,20 @@ namespace App\Http\Controllers\web\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\productRequest;
+use App\Services\brandServices;
+use App\Services\categoreyServices;
 use App\Services\productServices;
 use Illuminate\Http\Request;
 
 class productController extends Controller
 {
     private $productServices;
+    private $categoreyServices;
+    private $brandServices;
 
-    public function __construct(productServices $productServices){
+    public function __construct(productServices $productServices ,categoreyServices $categoreyServices,brandServices $brandServices){
+        $this->categoreyServices = $categoreyServices;
+        $this->brandServices = $brandServices;
         $this->productServices = $productServices;
     }
 
@@ -21,7 +27,9 @@ class productController extends Controller
     }
 
     public function create(){
-        return view('admin.product.create');
+        $brands=$this->brandServices->getBrands();
+        $categories=$this->categoreyServices->getAllCategorey();
+        return view('admin.product.create',compact('brands','categories'));
     }
 
     public function store(productRequest $request){
@@ -29,7 +37,7 @@ class productController extends Controller
         if($request->hasFile('image')){
             $file=$request->file('image');
             $name=time().'.'.$file->getClientOriginalName();
-            $file->move(public_path('products'),$name);
+            $file->move(public_path('product'),$name);
             $fields['image']=$name;
         }
         $products=$this->productServices->createProduct($fields, null, null);
@@ -46,7 +54,7 @@ class productController extends Controller
         if($request->hasFile('image')){
             $file=$request->file('image');
             $name=time().'.'.$file->getClientOriginalName();
-            $file->move(public_path('products'),$name);
+            $file->move(public_path('product'),$name);
             $fields['image']=$name;
         }
         $products=$this->productServices->updateProduct($fields, request('id'));

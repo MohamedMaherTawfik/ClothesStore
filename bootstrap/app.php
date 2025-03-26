@@ -18,15 +18,15 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // define localization middleware
-        $middleware->append(localization::class);
-        $middleware->api(ApiKey::class);
+        // $middleware->append(localization::class);
+        // $middleware->api(ApiKey::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function (AuthenticationException $e, Request $request) {
-            if ($request->is('api/*')) {
-                return response()->json([
-                    'message' => $e->getMessage(),
-                ], 401);
-            }
-        });
+        // $exceptions->render(function (AuthenticationException $e, Request $request) {
+        //     if ($request->is('api/*')) {
+        //         return response()->json([
+        //             'message' => $e->getMessage(),
+        //         ], 401);
+        //     }
+        // });
     })->create();

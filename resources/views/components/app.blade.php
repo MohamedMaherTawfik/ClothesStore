@@ -7,22 +7,22 @@
     <title>{{ $title ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-dark">
     <div class="container">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-dark text-light text-center justify-content-between">
                 <h4>{{ $header ?? 'Default Header' }}</h4>
                 {{ $actions ?? '' }} <!-- Slot for action buttons -->
             </div>
 
             @if (Session::has('success'))
-                <span class="alert alert-success p-2">{{ Session::get('success') }}</span>
+                <span class="alert alert-success p-2 bg-dark text-light">{{ Session::get('success') }}</span>
             @endif
             @if (Session::has('fail'))
-                <span class="alert alert-danger p-2">{{ Session::get('fail') }}</span>
+                <span class="alert alert-danger p-2 bg-dark">{{ Session::get('fail') }}</span>
             @endif
 
-            <div class="card-body">
+            <div class="card-body bg-dark ">
                 {{ $slot }} <!-- This is where the page-specific content goes -->
             </div>
         </div>

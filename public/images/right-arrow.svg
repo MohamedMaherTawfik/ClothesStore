@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <g id="btn" transform="translate(0.318)">
+    <g id="Light_Button_Secondary_Icon" data-name="Light/Button/Secondary/Icon" transform="translate(-0.318)">
+      <g id="Rectangle" fill="none" stroke="#e5002b" stroke-miterlimit="10" stroke-width="1">
+        <rect width="48" height="48" rx="24" stroke="none"/>
+        <rect x="0.5" y="0.5" width="47" height="47" rx="23.5" fill="none"/>
+      </g>
+    </g>
+    <path id="Path" d="M8.756,7.376,1.938.256a.815.815,0,0,0-1.185,0L.251.78a.9.9,0,0,0,0,1.238L5.976,8,.245,13.982a.905.905,0,0,0,0,1.238l.5.524a.815.815,0,0,0,1.185,0L8.756,8.618a.911.911,0,0,0,0-1.242Z" transform="translate(21 16)" fill="#e5002b"/>
+  </g>
+</svg>

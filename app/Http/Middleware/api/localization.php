@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\api;
 
-use App\Http\Controllers\admin\apiResponse;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Symfony\Component\HttpFoundation\Response;
 
-class ApiKey
+class localization
 {
-    use apiResponse;
     /**
      * Handle an incoming request.
      *
@@ -17,9 +16,9 @@ class ApiKey
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $apikey= config('app.api_key');
-        if($request->header('api-key') != $apikey){
-            return $this->apiResponse(null,'Invalid Api Key',401);
+        if ($request->hasHeader('Accept-Language')) {
+            $locale = explode(',', $request->header('Accept-Language'))[0];
+            App::setLocale($locale);
         }
         return $next($request);
     }

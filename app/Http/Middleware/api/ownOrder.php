@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\api;
 
-use App\Http\Controllers\admin\apiResponse;
-use App\Models\Cart;
+use App\Http\Controllers\api\admin\apiResponse;
+use App\Models\orders;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class ownCart
+class ownOrder
 {
     use apiResponse;
     /**
@@ -21,11 +21,10 @@ class ownCart
     {
         if(Auth::check())
         {
-            if (Cart::where('user_id', Auth::user()->id)->first() || auth()->user()->role == 'admin')
-            {
-              return $next($request);
+            if (orders::where('user_id', Auth::user()->id)->first() || auth()->user()->role == 'admin') {
+                return $next($request);
             }
-            else if (Cart::where('user_id', Auth::user()->id)->first() == 0){
+            else if (orders::where('user_id', Auth::user()->id)->first() == 0){
                 return $next($request);
             }
         }
