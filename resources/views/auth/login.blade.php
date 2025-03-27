@@ -11,22 +11,22 @@
 <body>
 
     <div class="signin-container">
-        <h3 class="mb-3">Log In</h3>
+        <h3 class="mb-3 text-white">Log In</h3>
         <form method="post" enctype="multipart/form-data" action="{{ route('login') }}">
             @csrf
-            <div class="mb-3">
+            <div class="mb-3" style="">
                 <input type="email" name="email" class="form-control" placeholder="Email">
                 @error('error')
-                    <span class="text-danger">{{ $message }}</span>
+                    <span class="text-warning">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-3">
                 <input type="password" name="password" class="form-control" placeholder="Password">
             </div>
-            <button type="submit" class="btn signin-btn">login</button>
+            <button type="submit" class="btn signin-btn text-white">login</button>
         </form>
-        <p class="mt-3">
-            Don't have an account? <a href="/signup">Register</a>
+        <p class="mt-3 text-white">
+            Don't have an account? <a class="BelowLink text-decoration-none text-warning" href="/signup">Register</a>
         </p>
     </div>
 

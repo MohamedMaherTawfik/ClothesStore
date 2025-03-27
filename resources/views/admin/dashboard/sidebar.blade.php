@@ -4,6 +4,7 @@
       <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="{{asset('admin/assets/images/logo-mini.svg')}}" alt="logo" /></a>
     </div>
     <ul class="nav">
+
       <li class="nav-item profile">
         <div class="profile-desc">
           <div class="profile-pic">
@@ -12,7 +13,7 @@
               <span class="count bg-success"></span>
             </div>
             <div class="profile-name">
-              <h5 class="mb-0 font-weight-normal text-white">{{Auth::user()->name}}</h5>
+              <h5 class="mb-0 font-weight-normal text-white">{{Auth::user()->first_name}}</h5>
               <span>Admin Member</span>
             </div>
           </div>
@@ -47,7 +48,7 @@
       </li>
 
       <li class="nav-item menu-items mt-4">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('color') }}">
           <span class="menu-icon">
             <i class="mdi mdi-file-document-box"></i>
           </span>
@@ -56,7 +57,7 @@
       </li>
 
       <li class="nav-item menu-items mt-4">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('size') }}">
           <span class="menu-icon">
             <i class="mdi mdi-file-document-box"></i>
           </span>

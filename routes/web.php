@@ -27,7 +27,7 @@ Route::controller(AuthController::class)->group(function () {
 
 
 Route::controller(dashboardController::class)->group(function () {
-    Route::get('/dashboard', 'index')->name('dashboard')->middleware('checkAdmin');
+    Route::get('/dashboard', 'index')->name('dashboard')->middleware(checkAdmin::class);
 });
 
 

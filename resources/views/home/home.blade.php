@@ -66,7 +66,7 @@
                             <!-- Dropdown Button -->
                             <button class="butn contact-butn dropdown-toggle px-2" type="button"
                                 id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->first_name }}
                             </button>
                             <ul class="dropdown-menu">
                                 <form action="{{ route('logout') }}" method="POST">

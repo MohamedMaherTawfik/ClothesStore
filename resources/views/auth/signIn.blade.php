@@ -11,7 +11,7 @@
 <body>
 
     <div class="signin-container">
-        <h3 class="mb-3">Register</h3>
+        <h3 class="mb-3 text-white">Register</h3>
         <form method="post" enctype="multipart/form-data" action="{{route('register')}}">
             @csrf
             <div class="mb-3">
@@ -50,8 +50,8 @@
             </div>
             <button type="submit" class="btn signin-btn">Register</button>
         </form>
-        <p class="mt-3">
-           I already have an account. <a href="{{route('login')}}">login</a>
+        <p class="mt-3 text-white">
+           I already have an account. <a class="text-warning" href="{{route('login')}}">login</a>
         </p>
     </div>
 
