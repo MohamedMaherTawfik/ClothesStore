@@ -39,7 +39,7 @@
                                 <td>{{ $item->status }}</td>
                                 <td>{{ $item->categorey_id }}</td>
                                 <td>{{ $item->brand_id }}</td>
-                                <td><a href="{{ route('editProduct', $item->id) }}" class="btn btn-primary btn-md">Edit Product</a></td>
+                                    <td><a href="{{ route('editProduct', $item->id) }}" class="btn btn-primary btn-md">Edit Product</a></td>
                                 <td><a href="{{ route('deleteProduct', $item->id) }}" class="btn btn-danger btn-md">Delete Product</a></td>
                             </tr>
                         @endforeach

@@ -54,7 +54,7 @@
             <label for="categorey_id">categorey: </label>
             <select id="categorey_id" name="categorey_id">
                 @foreach ($categories as $item)
-                    <option value="categorey_id" >{{ $item->name }}</option>
+                    <option value="{{ $item->id }}" >{{ $item->name }}</option>
                 @endforeach
             </select>
             @error('categorey_id')
@@ -66,7 +66,7 @@
             <label for="brand_id">brand: </label>
             <select id="brand_id" name="brand_id">
                 @foreach ($brands as $item)
-                    <option value="brand_id" >{{ $item->name }}</option>
+                    <option value="{{ $item->id }}" >{{ $item->name }}</option>
                 @endforeach
             </select>
             @error('brand_id')

@@ -18,15 +18,15 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <img src="{{ asset('categorey/' . $categorey->image) }}" class="img-fluid mt-5" style="width: 100%"
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4 justify-content-center">
+                    <div class="text-white fs-3 text-center">{{ $categorey->name }}</div>
+                    <img src="{{ asset('categorey/' . $categorey->image) }}" class="img-fluid mt-5 justify-content-center" style="width: 100%; height: 7    0%;"
                         alt="...">
                 </div>
             </div>
         </div>
     </section>
-
-    <div class="mt-5">.</div>
 
     <section class="categories-sec">
         <h3 class="text-center fw-bold mb-5 text-white">Products</h3>
@@ -35,7 +35,7 @@
                 @foreach ($categorey->products as $item)
                     <div class="col-md-3">
                         <div class="card text-black" style="width: 18rem; opacity: 80%;">
-                            <img src="{{ asset('products/' . $item->image) }}" style="height: 180px"
+                            <img src="{{ asset('product/'.$item->image) }}" style="height: 180px"
                                 class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $item->name }}</h5>

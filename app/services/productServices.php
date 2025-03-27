@@ -28,8 +28,8 @@ class productServices
                 }
                 else if($size=$sizes[$key]){
                 $this->productRepository->storeProductColorsSizes($product->id, $color->id, $size->id);
+            }
         }
-    }
         $this->productRepository->storeStock([
             'products_id'=>$product->id,
             'quantity'=>$data['quantity']

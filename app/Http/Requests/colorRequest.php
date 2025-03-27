@@ -22,7 +22,7 @@ class colorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'color' => 'required|max:25',
+            'color' => 'required|max:25|min:3',
         ];
     }
 }

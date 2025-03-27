@@ -34,6 +34,7 @@ class productController extends Controller
 
     public function store(productRequest $request){
         $fields=$request->validated();
+        // dd($fields);
         if($request->hasFile('image')){
             $file=$request->file('image');
             $name=time().'.'.$file->getClientOriginalName();
