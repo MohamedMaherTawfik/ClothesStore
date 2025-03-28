@@ -3,7 +3,7 @@
         Edit product
     </x-slot>
 
-    <form action="{{ route('updateBrand', $product->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('updateProduct', $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <input type="hidden" name="id" value="{{ $product->id }}">
@@ -49,10 +49,27 @@
         </div>
 
         <div class="mb-3">
-            <label for="productImage" class="form-label">Image</label>
-            <input type="file" name="image" class="form-control" id="productImage">
-            <small>Current Image: {{ $product->image }}</small>
-            @error('image')
+            <label for="categorey_id">categorey: </label>
+            <select id="categorey_id" name="categorey_id">
+                <option value="" selected disabled>None</option>
+                @foreach ($categories as $item)
+                    <option value="{{ $item->id }}" >{{ $item->name }}</option>
+                @endforeach
+            </select>
+            @error('categorey_id')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="brand_id">brand: </label>
+            <select id="brand_id" name="brand_id">
+                <option value="" selected disabled>None</option>
+                @foreach ($brands as $item)
+                    <option value="{{ $item->id }}" >{{ $item->name }}</option>
+                @endforeach
+            </select>
+            @error('brand_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>

@@ -40,13 +40,13 @@ class brandController extends Controller
 
     public function update(brandRequest $request){
         $fields=$request->validated();
-        $brand=$this->brandServices->updateBrand($fields,request('id'));
         if($request->hasFile('image')){
             $file=$request->file('image');
             $name=time().'.'.$file->getClientOriginalName();
             $file->move(public_path('brand'),$name);
             $fields['image']=$name;
         }
+        $brand=$this->brandServices->updateBrand($fields,request('id'));
         return redirect()->route('brand')->with('success',__('messages.update_Message'))->with('brand',$brand);
     }
 

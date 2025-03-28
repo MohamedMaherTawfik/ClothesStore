@@ -21,8 +21,8 @@ return new class extends Migration
             $table->double('price');
             $table->integer('discount')->nullable();
             $table->enum('status', ['available', 'unavailable'])->default('available');
-            $table->foreignIdFor(categorey::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(brand::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(categorey::class)->nullable();
+            $table->foreignIdFor(brand::class)->nullable();
             $table->timestamps();
         });
     }

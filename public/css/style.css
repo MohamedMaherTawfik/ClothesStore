@@ -442,3 +442,229 @@ header .inner-header .text-box .btns-wrapper .video-btn:hover .icon {
     color: #fff;
 }
 
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-btn-50 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.slider-arrow:hover .dandik,
+.slider-arrow:hover .bamdik {
+    visibility: visible;
+    opacity: 1;
+}
+
+.testimonial-card {
+    padding: 50px 50px 0px;
+    margin: 0px 15px 30px;
+    text-align: center;
+    border-radius: 8px;
+    background: var(--primary);
+}
+
+.testimonial-card i {
+    font-size: 45px;
+    margin-bottom: 20px;
+    color: var(--white);
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
+.testimonial-card p {
+    font-size: 22px;
+    line-height: 32px;
+    margin-bottom: 25px;
+    font-style: italic;
+    color: var(--white);
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
+.testimonial-card h5 {
+    color: var(--white);
+    text-transform: capitalize;
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
+.testimonial-card ul {
+    font-size: 14px;
+    color: white;
+    margin-bottom: 13px;
+}
+
+.testimonial-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: -35px;
+    display: inline-block;
+    border: 5px solid var(--body);
+}
+
+@media (max-width: 575px) {
+    .testimonial-card {
+        margin: 0px 0px 30px;
+        padding: 25px 25px 0px;
+    }
+
+    .testimonial-card p {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}
+
+.testimonial-slider .slick-slide {
+    opacity: 0.3;
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
+.testimonial-slider .slick-center {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
+.testimonial-slider .dandik,
+.testimonial-slider .bamdik {
+    opacity: 1;
+    visibility: visible;
+}
+
+.testimonial-slider .dandik {
+    right: 50px;
+}
+
+.testimonial-slider .bamdik {
+    left: 50px;
+}
+
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent
+}
+
+.slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0
+}
+
+.slick-list:focus {
+    outline: none
+}
+
+.slick-list.dragging {
+    cursor: pointer;
+    cursor: hand
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.slick-track:before,
+.slick-track:after {
+    display: table;
+    content: ''
+}
+
+.slick-track:after {
+    clear: both
+}
+
+.slick-loading .slick-track {
+    visibility: hidden
+}
+
+.slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px
+}
+
+[dir='rtl'] .slick-slide {
+    float: right
+}
+
+.slick-slide img {
+    display: block
+}
+
+.slick-slide.slick-loading img {
+    display: none
+}
+
+.slick-slide.dragging img {
+    pointer-events: none
+}
+
+.slick-initialized .slick-slide {
+    display: block
+}
+
+.slick-loading .slick-slide {
+    visibility: hidden
+}
+
+.slick-vertical .slick-slide {
+    display: block;
+    height: auto;
+    border: 1px solid transparent
+}
+
+.slick-arrow.slick-hidden {
+    display: none
+}

@@ -57,24 +57,24 @@
                                     sign in
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{route('register')}}">Register</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
                                     <li><a class="dropdown-item" href="{{ route('login') }}">Log in</a></li>
                                 </ul>
                             </div>
                         @else
-                        <div class="dropdown">
-                            <!-- Dropdown Button -->
-                            <button class="butn contact-butn dropdown-toggle px-2" type="button"
-                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->first_name }}
-                            </button>
-                            <ul class="dropdown-menu">
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
-                                </form>
-                            </ul>
-                        </div>
+                            <div class="dropdown">
+                                <!-- Dropdown Button -->
+                                <button class="butn contact-butn dropdown-toggle px-2" type="button"
+                                    id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ Auth::user()->first_name }}
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                </ul>
+                            </div>
                         @endif
 
                     </div>
@@ -115,8 +115,8 @@
                     <div class="img-box">
                         <img src="{{ asset('images/hody.jpg') }}" alt="" class="main-img wow fadeInRight"
                             data-wow-duration="2s" />
-                        <img src="{{ asset('images/widthPhoto.jpg') }}" alt="" class="card-img wow fadeInLeft"
-                            data-wow-duration="2s" data-wow-delay=".5s" />
+                        <img src="{{ asset('images/widthPhoto.jpg') }}" alt=""
+                            class="card-img wow fadeInLeft" data-wow-duration="2s" data-wow-delay=".5s" />
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -151,11 +151,12 @@
                 @foreach ($categories as $item)
                     <div class="col-md-3">
                         <div class="card text-black" style="width: 18rem;  opacity: 80%;">
-                            <img src="{{ asset('categorey/' . $item->image) }}" class="card-img-top" style="height: 180px" alt="...">
+                            <img src="{{ asset('categorey/' . $item->image) }}" class="card-img-top"
+                                style="height: 180px" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $item->name }}</h5>
                                 {{-- <p>{{ $item->description }}</p> --}}
-                                <a href="{{ route('showCategorey', $item->id) }}" class="btn btn-danger mt-3">Show
+                                <a href="{{ route('showCategorey', $item->id) }}" class="btn btn-dark mt-3">Show
                                     Categorey</a>
                             </div>
                         </div>
@@ -222,7 +223,7 @@
                             {{-- <hr> --}}
                             <div class="card-body">
                                 <h5 class="card-title">{{ $item->name }}</h5>
-                                <a href="#" class="btn btn-danger mt-3">Show Categorey</a>
+                                <a href="#" class="btn btn-dark mt-3">Show Brand</a>
                             </div>
                         </div>
                     </div>
@@ -238,20 +239,56 @@
         <div class="container text-center">
             <h3 class="fw-bold text-white">Latest Products</h3>
             <div class="row d-flex justify-content-center mt-5">
-                <div class="col-lg-5 m">
-                    <div class="card text-black" style="width: 31rem; opacity: 80%;">
-                        <img src="{{ asset('images/hody2.jpg') }}" class="card-img-top" alt="...">
+                @foreach ($products as $item)
+                    <div class="col-lg-4">
+                        <div class="card text-black" style="width: 21rem; opacity: 80%;">
+                            <a href="">
+                                <img src="{{ asset('product/' . $item->image) }}" class="card-img-top" style="height: 300px" alt="...">
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <div class="mt-5"></div>
+    <div class="mt-5">.</div>
+    <div class="mt-5">.</div>
+
+    <section class="section testimonial-part">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-white">
+                    <div class="section-heading">
+                        <h2>client's feedback</h2>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="card text-black" style="width: 31rem; opacity: 80%;">
-                        <img src="{{ asset('images/hody3.jpg') }}" class="card-img-top" alt="...">
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="testimonial-slider slider-arrow">
+                        <div class="testimonial-card text-white" style="background-color: rgba(0, 0, 0, 0.411)">
+                            <i class="fas fa-quote-left"></i>
+                            <p>Lorem ipsum dolor consectetur adipisicing elit neque earum sapiente vitae obcaecati
+                                magnam doloribus magni provident ipsam</p>
+                            <h5>mahmud hasan</h5>
+                            <ul>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                            </ul>
+                            <img src="{{ asset('images/food.jpeg') }}" alt="testimonial">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="mt-5"></div>
+
+
     <hr class="text-white ">
 
     <section class="info" id="info" style="background-color:#212529">

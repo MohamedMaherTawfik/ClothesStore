@@ -65,7 +65,7 @@ Route::group([
     Route::post('/create/store',[productController::class,'store'])->name('storeProduct');
     Route::get('/edit/{id}',[productController::class,'edit'])->name('editProduct');
     Route::post('/edit/{id}/update',[productController::class,'update'])->name('updateProduct');
-    Route::get('/delete/{id}',[productController::class,'delete'])->name('deleteProduct');
+    Route::get('/delete/{id}',[productController::class,'destroy'])->name('deleteProduct');
 });
 
 Route::group([

@@ -17,7 +17,7 @@ class categoreyRepository implements CategoreyInteface
     public function store($data)
     {
         $brand = categorey::create($data);
-        Event::dispatch(new NewDataEvent($brand));
+        // Event::dispatch(new NewDataEvent($brand));
         return $brand;
     }
 

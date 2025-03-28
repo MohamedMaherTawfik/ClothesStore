@@ -53,6 +53,7 @@
         <div class="mb-3">
             <label for="categorey_id">categorey: </label>
             <select id="categorey_id" name="categorey_id">
+                <option value="" selected disabled>None</option>
                 @foreach ($categories as $item)
                     <option value="{{ $item->id }}" >{{ $item->name }}</option>
                 @endforeach
@@ -65,6 +66,7 @@
         <div class="mb-3">
             <label for="brand_id">brand: </label>
             <select id="brand_id" name="brand_id">
+                <option value="" selected disabled>None</option>
                 @foreach ($brands as $item)
                     <option value="{{ $item->id }}" >{{ $item->name }}</option>
                 @endforeach
@@ -81,7 +83,6 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
-
 
         <button type="submit" class="btn btn-primary">Save</button>
     </form>

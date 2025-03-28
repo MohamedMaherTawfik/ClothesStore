@@ -20,7 +20,7 @@ class indexController extends Controller
     public function index(){
         $brands=$this->brandServices->getBrands();
         $categories=$this->categoreyServices->getAllCategorey();
-        $products=$this->productServices->allProducts();
+        $products=$this->productServices->allProducts()->take(3);
         return view('home.home',compact('brands','categories','products'));
     }
 

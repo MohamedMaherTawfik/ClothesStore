@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\admin\apiResponse;
+use App\Http\Controllers\api\admin\apiResponse;
 use App\Http\Requests\cartRequest;
 use App\Interfaces\cartInterface;
 use App\Models\Cart;

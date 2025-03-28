@@ -42,9 +42,8 @@
                                 <p>{{ $item->description }}</p>
                                 <div>
                                     <div class="row">
-
                                         <div class="col-lg-6">
-                                            <a href="{{ route('showCategorey', $item->id) }}"
+                                            <a href=""
                                                 class="btn btn-danger mt-3">Add To Cart</a>
                                         </div>
                                         <div class="col-lg-3"></div>

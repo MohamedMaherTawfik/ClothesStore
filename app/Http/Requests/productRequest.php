@@ -26,9 +26,9 @@ class productRequest extends FormRequest
             'description' => 'required|min:5|max:100',
             'price' => 'required|numeric',
             'quantity' => 'numeric',
-            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'categorey_id' => 'required',
-            'brand_id' => 'required',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'categorey_id' => 'nullable|numeric',
+            'brand_id' => 'nullable|numeric',
             'discount' => 'nullable',
         ];
     }
