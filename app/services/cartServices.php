@@ -19,33 +19,22 @@ class cartServices {
         $this->cartRepository = $cartRepository;
     }
 
-    public function add_to_cart(cartRequest $request)
+    public function add_to_cart($request,$products_id)
     {
-        $fields=$request->validated();
         $cart=Cart::where('user_id', Auth::user()->id)->first();
         if(!$cart){
-            Cart::create([
-                'user_id'=>Auth::user()->id,
-            ]);
-            CartItems::create([
-                'cart_id'=>Cart::where('user_id', Auth::user()->id)->first()->id,
-                'products_id'=>$request['products_id'],
-                'quantity'=>$request['quantity'],
-            ]);
-            return $this->apiResponse([],__('messages.AddToCart'));
+            $cart=$this->cartRepository->createCart();
+            $this->cartRepository->newCartItems($request['quantity'],$products_id);
+            return redirect()->back()->with('Product Added Success',__('messages.Quantityplused'));
         }
         else{
-            if(isset(CartItems::where('cart_id', $cart->id)->where('products_id', $request['products_id'])->first()->id)){
-                CartItems::where('cart_id', $cart->id)->where('products_id', $request['products_id'])->increment('quantity', $fields['quantity']);
-                return $this->apiResponse([],__('messages.Quantityplused'));
+            if(isset(CartItems::where('cart_id', $cart->id)->where('products_id', $products_id)->first()->id)){
+                $this->cartRepository->quantityPlus($cart,$products_id,$request['quantity']);
+                return redirect()->back()->with('Qantity Added Success',__('messages.Quantityplused'));
             }
             else{
-                CartItems::create([
-                    'cart_id'=>$cart->id,
-                    'products_id'=>$request['products_id'],
-                    'quantity'=>$fields['quantity'],
-                ]);
-                return $this->apiResponse([],__('messages.Quantityplused'));
+                $this->cartRepository->ExistCartItems($cart,$products_id,$request['quantity']);
+                return redirect()->back()->with('Product Added Success',__('messages.Quantityplused'));
             }
         }
     }

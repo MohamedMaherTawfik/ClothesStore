@@ -21,7 +21,8 @@
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4 justify-content-center">
                     <div class="text-white fs-3 text-center">{{ $categorey->name }}</div>
-                    <img src="{{ asset('categorey/' . $categorey->image) }}" class="img-fluid mt-5 justify-content-center" style="width: 100%; height: 7    0%;"
+                    <img src="{{ asset('categorey/' . $categorey->image) }}"
+                        class="img-fluid mt-5 justify-content-center" style="width: 100%; height: 7    0%;"
                         alt="...">
                 </div>
             </div>
@@ -35,24 +36,25 @@
                 @foreach ($categorey->products as $item)
                     <div class="col-md-3">
                         <div class="card text-black" style="width: 18rem; opacity: 80%;">
-                            <img src="{{ asset('product/'.$item->image) }}" style="height: 180px"
-                                class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $item->name }}</h5>
-                                <p>{{ $item->description }}</p>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <a href=""
-                                                class="btn btn-danger mt-3">Add To Cart</a>
+                            <img src="{{ asset('product/' . $item->image) }}" style="height: 180px" class="card-img-top"
+                                alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $item->name }}</h5>
+                                    <p>{{ $item->description }}</p>
+                                    <form action="{{ route('addToCart', $item->id) }}" method="POST">
+                                        @csrf
+                                        <p class="fw-bold mb-0">price: ${{ $item->price }}</p>
+                                        <div class="d-flex align-items-center justify-content-between mt-3">
+
+                                            <div class="d-flex align-items-center">
+                                                <label for="quantity" class="fw-bold me-2">Quantity:</label>
+                                                <input type="number" name="quantity" id="quantity" value="1" min="1" max="100" step="1" class="form-control" style="width: 55px;">
+                                            </div>
+                                            <input type="submit" name="submit" value="Add to Cart" class="btn btn-primary">
+
                                         </div>
-                                        <div class="col-lg-3"></div>
-                                        <div class="col-lg-3 mt-4">
-                                            <p>${{ $item->price }}</p>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 @endforeach

@@ -48,7 +48,7 @@
                                 <a class="nav-link" href="#" data-scroll-nav="3">portfolio</a>
                             </li>
                         </ul>
-                        <a href="#" class="butn lang-btn"><i class="fa-solid fa-cart-shopping"></i></a>
+                        <a href="{{ route('cart') }}" class="butn lang-btn"><i class="fa-solid fa-cart-shopping"></i></a>
                         @if (!Auth::check())
                             <div class="dropdown">
                                 <!-- Dropdown Button -->
@@ -88,16 +88,16 @@
                     <div class="col-md-10 col-lg-7">
                         <div class="text-box ">
                             <div class="content wow text-focus-in ">
-                                <p class="subtitle">Shop Smart, Shop Fast</p>
+                                <p class="subtitle text-primary">Shop Smart, Shop Fast</p>
                                 <h1 class="title mt-3">Trendy Deals<br>Hub Products</h1>
                                 <p class="p mt-3">
                                     Find the best deals on top-quality products, all in one place.
                                     Fast, secure, and hassle free shopping delivered to your door step
                                 </p>
                                 <div class="btns-wrapper mt-4">
-                                    <a href="#" data-scroll-goto="1" class="main-btn">Explore</a>
+                                    <a href="#" data-scroll-goto="1" class="main-btn text-decoration-none fs-5">Explore</a>
                                     <a href="https://www.youtube.com/watch?v=HmZKgaHa3Fg" data-fancybox
-                                        class="video-btn"><span class="icon"><i class="fas fa-play"></i></span> Watch
+                                        class="video-btn text-decoration-none"><span class="icon"><i class="fas fa-play"></i></span> Watch
                                         video</a>
                                 </div>
                             </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\web\admin\productController;
 use App\Http\Controllers\web\admin\sizeController;
 use App\Http\Controllers\web\auth\AuthController;
 use App\Http\Controllers\web\home\indexController;
+use App\Http\Controllers\web\orders\cartController;
 use App\Http\Middleware\web\checkAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -84,4 +85,14 @@ Route::group([
     Route::get('/',[sizeController::class,'index'])->name('size');
     Route::get('/create',[sizeController::class,'create'])->name('createSize');
     Route::post('/create/store',[sizeController::class,'store'])->name('storeSize');
+});
+
+Route::group([
+
+],function(){
+    Route::get('/cart',[cartController::class,'index'])->name('cart');
+    Route::post('/cart/{id}',[cartController::class,'addToCart'])->name('addToCart');
+    Route::post('/cart',[cartController::class,'clearCart'])->name('clearCart');
+    Route::get('/cart/delete/{id}',[cartController::class,'confirmDelete'])->name('deleteFromCart');
+    Route::post('/cart/delete/{id}',[cartController::class,'deleteFromCart'])->name('deleteFromCart');
 });
