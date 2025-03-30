@@ -36,21 +36,21 @@ class productRepository implements productInterface
             'stock',
         ])->find($id);
 
-        $data->colors->each(function ($color) {
-            $color->makeHidden('pivot');
-            $color->makeHidden('id');
-        });
+        // $data->colors->each(function ($color) {
+        //     $color->makeHidden('pivot');
+        //     $color->makeHidden('id');
+        // });
 
-        $data->sizes->each(function ($size) {
-            $size->makeHidden('pivot');
-            $size->makeHidden('id');
-        });
+        // $data->sizes->each(function ($size) {
+        //     $size->makeHidden('pivot');
+        //     $size->makeHidden('id');
+        // });
 
-        $data->stock->each(function ($stock) {
-            $stock->makeHidden('id');
-            $stock->makeHidden('products_id');
-            $stock->makeHidden('created_at');
-        });
+        // $data->stock->each(function ($stock) {
+        //     $stock->makeHidden('id');
+        //     $stock->makeHidden('products_id');
+        //     $stock->makeHidden('created_at');
+        // });
 
         return $data;
     }

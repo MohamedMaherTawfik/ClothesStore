@@ -95,9 +95,9 @@
                                     Fast, secure, and hassle free shopping delivered to your door step
                                 </p>
                                 <div class="btns-wrapper mt-4">
-                                    <a href="#" data-scroll-goto="1" class="main-btn text-decoration-none fs-5">Explore</a>
+                                    <a href="#" data-scroll-goto="1" class="main-btn text-decoration-none fs-5">Watch More</a>
                                     <a href="https://www.youtube.com/watch?v=HmZKgaHa3Fg" data-fancybox
-                                        class="video-btn text-decoration-none"><span class="icon"><i class="fas fa-play"></i></span> Watch
+                                        class="video-btn text-decoration-none"><span class="icon"><i class="fas fa-play"></i></span>
                                         video</a>
                                 </div>
                             </div>

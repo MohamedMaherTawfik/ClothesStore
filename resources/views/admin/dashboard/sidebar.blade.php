@@ -65,5 +65,14 @@
         </a>
       </li>
 
+      <li class="nav-item menu-items mt-4">
+        <a class="nav-link" href="{{ route('orders') }}">
+          <span class="menu-icon">
+            <i class="mdi mdi-file-document-box"></i>
+          </span>
+          <span class="menu-title">orders</span>
+        </a>
+      </li>
+
     </ul>
   </nav>

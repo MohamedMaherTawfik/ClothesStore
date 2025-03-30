@@ -49,7 +49,6 @@ class cartController extends Controller
 
     public function deleteFromCart()
     {
-        // dd(request('id'));
         $this->cartServices->deleteFromCart(request('id'));
         return redirect('/cart',)->with('success', __('messages.DeleteFromCart'));
     }

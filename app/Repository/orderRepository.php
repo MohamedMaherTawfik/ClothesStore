@@ -43,6 +43,31 @@ class orderRepository implements OrderInterface
         return $data;
     }
 
+    public function createOrder($data, $total, $total_quantity, $user_address)
+    {
+        return orders::create([
+            'user_id'=>Auth::user()->id,
+            'total_price'=>$total,
+            'total_quantity'=>$total_quantity,
+            'user_address'=>$user_address->address,
+            // 'carrier'=>$data['carrier'],
+            // 'notes'=>$data['notes'],
+            // 'coupon_code'=>$data['coupon_code'],
+            // 'discount'=>$data['discount'],
+            // 'taxes'=>$data['taxes']
+        ]);
+    }
+
+    public function createOrderDetails($order, $item)
+    {
+        return orderdetails::create([
+            'orders_id'=>$order->id,
+            'products_id'=>$item->product->id,
+            'quantity'=>$item->quantity,
+            'total_price'=>$item->product->price
+        ]);
+    }
+
     public function destroyOrder($id)
     {
         $orders = orders::find($id);
@@ -53,7 +78,6 @@ class orderRepository implements OrderInterface
     public function getUserOrders($id)
     {
         return User::with('orders')->find($id);
-
     }
 
     public function ChangeStatus($id, $status)

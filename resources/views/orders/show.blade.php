@@ -68,7 +68,8 @@
                             @else
                                 <div class="dropdown">
                                     <!-- User Button -->
-                                    <button class="butn contact-butn px-2 bg-danger" type="button" aria-expanded="false">
+                                    <button class="butn contact-butn px-2 bg-danger" type="button"
+                                        aria-expanded="false">
                                         <a href=""
                                             class="text-decoration-none text-white">{{ Auth::user()->first_name }}</a>
                                     </button>
@@ -77,7 +78,6 @@
                                     @csrf
                                     <button type="submit" class="butn contact-butn px-2 bg-danger">Logout</button>
                                 </form>
-
                             @endif
 
 
@@ -95,56 +95,44 @@
             <div class="card shadow-lg p-4">
                 <!-- Header Section with Left-aligned Title and Right-aligned Button -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2 class="fw-bold text-danger">My Items</h2>
-                    <form action="" method="post">
-                        @csrf
-                        <input class="btn btn-danger" type="submit" value="Clear Cart"></input>
-                    </form>
+                    <h4 class="fw-bold text-black">All Orders</h4>
 
                 </div>
 
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Product Image</th>
+                            <th>User name</th>
                             <th>Product Name</th>
-                            <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (count($cartItems) > 0)
-                            @foreach ($cartItems as $item)
+                        @if (count($order) > 0)
+                            @foreach ($order as $item)
                                 <tr>
-                                    <td><img style="width: 80px; height: 80px;"
-                                            src="{{ asset('product/' . $item->product->image) }}" width="50"></td>
-                                    <td>{{ $item->product->name }}</td>
-                                    <td>{{ $item->product->price }}</td>
+                                    <td>{{ $item->id }}</td>
+                                    @foreach ($productName as $int => $name)
+                                        @if ($item->id == $int)
+                                            <td>{{ $name }}</td>
+                                        @endif
+                                    @endforeach
                                     <td>{{ $item->quantity }}</td>
-                                    <td>{{ $item->product->price * $item->quantity }}$</td>
-                                    <td>
-                                        <a href="{{ route('deleteFromCart', $item->product->id) }}" class="btn btn-danger">🗑 Remove</a>
-                                    </td>
+                                    @foreach ($total as $index => $amount)
+                                        @if ($item->id == $index)
+                                            <td>{{ $amount }}</td>
+                                        @endif
+                                    @endforeach
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5" class="bg-light">No Items Found!</td>
+                                <td colspan="3" class="bg-light">No Items Found!</td>
                             </tr>
                         @endif
                     </tbody>
                 </table>
-
-                <h5>Total: <span class="fw-bold">{{ $total }}$</span></h5>
-                <div class="d-flex gap-2">
-                    <a href="{{ route('checkout') }}" class="btn btn-primary">Place Order</a>
-                    <form action="" method="post">
-                        @csrf
-                        <input class="btn btn-success" type="submit" value="Buy Now"></input>
-                    </form>
-                </div>
             </div>
         </div>
     </section>

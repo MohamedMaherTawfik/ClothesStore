@@ -33,31 +33,15 @@ class orderServices
         $total=0;
         $total_quantity=0;
         $cartItem=$this->cartRepository->getCartItems();
-        // return $cartItem;
         foreach($cartItem as $item){
             $total+=$item->quantity * $item->product->price;
             $total_quantity+=$item->quantity;
         }
         $user_address=userAddress::where('user_id',Auth::user()->id)->first();
-        $order=orders::create([
-            'user_id'=>Auth::user()->id,
-            'total_price'=>$total,
-            'total_quantity'=>$total_quantity,
-            'user_address'=>$user_address->address,
-            'carrier'=>$data['carrier'],
-            'notes'=>$data['notes'],
-            'coupon_code'=>$data['coupon_code'],
-            'discount'=>$data['discount'],
-            'taxes'=>$data['taxes']
-        ]);
+        $order=$this->orderRepository->createOrder($data,$total,$total_quantity,$user_address);
 
         foreach($cartItem as $item){
-                orderdetails::create([
-                    'orders_id'=>$order->id,
-                    'products_id'=>$item->product->id,
-                    'quantity'=>$item->quantity,
-                    'total_price'=>$item->product->price
-                ]);
+            $this->orderRepository->createOrderDetails($order,$item);
             }
         return $order;
     }

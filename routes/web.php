@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\web\admin\colorController;
 use App\Http\Controllers\web\admin\dashboardController;
 use App\Http\Controllers\web\admin\brandController;
@@ -9,6 +8,7 @@ use App\Http\Controllers\web\admin\sizeController;
 use App\Http\Controllers\web\auth\AuthController;
 use App\Http\Controllers\web\home\indexController;
 use App\Http\Controllers\web\orders\cartController;
+use App\Http\Controllers\web\orders\orderController;
 use App\Http\Middleware\web\checkAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -95,4 +95,23 @@ Route::group([
     Route::post('/cart',[cartController::class,'clearCart'])->name('clearCart');
     Route::get('/cart/delete/{id}',[cartController::class,'confirmDelete'])->name('deleteFromCart');
     Route::post('/cart/delete/{id}',[cartController::class,'deleteFromCart'])->name('deleteFromCart');
+});
+
+
+Route::group([
+    'prefix' => 'dashboard/orders',
+    'middleware' => checkAdmin::class
+],function(){
+    Route::get('/',[orderController::class,'index'])->name('orders');
+    Route::get('/find/{id}',[orderController::class,'findOrder'])->name('findOrder');
+    Route::post('/delete/{id}',[orderController::class,'deleteOrder'])->name('deleteOrder');
+    Route::post('/find/{id}',[orderController::class,'changeStatus'])->name('changeStatus');
+});
+
+Route::controller(orderController::class)->group(function (){
+    Route::get('/order/checkout','checkout')->name('checkout');
+    Route::post('/order/checkout','createOrder')->name('createOrder');
+    Route::get('/order/{id}','findOrder')->name('findOrder');
+    Route::post('order/{id}','deleteOrder')->name('deleteOrder');
+    Route::get('/orders','getUserOrders')->name('userOrders');
 });
