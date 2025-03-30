@@ -97,13 +97,13 @@
     margin-top: 100px;
 }
 
-.pp {
+.pp{
     text-decoration: none;
     color: rgb(255, 255, 255);
 }
 
 .pp:hover {
-    color: rgb(0, 0, 0);
+    color: rgba(255, 255, 255, 0.219);
 }
 
 .photo {
@@ -412,7 +412,7 @@ header .inner-header .text-box .btns-wrapper .main-btn {
 }
 
 header .inner-header .text-box .btns-wrapper .main-btn:hover {
-    background-color: rgba(0, 0, 255, 0.719) ;
+    background-color: rgba(0, 0, 255, 0.719);
     color: rgba(255, 255, 255, 0.76);
 }
 
@@ -953,3 +953,157 @@ header .inner-header .text-box .btns-wrapper .video-btn:hover .icon {
         width: 190px;
     }
 }
+
+.team-member {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(253, 253, 253, 0.836);
+}
+
+.team-member img {
+    max-width: 100%;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.team-member h5 {
+    font-size: 1.25rem;
+    margin-bottom: 5px;
+}
+
+.team-member p {
+    font-size: 1rem;
+    color: #777;
+}
+
+.feature-box {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #00000059;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.feature-box:hover {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.664);
+}
+
+.feature-box .icon {
+    font-size: 40px;
+    color: #dadada7a;
+    margin-bottom: 15px;
+}
+
+.feature-box h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.feature-box p {
+    font-size: 14px;
+    color: #cccccc86;
+}
+
+.feature-box .icon,
+.feature-box h4 {
+    transition: color 0.3s ease;
+}
+
+.feature-box:hover .icon {
+    color: #fff;
+}
+
+.feature-box:hover h4 {
+    color: #c7c7c7;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+@media (max-width: 768px) {
+    .feature-box {
+        margin-bottom: 20px;
+    }
+
+    .ms-5 {
+        margin-left: 0 !important;
+    }
+}
+
+.about-section {
+    background-color: rgba(0, 0, 0, 0.671);
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+}
+
+/* Section title */
+.about-section h1 {
+    font-size: 70px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Navigation links */
+.about-section .breadcrumb {
+    background: transparent;
+    padding: 0;
+    font-size: 18px;
+    color: white;
+}
+
+.about-section .breadcrumb a {
+    color: white;
+    text-decoration: none;
+}
+
+.about-section .breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Optional styling for the section image */
+.about-section img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.1;
+}
+
+.hero {
+    background: url('https://source.unsplash.com/1600x900/?business,teamwork') no-repeat center center/cover;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.team-member img {
+    border-radius: 50%;
+}
+
+.about-home{
+    color: rgba(255, 255, 255, 0.404) !important;
+}
+
+.about-home:hover{
+    color: rgba(255, 255, 255, 0.795) !important;
+}
+
+

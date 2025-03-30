@@ -4,6 +4,8 @@ namespace App\Http\Controllers\web\auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\userRequest;
+use App\Models\blogs;
+use App\Models\orders;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,5 +46,11 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', __('messages.logout'));
     }
 
+    public function profile()
+    {
+        $userOrders=orders::with('user')->where('user_id',Auth::user()->id)->get();
+        $userPosts=blogs::with('user')->where('user_id',Auth::user()->id)->get();
+        return view('auth.profile',compact('userOrders'),compact('userPosts'));
+    }
 
 }

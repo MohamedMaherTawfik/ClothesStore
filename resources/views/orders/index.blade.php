@@ -93,10 +93,8 @@
     <section>
         <div class="container mt-5">
             <div class="card shadow-lg p-4">
-                <!-- Header Section with Left-aligned Title and Right-aligned Button -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="fw-bold text-black">All Orders</h4>
-
                 </div>
 
                 <table class="table">

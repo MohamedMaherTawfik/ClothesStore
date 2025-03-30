@@ -29,4 +29,8 @@ class indexController extends Controller
         // dd($categorey);
         return view('home.findCategorey',compact('categorey'));
     }
+
+    public function about_us(){
+        return view('home.about_us');
+    }
 }
