@@ -6,18 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\statusrequest;
 use App\Models\User;
 use App\Services\orderServices;
+use App\Services\paymentServices;
 use App\Services\productServices;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class orderController extends Controller
 {
     private $orderServices;
     private $productServices;
-    public function __construct(orderServices $orderServices, productServices $productServices)
+    private $paymentServices;
+
+    public function __construct(orderServices $orderServices, productServices $productServices, paymentServices $paymentServices)
     {
         $this->orderServices = $orderServices;
         $this->productServices = $productServices;
+        $this->paymentServices = $paymentServices;
     }
 
     public function index()
@@ -39,7 +42,6 @@ class orderController extends Controller
             $total[$index + 1] = $products->price * $item->quantity;
             $productName[$index + 1] = $products->name;
         }
-        // dd($productName);
         return view('orders.show', compact('order','productName','total'));
     }
 
@@ -52,6 +54,17 @@ class orderController extends Controller
     {
         $this->orderServices->createOrder(request()->all());
         return redirect()->route('home')->with('success', __('messages.store_Message'));
+    }
+
+    public function createCheckoutforPayment()
+    {
+        return view('orders.paymentCheckout');
+    }
+    public function createOrderWithPayment()
+    {
+        $order=$this->orderServices->createOrder(request()->all());
+        $PaymentKey = $this->paymentServices->pay($order);
+        return redirect("https://accept.paymob.com/api/acceptance/iframes/901393?payment_token=" . $PaymentKey);
     }
 
     public function getUserOrders()
@@ -71,5 +84,21 @@ class orderController extends Controller
         $fields = $request->validated();
         $this->orderServices->ChangeStatus(request('id'), $fields);
         return redirect()->route('orders')->with('success', __('messages.ChangeOrderStatus'));
+    }
+
+    public function callback()
+    {
+        $this->paymentServices->callback(request()->all());
+    }
+
+    public function response()
+    {
+        $this->paymentServices->callback(request()->all());
+        $data=request()->all();
+        // dd($data);
+        if($data['success'] == 'true'){
+            return view('orders.success');
+        }
+        return view('orders.failed');
     }
 }

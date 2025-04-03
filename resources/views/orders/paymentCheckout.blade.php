@@ -16,14 +16,13 @@
 
 <body>
     <div class="confirm-container">
-        <p>Create Order ?</p>
+        <p>Create Order Using PayMob ?</p>
 
-        <form action="{{ route('createOrder') }}" method="post">
+        <form action="{{ route('pay') }}" method="post">
             @csrf
             <button type="submit" class="btn btn-delete">Yes</button>
             <a href="{{ route('cart') }}" class="btn btn-cancel">No</a>
         </form>
-
     </div>
 </body>
 

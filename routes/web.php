@@ -11,6 +11,7 @@ use App\Http\Controllers\web\orders\cartController;
 use App\Http\Controllers\web\orders\orderController;
 use App\Http\Middleware\web\AuthCheck;
 use App\Http\Middleware\web\checkAdmin;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(indexController::class)->group(function () {
@@ -79,6 +80,7 @@ Route::group([
     Route::get('/', [colorController::class, 'index'])->name('color');
     Route::get('/create', [colorController::class, 'create'])->name('createColor');
     Route::post('/create/store', [colorController::class, 'store'])->name('storeColor');
+
 });
 
 Route::group([
@@ -118,3 +120,11 @@ Route::controller(orderController::class)->group(function () {
     Route::post('order/{id}', 'deleteOrder')->name('deleteOrder');
     Route::get('/orders', 'getUserOrders')->name('userOrders');
 });
+
+Route::controller(orderController::class)->group(function () {
+    Route::get('/payment/create-order', [orderController::class, 'createCheckoutforPayment'])->name('payPage');
+    Route::post('/payment/create-order', [orderController::class, 'createOrderWithPayment'])->name('pay');
+    Route::post('payment/callback', [orderController::class, 'callback'])->name('paymob.callback');
+    Route::get('/payment/response', [orderController::class, 'response'])->name('response');
+});
+

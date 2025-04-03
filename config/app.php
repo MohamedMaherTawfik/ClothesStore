@@ -1,5 +1,8 @@
 <?php
 
+use PayMob\Facades\PayMob;
+use PayMob\PayMobServiceProvider;
+
 return [
 
     /*
@@ -118,6 +121,8 @@ return [
     |
     */
 
+
+
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
@@ -125,4 +130,7 @@ return [
 
     // My Api key Restored in .env File
     'api_key' => env('API_KEY'),
+
+    PayMobServiceProvider::class,
+    'PayMob' => PayMob::class,
 ];

@@ -7,18 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class orders extends Model
 {
     protected $table = 'orders';
-    protected $fillable = [
-        'user_id',
-        'total_price',
-        'status',
-        'discount',
-        'total_quantity',
-        'user_address',
-        'taxes',
-        'coupon_code',
-        'notes',
-        'carrier',
-    ];
+    protected $guarded = [];
 
     public function user(){
         return $this->belongsTo(User::class);

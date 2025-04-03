@@ -27,8 +27,8 @@
                             <tr class="bg-dark text-light">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->color }}</td>
-                                <td><a href="{{ route('editColor', $item->id) }}" class="btn btn-primary btn-md">Edit Color</a></td>
-                                <td><a href="{{ route('deleteColor', $item->id) }}" class="btn btn-danger btn-md">Delete Color</a></td>
+                                <td><a href="" class="btn btn-primary btn-md">Edit Color</a></td>
+                                <td><a href="" class="btn btn-danger btn-md">Delete Color</a></td>
                             </tr>
                         @endforeach
                     @else

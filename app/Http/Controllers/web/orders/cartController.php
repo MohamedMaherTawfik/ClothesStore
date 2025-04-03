@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web\orders;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\cartRequest;
+use App\Models\Cart;
 use App\Models\CartItems;
 use App\Models\products;
 use App\Services\cartServices;
@@ -42,7 +43,8 @@ class cartController extends Controller
 
     public function confirmDelete()
     {
-        $item=CartItems::where('cart_id', 2)->where('products_id', request('id'))->first();
+        $cart=Cart::where('user_id', Auth::user()->id)->first();
+        $item=CartItems::where('cart_id', $cart->id)->where('products_id', request('id'))->first();
         $product=products::where('id', $item->products_id)->first();
         return view('cart.delete')->with('product', $product);
     }

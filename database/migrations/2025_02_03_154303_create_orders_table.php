@@ -20,6 +20,9 @@ return new class extends Migration
             $table->double('discount')->nullable();
             $table->double('total_quantity');
             $table->double('user_address');
+            $table->string('transaction_type')->default('cash');
+            $table->string('transaction_status')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->double('taxes')->nullable();
             $table->string('coupon_code')->nullable();
             $table->string('notes')->nullable();

@@ -93,7 +93,7 @@
                 </nav>
 
                 <!-- Title -->
-                <h1>About Our Company</h1>
+                <p class="fs-1 fw-bold">About Our Company</p>
             </div>
         </div>
     </section>

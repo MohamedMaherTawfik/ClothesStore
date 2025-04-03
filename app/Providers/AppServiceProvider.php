@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Interfaces\paymentInterface;
+use App\Repository\PaymentRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\CategoreyInteface;
 use App\Interfaces\OrderInterface;
@@ -33,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(cartInterface::class, cartRepository::class);
         $this->app->bind(colorSizesInterface::class, colorsSizesRepository::class);
         $this->app->bind(blogInterface::class, blogRepository::class);
+        $this->app->bind(paymentInterface::class,PaymentRepository::class);
     }
 
     /**

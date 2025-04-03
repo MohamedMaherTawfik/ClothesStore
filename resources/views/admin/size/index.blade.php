@@ -27,8 +27,8 @@
                             <tr class="bg-dark text-light">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->size }}</td>
-                                <td><a href="{{ route('editSize', $item->id) }}" class="btn btn-primary btn-md">Edit Size</a></td>
-                                <td><a href="{{ route('deleteSize', $item->id) }}" class="btn btn-danger btn-md">Delete Size</a></td>
+                                <td><a href="" class="btn btn-primary btn-md">Edit Size</a></td>
+                                <td><a href="" class="btn btn-danger btn-md">Delete Size</a></td>
                             </tr>
                         @endforeach
                     @else

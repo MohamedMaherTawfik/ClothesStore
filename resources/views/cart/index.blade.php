@@ -140,9 +140,9 @@
                 <h5>Total: <span class="fw-bold">{{ $total }}$</span></h5>
                 <div class="d-flex gap-2">
                     <a href="{{ route('checkout') }}" class="btn btn-primary">Place Order</a>
-                    <form action="" method="post">
+                    <form action="{{route('payPage')}}" method="get">
                         @csrf
-                        <input class="btn btn-success" type="submit" value="Buy Now"></input>
+                        <input type="submit" value="Buy Now" class="btn btn-success">
                     </form>
                 </div>
             </div>
