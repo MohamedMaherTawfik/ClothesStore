@@ -28,16 +28,17 @@ class PaymentRepository implements paymentInterface
         $id=$order->id;
         $carrier=$order->carrier;
         $address=userAddress::where('user_id',Auth::user()->id)->first();
-        $items=orderdetails::where('orders_id',$id)->get();
+        // $items=orderdetails::where('orders_id',$id)->get();
         // dd($items->toArray());
 
         // Step 1: Generate auth token
         $authResponse = Http::post("{$this->baseUrl}/auth/tokens", [
             'api_key' => $this->apiKey,
         ]);
+        // dd($authResponse->json());
 
         $authToken = $authResponse->json('token');
-
+        // dd($authToken);
         // Step 2: Create order
         $orderResponse = Http::post("{$this->baseUrl}/ecommerce/orders", [
             'auth_token' => $authToken,
@@ -46,8 +47,10 @@ class PaymentRepository implements paymentInterface
             'merchant_order_id' => $id,
             // 'items' => $items->toArray()
         ]);
+        // dd($orderResponse->json());
 
         $orderId = $orderResponse->json('id');
+        // dd($orderId);
         // Step 3: Generate payment key
         $paymentKeyResponse = Http::post("{$this->baseUrl}/acceptance/payment_keys", [
             'auth_token' => $authToken,
@@ -72,6 +75,7 @@ class PaymentRepository implements paymentInterface
             'currency' => 'EGP',
             'integration_id' => config('services.paymob.integration_id'),
         ]);
+        // dd($paymentKeyResponse->json());
 
         return $paymentKeyResponse->json('token');
     }

@@ -20,6 +20,7 @@ class categoreyServices{
     }
 
     public function storeCategorey($data){
+        // dd($data['image']);
         $categorey=$this->categoreyRepository->store($data);
         return $categorey;
     }

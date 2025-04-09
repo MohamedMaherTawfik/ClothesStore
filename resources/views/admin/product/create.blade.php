@@ -33,6 +33,15 @@
         </div>
 
         <div class="mb-3">
+            <label for="productquantity" class="form-label">products quantity</label>
+            <input type="text" name="quantity" value="{{ old('quantity') }}" class="form-control" id="productquantity"
+                placeholder="quantity">
+            @error('quantity')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <label for="productstatus" class="form-label">products status</label>
             <input type="text" name="status" value="{{ old('status') }}" class="form-control" id="brandstatus"
                 placeholder="status">
@@ -83,6 +92,8 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
+
+
 
         <button type="submit" class="btn btn-primary">Save</button>
     </form>

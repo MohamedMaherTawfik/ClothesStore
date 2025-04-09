@@ -15,8 +15,15 @@
         <form method="post" enctype="multipart/form-data" action="{{route('register')}}">
             @csrf
             <div class="mb-3">
-                <input type="text" name="name" class="form-control" placeholder="Username">
-                @error('name')
+                <input type="text" name="first_name" class="form-control" placeholder="first_name">
+                @error('first_name')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <input type="text" name="last_name" class="form-control" placeholder="last_name">
+                @error('last_name')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
@@ -24,6 +31,27 @@
             <div class="mb-3">
                 <input type="email" name="email" class="form-control" placeholder="Email">
                 @error('email')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <input type="text" name="address" class="form-control" placeholder="Address">
+                @error('address')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <input type="text" name="city" class="form-control" placeholder="city">
+                @error('city')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <input type="text" name="postal_code" class="form-control" placeholder="postal_code">
+                @error('postal_code')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>

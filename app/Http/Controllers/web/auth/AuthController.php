@@ -7,10 +7,17 @@ use App\Http\Requests\userRequest;
 use App\Models\blogs;
 use App\Models\orders;
 use App\Models\User;
+use App\Models\userAddress;
+use App\Services\cartServices;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    private $cartService;
+    public function __construct(cartServices $cartServices)
+    {
+        $this->cartService = $cartServices;
+    }
     public function signUp()
     {
         return view('auth.signIn');
@@ -18,9 +25,24 @@ class AuthController extends Controller
 
     public function register(userRequest $request)
     {
+        // dd($request->all());
         $fields = $request->validated();
-        $user = User::create($fields);
+        $user = User::create([
+            'first_name' => $fields['first_name'],
+            'last_name' => $fields['last_name'],
+            'email' => $fields['email'],
+            'phone' => $fields['phone'],
+            'password' => bcrypt($fields['password']),
+        ]);
         Auth::login($user);
+        $this->cartService->createCart();
+        userAddress::create([
+            'user_id' => $user->id,
+            'address' => $fields['address'],
+            'city' => $fields['city'],
+            'postal_code' => $fields['postal_code'],
+        ],
+    );
         return redirect()->route('home')->with('success', __('messages.register'));
     }
 

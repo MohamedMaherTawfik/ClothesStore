@@ -38,15 +38,20 @@ class productController extends Controller
     public function store(productRequest $request)
     {
         $fields = $request->validated();
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            // dd($fields);
             $file = $request->file('image');
             $name = time() . '.' . $file->getClientOriginalName();
             $file->move(public_path('product'), $name);
             $fields['image'] = $name;
-            $products = $this->productServices->createProduct($fields, null, null);
-            return redirect('/dashboard/product')->with('success', __('messages.store_Message'))->with('products', $products);
+            try {
+                $this->productServices->createProduct($fields, null, null);
+                return redirect('/dashboard/product')->with('success', 'product Created Successfully!');
+            } catch (\Throwable $th) {
+                dd($th);
+                // return $th;
+            }
         }
-        return redirect()->route('product')->with('error', __('messages.Error_store_Message'));
     }
 
 

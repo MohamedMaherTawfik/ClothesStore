@@ -23,8 +23,12 @@ class userRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3|string|max:25',
+            'first_name' => 'required|min:3|string|max:25',
+            'last_name' => 'required|min:3|string|max:25',
             'email' => 'required|email|unique:users,email',
+            'address'=>'required|min:3|max:25|string',
+            'city'=>'required|min:3|max:25|string',
+            'postal_code'=>'required|min:3|max:25|string',
             'phone'=>'required|min:3|max:25|string',
             'password' => ['required','confirmed',Password::min(8)->mixedCase()->numbers()],
         ];

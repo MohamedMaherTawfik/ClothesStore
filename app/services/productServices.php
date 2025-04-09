@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Interfaces\productInterface;
+use App\Models\brand;
+use App\Models\categorey;
+use Illuminate\Support\Arr;
 class productServices
 {
     private $productRepository;
@@ -20,20 +23,22 @@ class productServices
 
     public function createProduct($data, $colors, $sizes)
     {
-        $product=$this->productRepository->store($data);
-        foreach($colors as $key => $color ){
+        $product = $this->productRepository->store(
+            Arr::except($data, ['image', 'quantity'])
+        );
+        // $this->productRepository->storeProductColorsSizes($product->id, $colors, $sizes);
+        // foreach($colors as $key => $color ){
 
-                if(!isset($sizes[$key]) || $sizes[$key]==null){
-                    $this->productRepository->storeProductColorsSizes($product->id, $color->id, rand(1,count($sizes)));
-                }
-                else if($size=$sizes[$key]){
-                $this->productRepository->storeProductColorsSizes($product->id, $color->id, $size->id);
-            }
-        }
-        $this->productRepository->storeStock([
-            'products_id'=>$product->id,
-            'quantity'=>$data['quantity']
-        ]);
+        //         if(!isset($sizes[$key]) || $sizes[$key]==null){
+        //             $this->productRepository->storeProductColorsSizes($product->id, $color->id, rand(1,count($sizes)));
+        //         }
+        //         else if($size=$sizes[$key]){
+        //         $this->productRepository->storeProductColorsSizes($product->id, $color->id, $size->id);
+        //     }
+        // }
+        // dd($product);
+        $this->productRepository->storeImage($product->id, $data['image']);
+        $this->productRepository->storeStock($product->id, $data['quantity']);
         return $product;
     }
 

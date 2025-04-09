@@ -19,6 +19,11 @@ class cartServices {
         $this->cartRepository = $cartRepository;
     }
 
+    public function createCart()
+    {
+        $data=$this->cartRepository->createCart();
+        return $data;
+    }
     public function add_to_cart($request,$products_id)
     {
         $cart=Cart::where('user_id', Auth::user()->id)->first();

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class products extends Model
 {
     protected $table = 'products';
-    protected $fillable = ['name', 'image', 'description', 'price', 'discount', 'status', 'categorey_id', 'brand_id'];
+    protected $guarded = [];
 
     public function categorey()
     {
@@ -42,5 +42,10 @@ class products extends Model
     public function stock()
     {
         return $this->hasMany(stocks::class);
+    }
+
+    public function productImages()
+    {
+        return $this->hasMany(productImages::class);
     }
 }
