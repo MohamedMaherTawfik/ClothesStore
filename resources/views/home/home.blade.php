@@ -48,7 +48,8 @@
                                 <a class="nav-link" href="#" data-scroll-nav="3">portfolio</a>
                             </li>
                         </ul>
-                        <a href="{{ route('cart') }}" class="butn lang-btn"><i class="fa-solid fa-cart-shopping"></i></a>
+                        <a href="{{ route('cart') }}" class="butn lang-btn"><i
+                                class="fa-solid fa-cart-shopping"></i></a>
                         @if (!Auth::check())
                             <div class="dropdown">
                                 <!-- Dropdown Button -->
@@ -73,7 +74,8 @@
                                         @csrf
                                         <button type="submit" class="dropdown-item">Logout</button>
                                     </form>
-                                    <a href="{{ route('profile') }}" class="dropdown-item text-decoration-none text-black">Profile</a>
+                                    <a href="{{ route('profile') }}"
+                                        class="dropdown-item text-decoration-none text-black">Profile</a>
                                 </ul>
                             </div>
                         @endif
@@ -96,9 +98,11 @@
                                     Fast, secure, and hassle free shopping delivered to your door step
                                 </p>
                                 <div class="btns-wrapper mt-4">
-                                    <a href="#" data-scroll-goto="1" class="main-btn text-decoration-none fs-5">Watch More</a>
+                                    <a href="#" data-scroll-goto="1"
+                                        class="main-btn text-decoration-none fs-5">Watch More</a>
                                     <a href="https://www.youtube.com/watch?v=HmZKgaHa3Fg" data-fancybox
-                                        class="video-btn text-decoration-none"><span class="icon"><i class="fas fa-play"></i></span>
+                                        class="video-btn text-decoration-none"><span class="icon"><i
+                                                class="fas fa-play"></i></span>
                                         video</a>
                                 </div>
                             </div>
@@ -244,7 +248,17 @@
                     <div class="col-lg-4">
                         <div class="card text-black" style="width: 21rem; opacity: 80%;">
                             <a href="">
-                                <img src="{{ asset('product/' . $item->image) }}" class="card-img-top" style="height: 300px" alt="...">
+                                @php
+                                    $firstImage = $item->productImages->first();
+                                @endphp
+
+                                @if ($firstImage)
+                                    <img src="{{ asset('product/' . $firstImage->image) }}" class="card-img-top"
+                                        style="height: 300px" alt="...">
+                                @else
+                                    <img src="{{ asset('product/default.jpg') }}" class="card-img-top"
+                                        style="height: 300px" alt="No Image">
+                                @endif
                             </a>
                         </div>
                     </div>

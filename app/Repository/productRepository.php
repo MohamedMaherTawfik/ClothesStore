@@ -15,7 +15,9 @@ class productRepository implements productInterface
 {
     public function all()
     {
-        return products::latest()->take(10)->get();
+        $products= products::with('productImages')->get();
+        // dd($products);
+        return $products;
     }
 
     public function store($data)

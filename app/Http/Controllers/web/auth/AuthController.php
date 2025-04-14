@@ -25,7 +25,6 @@ class AuthController extends Controller
 
     public function register(userRequest $request)
     {
-        // dd($request->all());
         $fields = $request->validated();
         $user = User::create([
             'first_name' => $fields['first_name'],

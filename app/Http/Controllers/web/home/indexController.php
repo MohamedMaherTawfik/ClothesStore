@@ -26,8 +26,8 @@ class indexController extends Controller
 
     public function showCategorey(){
         $categorey=$this->categoreyServices->showCategorey(request('id'));
-        // dd($categorey);
-        return view('home.findCategorey',compact('categorey'));
+        $products=$this->productServices->allProducts()->take(3);
+        return view('home.findCategorey',compact('categorey','products'));
     }
 
     public function about_us(){
