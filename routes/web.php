@@ -23,7 +23,7 @@ Route::controller(indexController::class)->group(function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/signup', 'signUp')->name('register');
-    Route::post('/signup', 'register')->name('register');
+    Route::post('/signup', 'register')->name('signin');
     Route::get('/login', 'signIn')->name('login');
     Route::post('/login', 'login')->name('login');
     Route::post('/logout', 'logout')->name('logout');

@@ -95,7 +95,6 @@ class orderController extends Controller
     {
         $this->paymentServices->callback(request()->all());
         $data=request()->all();
-        // dd($data);
         if($data['success'] == 'true'){
             return view('orders.success');
         }

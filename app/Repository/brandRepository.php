@@ -11,7 +11,7 @@ class brandRepository implements brandInterface
 {
     public function all()
     {
-        return brand::all();
+        return brand::paginate(4);
     }
 
     public function show($id)

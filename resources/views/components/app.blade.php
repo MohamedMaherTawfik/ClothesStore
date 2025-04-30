@@ -25,7 +25,7 @@
             <div class="card-body bg-dark ">
                 {{ $slot }} <!-- This is where the page-specific content goes -->
             </div>
-        </div>
+        </div>  
     </div>
 </body>
 </html>

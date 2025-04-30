@@ -15,8 +15,7 @@ class productRepository implements productInterface
 {
     public function all()
     {
-        $products= products::with('productImages')->get();
-        // dd($products);
+        $products= products::paginate(3);
         return $products;
     }
 
@@ -25,14 +24,6 @@ class productRepository implements productInterface
         $product = products::create($data);
         // Event::dispatch(new NewDataEvent($product));
         return $product;
-    }
-
-    public function storeImage($product_id,$image)
-    {
-        return productImages::create([
-            'products_id'=>$product_id,
-            'image'=>$image,
-        ]);
     }
 
     public function storeStock($product_id,$quantity)

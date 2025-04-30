@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->double('price');
+            $table->integer('quantity')->default(0);
+            $table->string('image');
+            $table->integer('rating')->default(0);
             $table->integer('discount')->nullable();
             $table->enum('status', ['available', 'unavailable'])->default('available');
             $table->foreignIdFor(categorey::class)->nullable();

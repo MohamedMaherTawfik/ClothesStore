@@ -23,21 +23,7 @@ class productServices
 
     public function createProduct($data, $colors, $sizes)
     {
-        $product = $this->productRepository->store(
-            Arr::except($data, ['image', 'quantity'])
-        );
-        // $this->productRepository->storeProductColorsSizes($product->id, $colors, $sizes);
-        // foreach($colors as $key => $color ){
-
-        //         if(!isset($sizes[$key]) || $sizes[$key]==null){
-        //             $this->productRepository->storeProductColorsSizes($product->id, $color->id, rand(1,count($sizes)));
-        //         }
-        //         else if($size=$sizes[$key]){
-        //         $this->productRepository->storeProductColorsSizes($product->id, $color->id, $size->id);
-        //     }
-        // }
-        // dd($product);
-        $this->productRepository->storeImage($product->id, $data['image']);
+        $product = $this->productRepository->store($data);
         $this->productRepository->storeStock($product->id, $data['quantity']);
         return $product;
     }

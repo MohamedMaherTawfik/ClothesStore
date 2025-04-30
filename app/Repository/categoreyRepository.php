@@ -11,7 +11,7 @@ class categoreyRepository implements CategoreyInteface
 {
     public function all()
     {
-        return categorey::all();
+        return categorey::with('products')->paginate(4);
     }
 
     public function store($data)

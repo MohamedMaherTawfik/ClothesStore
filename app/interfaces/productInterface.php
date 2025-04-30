@@ -6,7 +6,6 @@ interface productInterface {
     public function all();
     public function show($id);
     public function store($data);
-    public function storeImage($product_id,$image);
     public function storeStock($product_id,$quantity);
     public function update($data, $id);
     public function updateStock($id, $data);

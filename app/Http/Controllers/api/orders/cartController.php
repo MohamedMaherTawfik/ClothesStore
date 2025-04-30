@@ -18,7 +18,7 @@ class cartController extends Controller
 
     public function addToCart(cartRequest $request)
     {
-        $data= $this->cartServices->add_to_cart($request);
+        $data= $this->cartServices->add_to_cart($request,request('products_id'));
         if(!$data){
             return $this->sendError(__('messages.Error_AddToCart'));
         }
