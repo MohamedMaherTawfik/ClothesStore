@@ -27,7 +27,7 @@ class PaymentRepository implements paymentInterface
         $id=$order->id;
         $carrier=$order->carrier;
         $address=userAddress::where('user_id',Auth::user()->id)->first();
-
+        
         // Step 1: Generate auth token
         $authResponse = Http::post("{$this->baseUrl}/auth/tokens", [
             'api_key' => $this->apiKey,

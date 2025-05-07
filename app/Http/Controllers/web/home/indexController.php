@@ -36,4 +36,9 @@ class indexController extends Controller
     {
         return view('home.about_us');
     }
+
+    public function contact()
+    {
+        return view('home.contact_us');
+    }
 }
