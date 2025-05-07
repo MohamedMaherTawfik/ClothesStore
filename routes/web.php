@@ -20,7 +20,7 @@ Route::controller(indexController::class)->group(function () {
     Route::get('/brand/{id}', 'showbrand')->name('showbrand');
     Route::get('/about', 'about_us')->name('about');
 });
-
+    
 Route::controller(AuthController::class)->group(function () {
     Route::get('/signup', 'signUp')->name('register');
     Route::post('/signup', 'register')->name('signin');
@@ -28,6 +28,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');
     Route::post('/logout', 'logout')->name('logout');
     Route::get('/profile', 'profile')->name('profile');
+    Route::get('/contact','contact')->name('contact');
 });
 
 
@@ -128,3 +129,6 @@ Route::controller(orderController::class)->group(function () {
     Route::get('/payment/response', [orderController::class, 'response'])->name('response');
 });
 
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/cart/data', [CartController::class, 'data'])->name('cart.data');

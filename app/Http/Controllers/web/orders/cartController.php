@@ -22,17 +22,17 @@ class cartController extends Controller
     public function index()
     {
         $cartItems = $this->cartServices->getCartItems();
-        $total=0;
-        foreach($cartItems as $item){
-            $total+=$item->quantity * $item->product->price;
+        $total = 0;
+        foreach ($cartItems as $item) {
+            $total += $item->quantity * $item->product->price;
         }
-        return view('cart.index', compact('cartItems'),compact('total'));
+        return view('cart.index', compact('cartItems'), compact('total'));
     }
 
     public function addToCart(cartRequest $request)
     {
         $fields = $request->validated();
-        return $this->cartServices->add_to_cart($fields,request('id'));
+        return $this->cartServices->add_to_cart($fields, request('id'));
     }
 
     public function clearCart()
@@ -43,16 +43,37 @@ class cartController extends Controller
 
     public function confirmDelete()
     {
-        $cart=Cart::where('user_id', Auth::user()->id)->first();
-        $item=CartItems::where('cart_id', $cart->id)->where('products_id', request('id'))->first();
-        $product=products::where('id', $item->products_id)->first();
+        $cart = Cart::where('user_id', Auth::user()->id)->first();
+        $item = CartItems::where('cart_id', $cart->id)->where('products_id', request('id'))->first();
+        $product = products::where('id', $item->products_id)->first();
         return view('cart.delete')->with('product', $product);
     }
 
     public function deleteFromCart()
     {
         $this->cartServices->deleteFromCart(request('id'));
-        return redirect('/cart',)->with('success', __('messages.DeleteFromCart'));
+        return redirect('/cart', )->with('success', __('messages.DeleteFromCart'));
+    }
+
+    // CartController.php
+    public function add(Request $request)
+    {
+        // Your existing add to cart logic
+        return response()->json(['cartCount' => Cart::count()]);
+    }
+
+    public function remove(products $product)
+    {
+        // Your existing remove logic
+        return response()->json(['cartCount' => Cart::count()]);
+    }
+
+    public function data()
+    {
+        return response()->json([
+            'products' => Products::latest()->get(),
+            'cartCount' => Cart::count()
+        ]);
     }
 
 

@@ -33,6 +33,7 @@ class AuthController extends Controller
             'phone' => $fields['phone'],
             'password' => bcrypt($fields['password']),
         ]);
+        // Event::dispatch(new NewDataEvent($user));
         Auth::login($user);
         $this->cartService->createCart();
         userAddress::create([

@@ -87,6 +87,54 @@ class productSeeder extends Seeder
                 'brand_id' => 2
             ],
             [
+                'name' => 'Product 2',
+                'description' => 'Description for Product 2',
+                'price' => 200,
+                'quantity' => 5,
+                'image' => 'hody.jpg',
+                'rating' => 3,
+                'discount' => 20,
+                'status' => 'available',
+                'categorey_id' => 2,
+                'brand_id' => 2
+            ],
+            [
+                'name' => 'Product 2',
+                'description' => 'Description for Product 2',
+                'price' => 200,
+                'quantity' => 5,
+                'image' => 'hody2.jpg',
+                'rating' => 3,
+                'discount' => 20,
+                'status' => 'available',
+                'categorey_id' => 2,
+                'brand_id' => 2
+            ],
+            [
+                'name' => 'Product 2',
+                'description' => 'Description for Product 2',
+                'price' => 200,
+                'quantity' => 5,
+                'image' => 'hody.jpg',
+                'rating' => 3,
+                'discount' => 20,
+                'status' => 'available',
+                'categorey_id' => 2,
+                'brand_id' => 2
+            ],
+            [
+                'name' => 'Product 2',
+                'description' => 'Description for Product 2',
+                'price' => 200,
+                'quantity' => 5,
+                'image' => 'hody1.jpg',
+                'rating' => 3,
+                'discount' => 20,
+                'status' => 'available',
+                'categorey_id' => 2,
+                'brand_id' => 2
+            ],
+            [
                 'name' => 'Product 3',
                 'description' => 'Description for Product 3',
                 'price' => 300,

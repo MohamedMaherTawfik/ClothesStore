@@ -8,14 +8,11 @@
             </a>
             <div class="ml-10 space-x-6">
                 <a href="{{ route('home') }}" class="text-gray-500 hover:text-gray-800">HOME</a>
-                @if (Auth::check())
-                    <a href="" class="text-gray-500 hover:text-gray-800">MY COURSES</a>
-                @endif
                 <a href="/wishlist" class="text-gray-500 hover:text-gray-800">WISHLIST</a>
                 @if (Auth::check())
-                    <a href="" class="text-gray-500 hover:text-gray-800">PROFILE</a>
+                    <a href="{{ route('profile') }}" class="text-gray-500 hover:text-gray-800">PROFILE</a>
                 @endif
-                <a href="" class="text-gray-500 hover:text-gray-800">CONTACT</a>
+                <a href="{{ route('contact') }}" class="text-gray-500 hover:text-gray-800">CONTACT</a>
             </div>
         </div>
         <div class="flex items-center space-x-4">
@@ -64,7 +61,7 @@
                                 @csrf
                                 <button type="submit" class="">Logout</button>
                             </form>
-                            <a href=""
+                            <a href="{{ route('profile') }}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
                         </div>
                     </div>

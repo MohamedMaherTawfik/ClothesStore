@@ -20,6 +20,14 @@
 <body>
   <x-navbar />
 
+  <section>
+    <div class="container">
+        <div>
+            <h3 class="text-3xl font-bold text-center">My Cart</h3>
+        </div>
+    </div>
+  </section>
+
   <section class="py-8">
     <div class="container mx-auto px-4 mt-5">
       <div class="bg-white rounded-lg shadow-lg p-6">
