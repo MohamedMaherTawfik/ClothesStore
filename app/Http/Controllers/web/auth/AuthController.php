@@ -56,9 +56,13 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
         if (Auth::attempt($credentials)) {
             request()->session()->regenerate();
-            return redirect()->route('home')->with('success', __('messages.login'));
+            if(Auth::user()->role == 'admin'){
+                return redirect('/dashboard');
+            }else{
+                return redirect()->route('home');
+            }
         }
-        return redirect()->route('login')->with('error', __('these credentials do not match our records'));
+        return redirect()->route('login')->with('error','login failed');
 
     }
 
