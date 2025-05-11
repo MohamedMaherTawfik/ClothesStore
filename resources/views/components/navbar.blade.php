@@ -1,3 +1,7 @@
+<?php
+use App\Models\Cart;
+use App\Models\Cartitems;
+?>
 <nav class="bg-white shadow-sm py-4">
     <div class="container mx-auto px-4 flex items-center justify-between">
         <div class="flex items-center">
@@ -42,7 +46,12 @@
                         <!-- Item Count Badge -->
                         <span
                             class="absolute -top-1 -right-1 text-black bg-white rounded-full w-5 h-5 text-xs flex items-center justify-center font-semibold shadow">
-                            1
+                            @php
+
+                                $cart = cart::where('user_id', Auth::user()->id)->first();
+                                $cartItems = Cartitems::where('cart_id', $cart->id)->get();
+                            @endphp
+                            {{ count($cartItems) }}
                         </span>
                     </a>
                 @endif

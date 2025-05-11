@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Services\brandServices;
 use App\Services\categoreyServices;
 use App\Services\productServices;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
+use App\Models\CartItems;
 
 class indexController extends Controller
 {
@@ -23,7 +26,7 @@ class indexController extends Controller
         $brands = $this->brandServices->getBrands();
         $categories = $this->categoreyServices->getAllCategorey();
         $products = $this->productServices->allProducts();
-        return view('home.home', compact('brands', 'categories', 'products'));
+        return view('home.home', compact('brands', 'categories', 'products',));
     }
 
     public function showCategorey()

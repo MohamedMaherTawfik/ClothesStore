@@ -23,7 +23,8 @@ class cartRepository implements cartInterface
 
     public function clearCart()
     {
-        return cart::where('user_id', Auth::user()->id)->delete();
+        $cart= cart::where('user_id', Auth::user()->id)->first();
+        return CartItems::where('cart_id', $cart->id)->delete();
     }
 
     public function createCart()
